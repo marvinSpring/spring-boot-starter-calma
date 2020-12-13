@@ -8,10 +8,14 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.marvin.model.DingdingNotice;
+import com.marvin.model.Notice;
+import com.marvin.model.PiracyNotice;
 import com.marvin.model.SmsNotice;
+import com.marvin.util.Client;
 
 //阿里云sms短信发送组件
-public class SendSmsClient {
+public class SendSmsClient implements Client{
     public String send(SmsNotice noticeStruct) {
         DefaultProfile profile = DefaultProfile.getProfile(noticeStruct.getRegionId(), noticeStruct.getAccessKey(),noticeStruct.getSecret());
         IAcsClient client = new DefaultAcsClient(profile);
@@ -36,4 +40,11 @@ public class SendSmsClient {
         }
         return null;
     }
+
+	@Override
+	public void doSend(Notice smsNotice) {
+		send((SmsNotice)smsNotice);
+	}
+
+ 
 }

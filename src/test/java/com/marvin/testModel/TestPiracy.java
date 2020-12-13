@@ -8,7 +8,7 @@ import com.marvin.anno.PiracyExceptionListener;
 @Component
 public class TestPiracy {
 	
-	public void test(String name) {
+	public void test11(String name) {
 		System.out.println("name:"+name);
 		new IException();
 	}

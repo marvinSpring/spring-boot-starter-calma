@@ -7,12 +7,11 @@ import org.springframework.context.annotation.Configuration;
 
 import com.marvin.anno.ConditionOnPiracyExceptionNotice;
 import com.marvin.model.PiracyNotice;
-import com.marvin.properties.PiracyExceptionProperties;
 import com.marvin.util.PiracyNoticeTextResolver;
 
 @Configuration
 @ConditionOnPiracyExceptionNotice
-@EnableConfigurationProperties(PiracyExceptionProperties.class)
+//@EnableConfigurationProperties(PiracyExceptionProperties.class)
 public class DingdingExceptionNoticeSendConfig {//当异常通知这个文件存在则注入异常通知的文本解析器
 	
 	@Bean

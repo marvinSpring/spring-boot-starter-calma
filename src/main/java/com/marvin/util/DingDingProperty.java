@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix = "piracy")
+@ConfigurationProperties(prefix = "piracy.dingding")
 @PropertySource(value = "application.properties")
 public class DingDingProperty {//钉钉消息需要的参数——梦的面包
 

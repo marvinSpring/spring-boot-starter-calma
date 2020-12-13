@@ -16,7 +16,14 @@ import com.marvin.util.Client;
 
 //阿里云sms短信发送组件
 public class SendSmsClient implements Client{
-    public String send(SmsNotice noticeStruct) {
+	
+	private SmsNotice noticeStruct;
+	
+    public SendSmsClient(SmsNotice noticeStruct) {
+		this.noticeStruct = noticeStruct;
+	}
+
+	public String send(SmsNotice noticeStruct) {
         DefaultProfile profile = DefaultProfile.getProfile(noticeStruct.getRegionId(), noticeStruct.getAccessKey(),noticeStruct.getSecret());
         IAcsClient client = new DefaultAcsClient(profile);
 
@@ -30,14 +37,14 @@ public class SendSmsClient implements Client{
         request.putQueryParameter("SignName", noticeStruct.getSignName());//签名
         request.putQueryParameter("TemplateCode", noticeStruct.getTemplateCode());//模板码
         request.putQueryParameter("TemplateParam", "{\"name\":\"Marvin\",\"code\":\""+noticeStruct.getParam()+"\"}");//参数 TODO:这里只能等通用模板签名申请下来才可以自定义短信内容
-        try {
-            CommonResponse response = client.getCommonResponse(request);
-            return response.getData();
-        } catch (ServerException e) {
-            e.printStackTrace();
-        } catch (ClientException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            CommonResponse response = client.getCommonResponse(request);
+//            return response.getData();
+//        } catch (ServerException e) {
+//            e.printStackTrace();
+//        } catch (ClientException e) {
+//            e.printStackTrace();
+//        }
         return null;
     }
 

@@ -10,12 +10,11 @@ import com.marvin.util.DingdingClient;
 import com.marvin.util.NoticeSendComponent;
 import com.marvin.util.PiracyNoticeTextResolver;
 
-@Configuration
+@Configuration//注入钉钉通知的组件和异常通知的监听器
 public class RegisterConfig {
 
 	private NoticeSendComponent<PiracyNotice> sendComponent;
 	
-	@SuppressWarnings("unchecked")
 	@Bean
 	public NoticeSendComponent<PiracyNotice> registerSendComponent(PiracyNoticeTextResolver<PiracyNotice> resolver,DingdingClient client){
 		NoticeSendComponent<PiracyNotice> dingNoticeSendComponent = new DingNoticeSendComponent<PiracyNotice>(resolver, client);

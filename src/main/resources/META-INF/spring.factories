@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.marvin.config.RegisterConfig,\
 com.marvin.config.DingdingExceptionNoticeSendConfig,\
-com.marvin.config.DingdingExceptionNoticeSendConfig
+com.marvin.config.DingDingClientConfig,\
+com.marvin.config.PiracyConfig

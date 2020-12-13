@@ -8,7 +8,7 @@ import com.marvin.listener.PiracyNotifier;
 import com.marvin.model.PiracyNotice;
 
 @Component
-public class PiracyHandler {
+public class PiracyHandler {//异常调度器
 
 	private final ApplicationEventPublisher applicationEventPublisher;
 	
@@ -26,7 +26,7 @@ public class PiracyHandler {
 	public void createNotice(String objName, Object[] objArgs, RuntimeException e) {
 		PiracyNotice mailNotice = new PiracyNotice(e, objArgs, objName);
 		PiracyListEvent event = new PiracyListEvent(this,mailNotice);
-		applicationEventPublisher.publishEvent(event);
+		applicationEventPublisher.publishEvent(event);//发布事件——这里会将事件发布到applicationContext中
 	}
 	
 }

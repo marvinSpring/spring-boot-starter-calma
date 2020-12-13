@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PiracyNotice {//异常的结构体
+public class PiracyNotice {//异常的结构体——梦的样子
 
 	String title;//异常类名称
 	
@@ -78,11 +78,11 @@ public class PiracyNotice {//异常的结构体
 		}
 	}
 	
-	public String createText() {//将异常格式化返回
+	public String createText() {//将异常格式化返回——梦的美容院
 		StringBuilder builder = new StringBuilder();
 		builder.append("类路径：").append(classPath).append("\r\n");
 		builder.append("方法名称：").append(methodName).append("\r\n");
-		if(params!=null&&params.size()>0) {
+		if(params!=null&&params.size()>0) {//如果有参数追加参数到内容中
 			builder.append("参数信息：").append(String.join(",",params.stream().map(x->x.toString()).collect(Collectors.toList()))).append("\r\n");
 		}
 		builder.append("异常信息：").append(String.join("cause by:\r\n", exceptionMessage)).append("\r\n");

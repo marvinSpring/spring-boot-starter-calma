@@ -10,10 +10,11 @@ import com.marvin.util.DingDingProperty;
 import com.marvin.util.DingdingClient;
 
 @Configuration
-public class DingDingClientConfig {
+public class DingDingClientConfig {//注入发送钉钉信息的客户端
 
-	@Bean
-	public DingdingClient dingDingClient() {//DingDingProperty property,Gson gson
-		return new DefaultDingdingClient();
+	@Bean(name = "client")
+	public DingdingClient dingDingClient() { 
+		DefaultDingdingClient client = new DefaultDingdingClient();
+		return client;
 	}
 }

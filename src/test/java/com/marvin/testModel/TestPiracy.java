@@ -1,9 +1,5 @@
 package com.marvin.testModel;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.marvin.anno.PiracyExceptionListener;

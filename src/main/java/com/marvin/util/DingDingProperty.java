@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DingDingProperty {
+public class DingDingProperty {//钉钉消息需要的参数——梦的面包
 
 	private String [] phoneNum;//手机号
 	

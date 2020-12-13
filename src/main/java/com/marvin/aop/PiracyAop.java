@@ -10,7 +10,7 @@ import com.marvin.handler.PiracyHandler;
 
 @Aspect
 @Component
-public class PiracyAop {
+public class PiracyAop {//在异常出现的时候收集异常创建通知——梦开始的地方
 
 	private PiracyHandler handler;
 	
@@ -18,8 +18,8 @@ public class PiracyAop {
 		this.handler = handler;
 	}
 
-	@AfterThrowing(value = "@within(listener)",throwing = "e",argNames = "listener,e")////point()point()
-	public void mailExceptionNotifier(JoinPoint joinPoint,PiracyExceptionListener listener ,RuntimeException e) {
+	@AfterThrowing(value = "@within(listener)",throwing = "e",argNames = "listener,e")//创建通知
+	public void piracyExceptionNotifier(JoinPoint joinPoint,PiracyExceptionListener listener ,RuntimeException e) {
 		handler.createNotice(joinPoint.getSignature().getName(),joinPoint.getArgs(),e);
 	}
 	

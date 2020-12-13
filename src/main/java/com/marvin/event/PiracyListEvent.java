@@ -9,18 +9,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PiracyListEvent extends ApplicationEvent{
+public class PiracyListEvent extends ApplicationEvent{//异常事件驱动器
+	
 	private static final long serialVersionUID = 1L;
 	
 	private PiracyNotice notice;
 	
-	public PiracyListEvent(Object source, PiracyNotice mailNotice) {
+	public PiracyListEvent(Object source, PiracyNotice piracyNotice) {
 		super(source);
-		this.notice = mailNotice;
+		this.notice = piracyNotice;
 	}
-
-	public void print() {
-		System.err.println("Hello Spring Event");
-	}
-	
 }

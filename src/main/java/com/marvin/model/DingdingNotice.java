@@ -1,14 +1,14 @@
 package com.marvin.model;
 
-public class DingdingNotice {
+public class DingdingNotice {//最终给钉钉发送的结构体
 
-	private String msgtype = "text";
+	private String msgtype = "text";//发送的文本类型
 	
-	protected String phone;
+	protected String phone;//手机号
 
-	protected boolean isAll;
+	protected boolean isAll;//是否是通知所有的手机号
 	
-	private DingText text;
+	private DingText text;//发送的消息内容
 
 	public String getMsgtype() {
 		return msgtype;

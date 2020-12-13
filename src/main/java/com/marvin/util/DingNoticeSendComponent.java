@@ -4,17 +4,20 @@ import com.marvin.model.DingText;
 import com.marvin.model.DingdingNotice;
 import com.marvin.model.PiracyNotice;
 
-public class DingNoticeSendComponent<T extends PiracyNotice> implements NoticeSendComponent{
+//发送钉钉通知的组件 
+public class DingNoticeSendComponent<T extends PiracyNotice> implements NoticeSendComponent<PiracyNotice>{
 	
-	private PiracyNoticeTextResolver<PiracyNotice> resolver;
+	private final PiracyNoticeTextResolver<PiracyNotice> resolver;
 	
-	private DingdingClient client;
+	private final DingdingClient client;
 
 	public DingNoticeSendComponent(PiracyNoticeTextResolver<PiracyNotice> resolver,DingdingClient client) {
 		this.client = client;
 		this.resolver = resolver;
 	}
 
+	//将异常结构体组装好 
+	@Override
 	public void send(PiracyNotice exceptionNotice) {
 		String text = resolver.resolve(exceptionNotice);
 		DingdingNotice dingdingNotice = new DingdingNotice();

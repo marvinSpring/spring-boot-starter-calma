@@ -13,11 +13,11 @@ import feign.RequestLine;
 
 public interface DingdingClientFeign {
 
-	@RequestLine("POST /send?access_token={accessToken}") // TODO:ac39ef481aff92d19dc21ec6df05e5f2b2a6870e6046f3f95beb5b34110e2a3e
+	@RequestLine("POST /send?access_token={accessToken}")  
 	@Headers("Content-Type: application/json; charset=utf-8")
 	@Body("{body}")
 	Object post(@Param("accessToken") String accessToken,
 			@Param(value = "body", expander = JsonExpander.class) DingdingNotice body,
-			@QueryMap Map<String, Object> map);
+			@QueryMap Map<String, Object> map);//调钉钉机器人的接口——如果参数没问题钉钉那边也没问题=梦实现了
 
 }

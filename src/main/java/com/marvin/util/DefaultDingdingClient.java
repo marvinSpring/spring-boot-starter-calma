@@ -16,6 +16,8 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import com.google.gson.Gson;
 import com.marvin.feign.DingdingClientFeign;
 import com.marvin.model.DingdingNotice;
+import com.marvin.model.Notice;
+import com.marvin.model.PiracyNotice;
 
 import feign.Feign;
 import feign.FeignException;
@@ -26,30 +28,29 @@ import feign.codec.Decoder;
 import feign.codec.EncodeException;
 import feign.codec.Encoder;
 
-public class DefaultDingdingClient implements DingdingClient {// 发送钉钉通知的客户端
+public class DefaultDingdingClient implements Client {// 发送钉钉通知的客户端
 
 	private DingdingClientFeign client = Feign.builder().encoder(new GsonEncoder()).decoder(new GsonDecoder())
 			.target(DingdingClientFeign.class, "https://oapi.dingtalk.com/robot");
 
 	private Gson gson = new Gson();// json
 
-	private DingDingProperty dingProperty = new DingDingProperty(new String[] { "19991962259" },
-			"ac39ef481aff92d19dc21ec6df05e5f2b2a6870e6046f3f95beb5b34110e2a3e",
-			"SECb202b52aedf7d14fb7f2d40bf76625aef65a64fb1e54d1c82f9aa84cbb6a8077");// 暂时做配置的硬编码
+	private DingDingProperty dingProperty;//
 
-	public DefaultDingdingClient() {
+	public DefaultDingdingClient(DingDingProperty dingProperty) {
+		this.dingProperty = dingProperty;
 	}
 
-	@Override//预请求钉钉接口——梦的港口
-	public void doSend(DingdingNotice body) {
+	@Override // 预请求钉钉接口——梦的港口
+	public void doSend(Notice body) {
 		HashMap<String, Object> map = new HashMap<>();
 		long timeStamp = System.currentTimeMillis();
-		map.put("sign", generateSign(timeStamp, dingProperty.getSignSecret()));
+		map.put("sign", generateSign(timeStamp, dingProperty.getSecret()));
 		map.put("timestamp", timeStamp);
-		client.post(dingProperty.getAccessToken(), body, map);
+		client.post(dingProperty.getAccess_token(), (DingdingNotice) body, map);
 	}
 
-	private String generateSign(long timeStamp, String signSecret) {//生成sign码
+	private String generateSign(long timeStamp, String signSecret) {// 生成sign码
 		String strForSign = String.format("%d\n%s", timeStamp, signSecret);
 		try {
 			Mac mac = Mac.getInstance("HmacSHA256");

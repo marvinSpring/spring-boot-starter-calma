@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import org.springframework.util.DigestUtils;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,8 +19,6 @@ public class PiracyNotice {//异常的结构体——梦的样子
 	String title;//异常类名称
 	
 	LocalDateTime createTime = LocalDateTime.now();//通知时间
-	
-	String projectName;//工程名称
 	
 	String uid;//异常标识码
 	
@@ -31,8 +31,10 @@ public class PiracyNotice {//异常的结构体——梦的样子
 	List<String> exceptionMessage;//出现异常的异常原因信息
 	
 	List<String> traceInfos;//异常的追踪栈
-
-	public PiracyNotice(Throwable e,Object [] args,String title) {
+	
+	private String projectName;//工程名称
+	
+	public PiracyNotice(Throwable e,Object [] args,String projectName) {
 		this.exceptionMessage = giveMeExceptionMessage(e);
 		this.params = args==null?null:Arrays.stream(args).collect(Collectors.toList());
 		List<StackTraceElement> list = stackTrace(e);
@@ -41,6 +43,7 @@ public class PiracyNotice {//异常的结构体——梦的样子
 			this.methodName = list.get(0).getMethodName();
 			this.classPath =list.get(0).getClassName();
 		}
+		this.projectName=projectName!=null&&projectName.length()>0?projectName:"工程名称未正确获取";
 		this.uid = generateUid();
 	}
 
@@ -80,12 +83,13 @@ public class PiracyNotice {//异常的结构体——梦的样子
 	
 	public String createText() {//将异常格式化返回——梦的美容院
 		StringBuilder builder = new StringBuilder();
+		builder.append("工程名称：").append(projectName).append("\r\n");
 		builder.append("类路径：").append(classPath).append("\r\n");
 		builder.append("方法名称：").append(methodName).append("\r\n");
 		if(params!=null&&params.size()>0) {//如果有参数追加参数到内容中
 			builder.append("参数信息：").append(String.join(",",params.stream().map(x->x.toString()).collect(Collectors.toList()))).append("\r\n");
 		}
-		builder.append("异常信息：").append(String.join("cause by:\r\n", exceptionMessage)).append("\r\n");
+		builder.append("异常信息：").append(String.join("cause by : \r\n", exceptionMessage)).append("\r\n");
 		builder.append("异常追踪：").append(String.join("\r\n",traceInfos)).append("\r\n");
 		builder.append("出现时间：").append(createTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\r\n");
 		return builder.toString();

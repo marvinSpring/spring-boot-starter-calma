@@ -1,11 +1,22 @@
 package com.marvin.model;
 
-public class DingdingNotice {//最终给钉钉发送的结构体
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
+@Component
+@ConfigurationProperties(prefix = "piracy")
+@PropertySource(value = "application.properties")
+public class DingdingNotice extends Notice{//最终给钉钉发送的结构体
+
+//	@Value("${piracy.msgtype}")
 	private String msgtype = "text";//发送的文本类型
-	
+
+//	@Value("${piracy.phone}")
 	protected String phone;//手机号
 
+//	@Value("${piracy.all}")
 	protected boolean isAll;//是否是通知所有的手机号
 	
 	private DingText text;//发送的消息内容

@@ -37,6 +37,11 @@
 			<version>9.7.0</version>
 		</dependency> 
 		<dependency>
+		 	<groupId>org.apache.tomcat</groupId>
+	  		<artifactId>tomcat-util</artifactId>
+	  		<version>9.0.8</version>
+	  	</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -57,8 +62,8 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

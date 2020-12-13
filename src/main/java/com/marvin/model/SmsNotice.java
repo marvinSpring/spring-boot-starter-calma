@@ -1,6 +1,6 @@
 package com.marvin.model;
 
-public class SmsNotice {//最终发送短信的结构体
+public class SmsNotice extends Notice{//最终发送短信的结构体
 	
 	private String regionId;//阿里云的地区id
 	

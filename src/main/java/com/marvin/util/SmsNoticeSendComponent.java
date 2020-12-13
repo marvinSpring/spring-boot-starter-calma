@@ -10,23 +10,23 @@ public class SmsNoticeSendComponent<T extends PiracyNotice> implements NoticeSen
 	
 	private final SendSmsClient client;
 	
-	public SmsNoticeSendComponent(PiracyNoticeTextResolver<PiracyNotice> resolver,SendSmsClient client) {
-		this.client = client;
+	public SmsNoticeSendComponent(PiracyNoticeTextResolver<PiracyNotice> resolver,Client client) {
+		this.client = (SendSmsClient)client;
 		this.resolver = resolver;
 	}
 	
 	@Override
-	public void send(PiracyNotice piracyNotice) {
+	public void send(PiracyNotice piracyNotice) {//这里应该使用smsModel，然后其中封装手机号accesskey等信息
 		String text = resolver.resolve(piracyNotice);//将异常解析成便于阅读的结构
 		SmsNotice notice = new SmsNotice();
-		notice.setPhoneNumbers("19991962259");
-		notice.setAccessKey("LTAI4GAavZLMhfr6hhD6ZPPq");
-		notice.setSecret("rFpTMVPy5FGuBsinA95XbaMleWUahQ");
+		notice.setPhoneNumbers("");
+		notice.setAccessKey("");
+		notice.setSecret("");
 		notice.setParam(String.valueOf(text.length()));//TODO:通用短信签名和模板没下来，只能发数字，暂时就是异常的长度
-		notice.setTemplateCode("SMS_204985914");
-		notice.setRegionId("cn-hangzhou");
-		notice.setSignName("ABC商城");
-		client.send(notice);
+		notice.setTemplateCode("");
+		notice.setRegionId("");
+		notice.setSignName("");
+		client.doSend(notice);
 	}
 
 }

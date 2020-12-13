@@ -1,12 +1,11 @@
 package com.marvin.model;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "piracy")
+@ConfigurationProperties(prefix = "piracy.dingding")
 @PropertySource(value = "application.properties")
 public class DingdingNotice extends Notice{//最终给钉钉发送的结构体
 

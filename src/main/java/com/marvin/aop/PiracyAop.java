@@ -15,8 +15,8 @@ public class PiracyAop {//在异常出现的时候收集异常创建通知——
 
 	private PiracyHandler handler;
 	
-	@Value("${piracy.projectName}")
-	private String projectName = "1";
+	@Value("${spring.application.name}")
+	private String projectName;
 	
 	public PiracyAop(PiracyHandler handler) {
 		this.handler = handler;

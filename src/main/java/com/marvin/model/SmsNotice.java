@@ -1,5 +1,17 @@
 package com.marvin.model;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Component
+@ConfigurationProperties(prefix = "piracy.sms")
+@PropertySource(value = "application.properties")
 public class SmsNotice extends Notice{//最终发送短信的结构体
 	
 	private String regionId;//阿里云的地区id
@@ -14,62 +26,6 @@ public class SmsNotice extends Notice{//最终发送短信的结构体
 	
 	private String templateCode;//阿里云短信的模板码
 	
-	private String param;//发送短信的参数
+	private String param;//发送短信的参数 TODO:
 
-	public String getRegionId() {
-		return regionId;
-	}
-
-	public void setRegionId(String regionId) {
-		this.regionId = regionId;
-	}
-
-	public String getAccessKey() {
-		return accessKey;
-	}
-
-	public void setAccessKey(String accessKey) {
-		this.accessKey = accessKey;
-	}
-
-	public String getSecret() {
-		return secret;
-	}
-
-	public void setSecret(String secret) {
-		this.secret = secret;
-	}
-
-	public String getPhoneNumbers() {
-		return phoneNumbers;
-	}
-
-	public void setPhoneNumbers(String phoneNumbers) {
-		this.phoneNumbers = phoneNumbers;
-	}
-
-	public String getSignName() {
-		return signName;
-	}
-
-	public void setSignName(String signName) {
-		this.signName = signName;
-	}
-
-	public String getTemplateCode() {
-		return templateCode;
-	}
-
-	public void setTemplateCode(String templateCode) {
-		this.templateCode = templateCode;
-	}
-
-	public String getParam() {
-		return param;
-	}
-
-	public void setParam(String param) {
-		this.param = param;
-	}
-	
 }

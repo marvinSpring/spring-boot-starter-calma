@@ -7,5 +7,5 @@ import com.marvin.model.PiracyNotice;
 @FunctionalInterface
 public interface Client {
 
-	void doSend(Notice dingNotice);
+	void doSend(Notice notice);
 }

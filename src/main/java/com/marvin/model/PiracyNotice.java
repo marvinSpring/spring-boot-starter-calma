@@ -14,7 +14,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PiracyNotice {//异常的结构体——梦的样子
+public class PiracyNotice extends Notice{//异常的结构体——梦的样子
 
 	String title;//异常类名称
 	
@@ -74,7 +74,7 @@ public class PiracyNotice {//异常的结构体——梦的样子
 	}
 
 	private void giveMeExceptionMessage(Throwable exception, ArrayList<String> list) {//拼接异常字符串  异常 异常信息
-		list.add(String.format("%s%s",exception.getClass(),exception.getMessage()));
+		list.add(String.format("%s:%s",exception.getClass(),exception.getMessage()));
 		Throwable cause = exception.getCause();
 		if(cause!=null) {
 			giveMeExceptionMessage(cause,list);

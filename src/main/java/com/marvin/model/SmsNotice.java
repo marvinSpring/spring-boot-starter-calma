@@ -1,5 +1,7 @@
 package com.marvin.model;
 
+import java.util.Map;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -26,6 +28,6 @@ public class SmsNotice extends Notice{//最终发送短信的结构体
 	
 	private String templateCode;//阿里云短信的模板码
 	
-	private String param;//发送短信的参数 TODO:
+	private Map<String,Object> param;//发送短信的参数 TODO:
 
 }

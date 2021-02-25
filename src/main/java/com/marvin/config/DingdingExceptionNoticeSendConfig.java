@@ -1,7 +1,6 @@
 package com.marvin.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,11 +11,16 @@ import com.marvin.util.PiracyNoticeTextResolver;
 @Configuration
 @ConditionOnPiracyExceptionNotice
 //@EnableConfigurationProperties(PiracyExceptionProperties.class)
-public class DingdingExceptionNoticeSendConfig {//当异常通知这个文件存在则注入异常通知的文本解析器
+public class DingdingExceptionNoticeSendConfig { 
 	
 	@Bean
 	@ConditionalOnMissingBean
 	public PiracyNoticeTextResolver<PiracyNotice> exceptionNotice() {
-		return x->x.createText();
+		return new PiracyNoticeTextResolver<PiracyNotice>() {
+			@Override
+			public String resolve(PiracyNotice piracyNotice) {
+				return piracyNotice.createText();
+			}
+		};
 	}
 }

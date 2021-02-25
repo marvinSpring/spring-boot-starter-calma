@@ -39,7 +39,7 @@ public class PiracyNotice extends Notice{//异常的结构体——梦的样子
 		this.params = args==null?null:Arrays.stream(args).collect(Collectors.toList());
 		List<StackTraceElement> list = stackTrace(e);
 		if(list.size()>0) {
-			this.traceInfos=list.stream().map(x->x.toString()).collect(Collectors.toList());
+			this.traceInfos=list.stream().map(StackTraceElement::toString).collect(Collectors.toList());
 			this.methodName = list.get(0).getMethodName();
 			this.classPath =list.get(0).getClassName();
 		}
@@ -48,8 +48,7 @@ public class PiracyNotice extends Notice{//异常的结构体——梦的样子
 	}
 
 	private String generateUid() {//生成异常的唯一标识码
-		String uid = DigestUtils.md5DigestAsHex(String.format("%s-%s",exceptionMessage,traceInfos.size()>0?traceInfos.get(0):"").getBytes());
-		return uid;
+		return DigestUtils.md5DigestAsHex(String.format("%s-%s",exceptionMessage,traceInfos.size()>0?traceInfos.get(0):"").getBytes());
 	}
 
 	private List<StackTraceElement> stackTrace(Throwable e) {//追踪异常栈信息
@@ -87,7 +86,7 @@ public class PiracyNotice extends Notice{//异常的结构体——梦的样子
 		builder.append("类路径：").append(classPath).append("\r\n");
 		builder.append("方法名称：").append(methodName).append("\r\n");
 		if(params!=null&&params.size()>0) {//如果有参数追加参数到内容中
-			builder.append("参数信息：").append(String.join(",",params.stream().map(x->x.toString()).collect(Collectors.toList()))).append("\r\n");
+			builder.append("参数信息：").append(String.join(",",params.stream().map(Object::toString).collect(Collectors.toList()))).append("\r\n");
 		}
 		builder.append("异常信息：").append(String.join("cause by : \r\n", exceptionMessage)).append("\r\n");
 		builder.append("异常追踪：").append(String.join("\r\n",traceInfos)).append("\r\n");

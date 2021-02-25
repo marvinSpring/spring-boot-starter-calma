@@ -17,7 +17,6 @@ import com.google.gson.Gson;
 import com.marvin.feign.DingdingClientFeign;
 import com.marvin.model.DingdingNotice;
 import com.marvin.model.Notice;
-import com.marvin.model.PiracyNotice;
 
 import feign.Feign;
 import feign.FeignException;
@@ -30,21 +29,20 @@ import feign.codec.Encoder;
 
 public class DefaultDingdingClient implements Client {// 发送钉钉通知的客户端
 
-	private DingdingClientFeign client = Feign.builder().encoder(new GsonEncoder()).decoder(new GsonDecoder())
-			.target(DingdingClientFeign.class, "https://oapi.dingtalk.com/robot");
+	private final DingdingClientFeign client = Feign.builder().encoder(new GsonEncoder()).decoder(new GsonDecoder()).target(DingdingClientFeign.class, "https://oapi.dingtalk.com/robot");
 
-	private Gson gson = new Gson();// json
+	private final Gson gson = new Gson();// json
 
-	private DingDingProperty dingProperty;//
+	private final DingDingProperty dingProperty;
 
 	public DefaultDingdingClient(DingDingProperty dingProperty) {
 		this.dingProperty = dingProperty;
 	}
 
-	@Override // 预请求钉钉接口——梦的港口
+	@Override // 预请求钉钉接口 
 	public void doSend(Notice body) {
-		HashMap<String, Object> map = new HashMap<>();
 		long timeStamp = System.currentTimeMillis();
+		HashMap<String, Object> map = new HashMap<>();
 		map.put("sign", generateSign(timeStamp, dingProperty.getSecret()));
 		map.put("timestamp", timeStamp);
 		client.post(dingProperty.getAccess_token(), (DingdingNotice) body, map);

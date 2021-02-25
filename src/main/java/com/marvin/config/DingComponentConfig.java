@@ -11,11 +11,11 @@ import com.marvin.util.NoticeSendComponent;
 import com.marvin.util.PiracyNoticeTextResolver;
 import com.marvin.util.SmsNoticeSendComponent;
 
-@Configuration // 注入通知的组件
+@Configuration 
 @ConditionalOnProperty(prefix = "piracy.dingding",name = "enable",havingValue = "true")
 public class DingComponentConfig {
 
-	@Bean
+	@Bean// 注入通知的组件
 	public NoticeSendComponent<PiracyNotice> registerSendComponent(PiracyNoticeTextResolver<PiracyNotice> resolver,
 			Client client) {
 		NoticeSendComponent<PiracyNotice> component = new DingNoticeSendComponent<PiracyNotice>(resolver, client);

@@ -41,7 +41,7 @@ public class SendSmsClient implements Client {
 		request.putQueryParameter("PhoneNumbers", this.noticeStruct.getPhoneNumbers());// 手机号
 		request.putQueryParameter("SignName", this.noticeStruct.getSignName());// 签名
 		request.putQueryParameter("TemplateCode", this.noticeStruct.getTemplateCode());// 模板码
-		Map<String, Object> param = notice.getParam();// TODO:时间，异常原因
+		Map<String, Object> param = notice.getParam();
 		request.putQueryParameter("TemplateParam",
 				"{\"project\":\"" + param.get("project") + "\",\"time\":\""
 						+ param.get("time").toString().replaceAll("T"," ").subSequence(0, param.get("time").toString().length() - 7)

@@ -28,6 +28,6 @@ public class SmsNotice extends Notice{//最终发送短信的结构体
 	
 	private String templateCode;//阿里云短信的模板码
 	
-	private Map<String,Object> param;//发送短信的参数 TODO:
+	private Map<String,Object> param;//发送短信的参数  
 
 }

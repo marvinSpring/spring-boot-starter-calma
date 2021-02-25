@@ -18,7 +18,7 @@ public abstract class AbstractPiracyNotifier implements ApplicationListener<Pira
 	}
 
 	@Override
-	public void onApplicationEvent(PiracyListEvent event) {//PiracyListEvent事件发布到applicationContext后这个方法就开始跑了
+	public void onApplicationEvent(PiracyListEvent event) {//PiracyListEvent事件发布到applicationContext后,ApplicationListener一旦监听到该事件发布就调用本方法
 		if(event instanceof PiracyListEvent) {
 			send(event.getNotice());
 		}

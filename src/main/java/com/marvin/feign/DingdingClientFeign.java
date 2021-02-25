@@ -18,6 +18,6 @@ public interface DingdingClientFeign {
 	@Body("{body}")
 	Object post(@Param("accessToken") String accessToken,
 			@Param(value = "body", expander = JsonExpander.class) DingdingNotice body,
-			@QueryMap Map<String, Object> map);//调钉钉机器人的接口——如果参数没问题钉钉那边也没问题=梦实现了
+			@QueryMap Map<String, Object> map);//调钉钉机器人的接口
 
 }

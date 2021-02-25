@@ -1,6 +1,6 @@
 package com.marvin.util;
 
-import com.marvin.model.DingText;
+import com.marvin.model.DingContent;
 import com.marvin.model.DingdingNotice;
 import com.marvin.model.Notice;
 import com.marvin.model.PiracyNotice;
@@ -10,7 +10,7 @@ public class DingNoticeSendComponent<T extends PiracyNotice> implements NoticeSe
 	
 	private final PiracyNoticeTextResolver<PiracyNotice> resolver;
 	
-	private Client client;
+	private final Client client;
 
 	public DingNoticeSendComponent(PiracyNoticeTextResolver<PiracyNotice> resolver,Client client) {
 		this.client = client;
@@ -22,13 +22,9 @@ public class DingNoticeSendComponent<T extends PiracyNotice> implements NoticeSe
 	public void send(PiracyNotice exceptionNotice) {
 		String text = resolver.resolve(exceptionNotice);
 		Notice dingdingNotice = new DingdingNotice();
-		DingText content = new DingText();
+		DingContent content = new DingContent();//为了满足钉钉接口的参数格式而创建的类对象
 		content.setContent(text);
-		((DingdingNotice) dingdingNotice).setText(content);
+		((DingdingNotice) dingdingNotice).setContent(content);
 		client.doSend(dingdingNotice);
-	}
-
-	public Client getClient() {
-		return client;
 	}
 }

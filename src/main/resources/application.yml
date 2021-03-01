@@ -1,0 +1,22 @@
+spring:
+  application:
+    name:
+piracy:
+#Sms配置
+  sms:
+    enable:
+    regionId:
+    accessKey:
+    secret:
+    phoneNumbers:
+    signName:
+    templateCode:
+#钉钉
+  dingding:
+    enable:
+    msgtype:
+    phone:
+    all:
+    access_token:
+    secret:
+#钉钉或短信只能配置一个

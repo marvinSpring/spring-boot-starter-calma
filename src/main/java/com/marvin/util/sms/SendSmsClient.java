@@ -50,8 +50,6 @@ public class SendSmsClient implements Client {
 			CommonResponse response = client.getCommonResponse(request);
 			System.out.println(response.getData());
 			return response.getData();
-		} catch (ServerException e) {
-			e.printStackTrace();
 		} catch (ClientException e) {
 			e.printStackTrace();
 		}

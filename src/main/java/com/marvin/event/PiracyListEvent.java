@@ -9,6 +9,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
+/**
+ * @Describe: 异常事件，将异常事件包装成异常事件
+ * @Date: 2021/03/01
+ * @Author: Marvin
+ */
 public class PiracyListEvent extends ApplicationEvent{//异常事件驱动器
 	
 	private static final long serialVersionUID = 1L;

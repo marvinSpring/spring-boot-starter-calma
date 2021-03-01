@@ -8,6 +8,11 @@ import com.marvin.model.PiracyNotice;
 import com.marvin.model.SmsNotice;
 import com.marvin.util.sms.SendSmsClient;
 
+/**
+ * @Describe: Sms的发送组件
+ * @Date: 2021/03/01
+ * @Author: Marvin
+ */
 public class SmsNoticeSendComponent<T extends PiracyNotice> implements NoticeSendComponent<PiracyNotice> {// 短信发送的组件
 
 	private final PiracyNoticeTextResolver<PiracyNotice> resolver;

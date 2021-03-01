@@ -31,7 +31,6 @@ public class SendSmsClient implements Client {
 		DefaultProfile profile = DefaultProfile.getProfile(noticeStruct.getRegionId(), noticeStruct.getAccessKey(),
 				noticeStruct.getSecret());
 		IAcsClient client = new DefaultAcsClient(profile);
-		System.out.println("2:" + noticeStruct.getPhoneNumbers());
 		CommonRequest request = new CommonRequest();
 		request.setSysMethod(MethodType.POST);
 		request.setSysDomain("dysmsapi.aliyuncs.com");
@@ -48,7 +47,6 @@ public class SendSmsClient implements Client {
 						+ "\",\"causeBy\":\"" + param.get("causeBy") + "\"}");
 		try {
 			CommonResponse response = client.getCommonResponse(request);
-			System.out.println(response.getData());
 			return response.getData();
 		} catch (ClientException e) {
 			e.printStackTrace();

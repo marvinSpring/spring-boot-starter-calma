@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.DigestUtils;
 
 import lombok.Getter;
@@ -22,7 +23,8 @@ import lombok.Setter;
 public class PiracyNotice extends Notice{//异常的结构体
 
 	String title;//异常类名称
-	
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	LocalDateTime createTime = LocalDateTime.now();//通知时间
 	
 	String uid;//异常标识码

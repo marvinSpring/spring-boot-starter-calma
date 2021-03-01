@@ -1,5 +1,7 @@
 package com.marvin.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -7,6 +9,7 @@ import java.util.stream.Collectors;
 import com.marvin.model.PiracyNotice;
 import com.marvin.model.SmsNotice;
 import com.marvin.util.sms.SendSmsClient;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @Describe: Sms的发送组件
@@ -19,15 +22,17 @@ public class SmsNoticeSendComponent<T extends PiracyNotice> implements NoticeSen
 
 	private final SendSmsClient client;
 
+	@Autowired
+	private SmsNotice smsNotice;
+
 	public SmsNoticeSendComponent(PiracyNoticeTextResolver<PiracyNotice> resolver, Client client) {
 		this.client = (SendSmsClient) client;
 		this.resolver = resolver;
 	}
 
 	@Override
-	public void send(PiracyNotice piracyNotice) {// 这里应该使用smsModel，然后其中封装手机号accesskey等信息
+	public void send(PiracyNotice piracyNotice) {
 		Map<String, Object> map = this.smsResolve(piracyNotice);// 将异常解析成短信模板结构
-		SmsNotice smsNotice = new SmsNotice();
 		smsNotice.setParam(map);
 		client.doSend(smsNotice);
 	}
@@ -35,7 +40,8 @@ public class SmsNoticeSendComponent<T extends PiracyNotice> implements NoticeSen
 	private Map<String,Object> smsResolve(PiracyNotice piracyNotice) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("project",piracyNotice.getProjectName());
-		map.put("time",piracyNotice.getCreateTime());
+		LocalDateTime time = piracyNotice.getCreateTime();
+		map.put("time",time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth()+" "+time.getHour()+":"+time.getMinute()+":"+time.getSecond());
 		for (String x : piracyNotice.getExceptionMessage()) {
 			map.put("causeBy",x.substring(x.indexOf(":")+1));
 		}

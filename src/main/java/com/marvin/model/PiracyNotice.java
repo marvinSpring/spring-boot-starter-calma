@@ -14,7 +14,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PiracyNotice extends Notice{//异常的结构体——梦的样子
+/**
+ * @Describe: 异常信息
+ * @Date: 2021/03/01
+ * @Author: Marvin
+ */
+public class PiracyNotice extends Notice{//异常的结构体
 
 	String title;//异常类名称
 	

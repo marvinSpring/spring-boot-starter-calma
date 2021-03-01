@@ -4,9 +4,20 @@ import com.marvin.model.DingContent;
 import com.marvin.model.DingdingNotice;
 import com.marvin.model.Notice;
 import com.marvin.model.PiracyNotice;
+import org.springframework.beans.factory.annotation.Autowired;
 
-//发送钉钉通知的组件 
+/**
+ * @Describe: 发送钉钉通知的组件
+ * @Date: 2021/03/01
+ * @Author: Marvin
+ */
 public class DingNoticeSendComponent<T extends PiracyNotice> implements NoticeSendComponent<PiracyNotice>{
+
+	@Autowired
+	private DingdingNotice dingdingNotice;
+
+	@Autowired
+	DingContent content;
 	
 	private final PiracyNoticeTextResolver<PiracyNotice> resolver;
 	
@@ -21,10 +32,8 @@ public class DingNoticeSendComponent<T extends PiracyNotice> implements NoticeSe
 	@Override
 	public void send(PiracyNotice exceptionNotice) {
 		String text = resolver.resolve(exceptionNotice);
-		Notice dingdingNotice = new DingdingNotice();
-		DingContent content = new DingContent();//为了满足钉钉接口的参数格式而创建的类对象
 		content.setContent(text);
-		((DingdingNotice) dingdingNotice).setContent(content);
+		((DingdingNotice) dingdingNotice).setText(content);
 		client.doSend(dingdingNotice);
 	}
 }

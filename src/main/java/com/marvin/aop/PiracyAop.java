@@ -11,7 +11,12 @@ import com.marvin.handler.PiracyHandler;
 
 @Aspect
 @Component
-public class PiracyAop {//在异常出现的时候收集异常创建通知——梦开始的地方
+/**
+ * @Describe:核心，通过Aop中的在方法执行抛异常后切入的这个方式来将异常进行捕获，然后对捕获到的异常进行处理
+ * @Date:2021/03/01
+ * @Author:Marvin
+ */
+public class PiracyAop {//在异常出现的时候收集异常创建通知
 
 	private PiracyHandler handler;
 	
@@ -22,7 +27,7 @@ public class PiracyAop {//在异常出现的时候收集异常创建通知——
 		this.handler = handler;
 	}
 
-	@AfterThrowing(value = "@within(listener)",throwing = "e",argNames = "listener,e")//创建通知
+	@AfterThrowing(value = "@within(listener)",throwing = "e",argNames = "joinPoint,listener,e")//创建通知
 	public void piracyExceptionNotifier(JoinPoint joinPoint,PiracyExceptionListener listener ,RuntimeException e) {
 		handler.createNotice(joinPoint.getArgs(),e,projectName);
 	}

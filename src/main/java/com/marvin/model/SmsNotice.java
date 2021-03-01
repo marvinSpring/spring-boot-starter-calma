@@ -13,8 +13,15 @@ import lombok.Setter;
 @Setter
 @Component
 @ConfigurationProperties(prefix = "piracy.sms")
-@PropertySource(value = "application.properties")
+@PropertySource(value = "application.yml")
+/**
+ * @Describe: Sms异常结构体
+ * @Date: 2021/03/01
+ * @Author: Marvin
+ */
 public class SmsNotice extends Notice{//最终发送短信的结构体
+
+	private boolean enable;
 	
 	private String regionId;//阿里云的地区id
 	

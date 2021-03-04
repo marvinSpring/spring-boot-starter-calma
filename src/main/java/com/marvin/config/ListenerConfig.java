@@ -1,5 +1,7 @@
 package com.marvin.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +14,8 @@ import com.marvin.util.NoticeSendComponent;
 public class ListenerConfig {
 
 	@Bean
-	public PiracyNotifier piracyNotifier(NoticeSendComponent<PiracyNotice> component) {
+	@ConditionalOnMissingBean
+	public PiracyNotifier piracyNotifier( NoticeSendComponent<PiracyNotice> component) {
 		AbstractPiracyNotifier piracyNotifier = new PiracyNotifier(component);
 		return (PiracyNotifier) piracyNotifier;
 	}

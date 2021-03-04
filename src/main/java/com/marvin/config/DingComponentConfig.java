@@ -1,6 +1,8 @@
 package com.marvin.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +18,7 @@ import com.marvin.util.SmsNoticeSendComponent;
 public class DingComponentConfig {
 
 	@Bean// 注入通知的组件
+	@ConditionalOnMissingBean
 	public NoticeSendComponent<PiracyNotice> registerSendComponent(PiracyNoticeTextResolver<PiracyNotice> resolver,
 			Client client) {
 		NoticeSendComponent<PiracyNotice> component = new DingNoticeSendComponent<PiracyNotice>(resolver, client);

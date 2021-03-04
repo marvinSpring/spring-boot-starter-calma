@@ -1,7 +1,9 @@
 package com.marvin.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,11 +14,12 @@ import com.marvin.util.sms.SendSmsClient;
 
 @Configuration
 @ConditionalOnProperty(prefix = "piracy.sms",name = "enable",havingValue = "true")
+@EnableConfigurationProperties(SmsNotice.class)
 public class SmsClientConfig {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public SendSmsClient clientForSms(SmsNotice noticeStruct) {
+	public SendSmsClient clientForSms(@Qualifier("smsNotice") SmsNotice noticeStruct) {
 		Client client = new SendSmsClient(noticeStruct);
 		return (SendSmsClient) client;
 	}

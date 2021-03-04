@@ -19,13 +19,9 @@ public class PiracyHandler {//异常调度器
 		this.applicationEventPublisher = applicationEventPublisher;
 	}
 
-	public ApplicationEventPublisher getApplicationEventPublisher() {
-		return applicationEventPublisher;
-	}
-
 	public void createNotice( Object[] objArgs, RuntimeException e,String projectName) {
-		PiracyNotice mailNotice = new PiracyNotice(e, objArgs, projectName);
-		PiracyListEvent event = new PiracyListEvent(this,mailNotice);
+		PiracyNotice notice = new PiracyNotice(e, objArgs, projectName);
+		PiracyListEvent event = new PiracyListEvent(this,notice);
 		applicationEventPublisher.publishEvent(event);//发布事件——这里将事件发布到applicationContext中
 	}
 	

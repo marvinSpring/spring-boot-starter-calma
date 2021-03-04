@@ -18,7 +18,7 @@ import com.marvin.handler.PiracyHandler;
  */
 public class PiracyAop {//在异常出现的时候收集异常创建通知
 
-	private PiracyHandler handler;
+	private final PiracyHandler handler;
 	
 	@Value("${spring.application.name}")
 	private String projectName;

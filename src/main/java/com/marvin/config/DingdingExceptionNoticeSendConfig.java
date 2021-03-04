@@ -16,11 +16,6 @@ public class DingdingExceptionNoticeSendConfig {
 	@Bean
 	@ConditionalOnMissingBean
 	public PiracyNoticeTextResolver<PiracyNotice> exceptionNotice() {
-		return new PiracyNoticeTextResolver<PiracyNotice>() {
-			@Override
-			public String resolve(PiracyNotice piracyNotice) {
-				return piracyNotice.createText();
-			}
-		};
+		return PiracyNotice::createText;
 	}
 }

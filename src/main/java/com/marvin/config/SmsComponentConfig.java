@@ -1,5 +1,6 @@
 package com.marvin.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import com.marvin.util.SmsNoticeSendComponent;
 public class SmsComponentConfig {
 
 	@Bean
+	@ConditionalOnMissingBean
 	public SmsNoticeSendComponent<PiracyNotice> smsNoticeComponent(PiracyNoticeTextResolver<PiracyNotice> resolver,
 			Client client)
 	{

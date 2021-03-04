@@ -53,10 +53,10 @@ public class DefaultDingdingClient implements Client {// 发送钉钉通知的�
 		try {
 			Mac mac = Mac.getInstance("HmacSHA256");
 			try {
-				mac.init(new SecretKeySpec(signSecret.getBytes("UTF-8"), "HmacSHA256"));
-				byte[] signData = mac.doFinal(strForSign.getBytes("UTF-8"));
+				mac.init(new SecretKeySpec(signSecret.getBytes(StandardCharsets.UTF_8), "HmacSHA256"));
+				byte[] signData = mac.doFinal(strForSign.getBytes(StandardCharsets.UTF_8));
 				return Base64.encodeBase64String(signData);
-			} catch (InvalidKeyException | UnsupportedEncodingException e) {
+			} catch (InvalidKeyException e) {
 				e.printStackTrace();
 			}
 		} catch (NoSuchAlgorithmException e) {

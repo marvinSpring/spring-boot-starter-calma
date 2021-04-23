@@ -10,7 +10,7 @@ public class TestPiracy {
 	
 	public void test11(String name) {
 		System.out.println("name:"+name);
-//		new IException();
+		new IException();
 	}
 	
 	class IException{

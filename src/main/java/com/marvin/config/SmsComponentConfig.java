@@ -1,5 +1,6 @@
 package com.marvin.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -12,15 +13,16 @@ import com.marvin.util.PiracyNoticeTextResolver;
 import com.marvin.util.SmsNoticeSendComponent;
 
 @Configuration
-@ConditionalOnProperty(prefix = "piracy.sms",name = "enable",havingValue = "true")
+@ConditionalOnProperty(prefix = "piracy.sms", name = "enable", havingValue = "true")
+@Slf4j
 public class SmsComponentConfig {
 
-	@Bean
-	@ConditionalOnMissingBean
-	public SmsNoticeSendComponent<PiracyNotice> smsNoticeComponent(PiracyNoticeTextResolver<PiracyNotice> resolver,
-			Client client)
-	{
-		NoticeSendComponent<PiracyNotice> component = new SmsNoticeSendComponent<PiracyNotice>(resolver, client);
-		return (SmsNoticeSendComponent<PiracyNotice>) component;
-	}
+    @Bean
+    @ConditionalOnMissingBean
+    public SmsNoticeSendComponent<PiracyNotice> smsNoticeComponent(PiracyNoticeTextResolver<PiracyNotice> resolver,
+                                                                   Client client) {
+        log.info("-----------------》》》》》短信通知开启《《《《《《《-------------------------");
+        NoticeSendComponent<PiracyNotice> component = new SmsNoticeSendComponent<PiracyNotice>(resolver, client);
+        return (SmsNoticeSendComponent<PiracyNotice>) component;
+    }
 }

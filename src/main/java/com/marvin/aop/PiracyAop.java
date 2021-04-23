@@ -27,8 +27,13 @@ public class PiracyAop {//在异常出现的时候收集异常创建通知
 		this.handler = handler;
 	}
 
-	@AfterThrowing(value = "@within(listener)",throwing = "e",argNames = "joinPoint,listener,e")//创建通知
+	@AfterThrowing(value = "@within(listener)",throwing = "e",argNames = "listener,e")//创建通知
 	public void piracyExceptionNotifier(JoinPoint joinPoint,PiracyExceptionListener listener ,RuntimeException e) {
+		handler.createNotice(joinPoint.getArgs(),e,projectName);
+	}
+
+	@AfterThrowing(value = "@annotation(listener)",throwing = "e",argNames = "listener,e")//创建通知
+	public void methodExceptionNotifier(JoinPoint joinPoint,PiracyExceptionListener listener ,RuntimeException e) {
 		handler.createNotice(joinPoint.getArgs(),e,projectName);
 	}
 	

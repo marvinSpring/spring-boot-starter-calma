@@ -1,5 +1,6 @@
 package com.marvin.aop;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,7 +11,7 @@ import com.marvin.anno.PiracyExceptionListener;
 import com.marvin.handler.PiracyHandler;
 
 @Aspect
-@Component
+@Slf4j
 /**
  * @Describe:核心，通过Aop中的在方法执行抛异常后切入的这个方式来将异常进行捕获，然后对捕获到的异常进行处理
  * @Date:2021/03/01
@@ -29,11 +30,13 @@ public class PiracyAop {//在异常出现的时候收集异常创建通知
 
 	@AfterThrowing(value = "@within(listener)",throwing = "e",argNames = "listener,e")//创建通知
 	public void piracyExceptionNotifier(JoinPoint joinPoint,PiracyExceptionListener listener ,RuntimeException e) {
+		log.info("-------------------->>>>>>>>>>Aop《《《《《《《《《《------------------");
 		handler.createNotice(joinPoint.getArgs(),e,projectName);
 	}
 
 	@AfterThrowing(value = "@annotation(listener)",throwing = "e",argNames = "listener,e")//创建通知
 	public void methodExceptionNotifier(JoinPoint joinPoint,PiracyExceptionListener listener ,RuntimeException e) {
+		log.info("-------------------->>>>>>>>>>Aop《《《《《《《《《《------------------");
 		handler.createNotice(joinPoint.getArgs(),e,projectName);
 	}
 	

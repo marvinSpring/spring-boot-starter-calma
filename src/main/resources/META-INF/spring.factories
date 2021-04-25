@@ -1,4 +1,10 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.marvin.config.HandlerConfiguration,\
+com.marvin.config.AopConfiguration,\
+com.marvin.config.PiracyNoticeConfig,\
+com.marvin.config.ListenerConfig,\
+com.marvin.config.SmsClientConfig,\
+com.marvin.config.SmsComponentConfig,\
 com.marvin.config.DingComponentConfig,\
 com.marvin.config.DingdingExceptionNoticeSendConfig,\
 com.marvin.config.DingDingClientConfig

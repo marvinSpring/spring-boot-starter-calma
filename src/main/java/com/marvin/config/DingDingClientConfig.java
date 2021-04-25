@@ -1,5 +1,6 @@
 package com.marvin.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -14,11 +15,17 @@ import com.marvin.util.DingDingProperty;
 @Configuration
 @ConditionalOnProperty(prefix = "piracy.dingding",name = "enable",havingValue = "true")
 @EnableConfigurationProperties(DingDingProperty.class)
+@Slf4j
 public class DingDingClientConfig {//注入发送钉钉信息的客户端
+
+	public DingDingClientConfig() {
+		log.info("---------------->>>>>DingDingClientConfig<<<<<<-----------------");
+	}
 
 	@Bean
 	@ConditionalOnMissingBean
-	public Client dingDingClient(@Qualifier("dingDingProperty") DingDingProperty dingProperty) {
+	public Client dingDingClient(DingDingProperty dingProperty) {
+		log.info("---------------->>>>>DingDingProperty"+dingProperty+"<<<<<<-----------------");
 		Client client = new DefaultDingdingClient(dingProperty);
 		return client;
 	}

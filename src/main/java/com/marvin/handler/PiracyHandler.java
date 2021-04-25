@@ -1,6 +1,7 @@
 package com.marvin.handler;
 
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import com.marvin.event.PiracyListEvent;
 import com.marvin.model.PiracyNotice;
@@ -10,7 +11,7 @@ import com.marvin.model.PiracyNotice;
  * @Date: 2021/03/01
  * @Author: Marvin
  */
-@Component
+@Configuration
 public class PiracyHandler {//异常调度器
 
 	private final ApplicationEventPublisher applicationEventPublisher;

@@ -2,8 +2,8 @@ package com.marvin.util;
 
 import com.marvin.model.DingContent;
 import com.marvin.model.DingdingNotice;
-import com.marvin.model.Notice;
 import com.marvin.model.PiracyNotice;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Date: 2021/03/01
  * @Author: Marvin
  */
+@Slf4j
 public class DingNoticeSendComponent<T extends PiracyNotice> implements NoticeSendComponent<PiracyNotice>{
 
 	@Autowired
-	private DingdingNotice dingdingNotice;
+	private DingDingProperty dingDingProperty;
 
-	@Autowired
 	DingContent content;
 	
 	private final PiracyNoticeTextResolver<PiracyNotice> resolver;
@@ -31,9 +31,17 @@ public class DingNoticeSendComponent<T extends PiracyNotice> implements NoticeSe
 	//将异常结构体组装好 
 	@Override
 	public void send(PiracyNotice exceptionNotice) {
-		String text = resolver.resolve(exceptionNotice);
-		content.setContent(text);
-		((DingdingNotice) dingdingNotice).setText(content);
-		client.doSend(dingdingNotice);
+		try {
+			log.info("--------------->>>>>send<<<<<<<<-----------------------");
+			String text = resolver.resolve(exceptionNotice);
+			content = new DingContent();
+			content.setContent(text);
+			DingdingNotice dingdingNotice = dingDingProperty.createDingdingNotice(content);
+			((DingdingNotice) dingdingNotice).setText(content);
+			client.doSend(dingdingNotice);
+		} catch (Exception e) {
+			log.info(e.getCause().toString()+"\n \n");//TODO:加本项目特有的异常，然后用日志打印
+			e.printStackTrace();
+		}
 	}
 }

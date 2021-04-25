@@ -2,6 +2,7 @@ package com.marvin.model;
 
 import java.util.Map;
 
+import com.marvin.util.SupportYamlPropertyFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -11,9 +12,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Component
 @ConfigurationProperties(prefix = "piracy.sms")
-@PropertySource(value = "application.yml")
+@PropertySource(value = "classpath:application.yml",factory = SupportYamlPropertyFactory.class)
 /**
  * @Describe: Sms异常结构体
  * @Date: 2021/03/01

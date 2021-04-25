@@ -1,14 +1,11 @@
 package com.marvin.util;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.marvin.model.PiracyNotice;
 import com.marvin.model.SmsNotice;
-import com.marvin.util.sms.SendSmsClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -38,12 +35,17 @@ public class SmsNoticeSendComponent<T extends PiracyNotice> implements NoticeSen
 	}
 
 	private Map<String,Object> smsResolve(PiracyNotice piracyNotice) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("project",piracyNotice.getProjectName());
-		LocalDateTime time = piracyNotice.getCreateTime();
-		map.put("time",time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth()+" "+time.getHour()+":"+time.getMinute()+":"+time.getSecond());
-		for (String x : piracyNotice.getExceptionMessage()) {
-			map.put("causeBy",x.substring(x.indexOf(":")+1));
+		Map<String, Object> map = null;
+		try {
+			map = new HashMap<>();
+			map.put("project",piracyNotice.getProjectName());
+			LocalDateTime time = piracyNotice.getCreateTime();
+			map.put("time",time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth()+" "+time.getHour()+":"+time.getMinute()+":"+time.getSecond());
+			for (String x : piracyNotice.getExceptionMessage()) {
+				map.put("causeBy",x.substring(x.indexOf(":")+1));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return map;
 	}

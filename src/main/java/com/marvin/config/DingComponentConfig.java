@@ -1,6 +1,5 @@
 package com.marvin.config;
 
-import com.marvin.model.DingdingNotice;
 import com.marvin.util.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -15,6 +14,9 @@ import com.marvin.model.PiracyNotice;
 @ConditionalOnProperty(prefix = "piracy.dingding",name = "enable",havingValue = "true")
 @Slf4j
 public class DingComponentConfig {
+	public DingComponentConfig() {
+		log.info("-----------------》》》》》11111《《《《《《《-------------------------");
+	}
 
 	@Bean// 注入通知的组件
 	@ConditionalOnMissingBean

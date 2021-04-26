@@ -18,14 +18,10 @@ import com.marvin.util.DingDingProperty;
 @Slf4j
 public class DingDingClientConfig {//注入发送钉钉信息的客户端
 
-	public DingDingClientConfig() {
-		log.info("---------------->>>>>DingDingClientConfig<<<<<<-----------------");
-	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public Client dingDingClient(DingDingProperty dingProperty) {
-		log.info("---------------->>>>>DingDingProperty"+dingProperty+"<<<<<<-----------------");
 		Client client = new DefaultDingdingClient(dingProperty);
 		return client;
 	}

@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.marvin.config.DingComponentConfig,\
+com.marvin.config.DingdingExceptionNoticeSendConfig,\
+com.marvin.config.DingDingClientConfig

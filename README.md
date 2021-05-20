@@ -2,7 +2,7 @@
 本项目的作用是在企业项目出现bug的时候及时通知到对应的程序员
 
 #### 软件架构
-Spring源码(Version: **5.1.19.BUILD-SNAPSHOT**)
+使用SpringAOP
 
 #### 安装教程
 

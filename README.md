@@ -7,6 +7,7 @@
 JDK1.8+ | Maven3.2.5+ | SpringBoot2.0.0.RELEASE+
 
 快速入门
+
 1.将本工程从git上拉下来
 
 2.在你的工程的pom文件中将以下依赖加入

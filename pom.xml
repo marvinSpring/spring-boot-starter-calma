@@ -12,10 +12,10 @@
     <artifactId>piracy-spring-boot-starter</artifactId>
     <version>1.0.0</version>
     <name>Piracy-Dong-ExceptionNotice-Framework</name>
-    <description>剽窃东哥的Prometheus（一个异常通知框架）</description>
+    <description>一个异常通知框架</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
     </properties>
 
     <dependencies>

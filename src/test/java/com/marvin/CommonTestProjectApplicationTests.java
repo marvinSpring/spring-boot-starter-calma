@@ -11,12 +11,4 @@ import com.marvin.testModel.TestPiracy;
 @EnableAutoConfiguration
 class CommonTestProjectApplicationTests {
 
-	@Autowired
-	TestPiracy testPiracy;
-
-	@Test
-	public void test23() {
-		testPiracy.test11("参数");
-	}
-
 }

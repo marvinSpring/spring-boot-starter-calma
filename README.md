@@ -36,13 +36,13 @@ piracy:
 #    signName: 阿里云短信的签名
 #    templateCode: 阿里云短信的模板码
 #钉钉
-dingding:
-enable: true #开启钉钉通知
-msgtype: text #发送的消息格式，暂时我还没有做markdown
-phone: #你的手机号
-is-all: true #这个暂时没做
-access_token: #钉钉机器人的token
-secret: #钉钉机器人的密钥
+  dingding:
+    enable: true #开启钉钉通知
+    msgtype: text #发送的消息格式，暂时我还没有做markdown
+    phone: #你的手机号
+    is-all: true #这个暂时没做
+    access_token: #钉钉机器人的token
+    secret: #钉钉机器人的密钥
 ```
 tips：至于钉钉的配置请移步：钉钉机器人,注意订单机器人的钩子webhook 上面的步骤都完成之后，就可以测试这个star有多好用了
 ```
@@ -94,13 +94,13 @@ piracy:
 #    signName: 阿里云短信的签名
 #    templateCode: 阿里云短信的模板码
 #钉钉
-dingding:
-enable: true #开启钉钉通知
-msgtype: text #发送的消息格式，暂时我还没有做markdown
-phone: #你的手机号
-is-all: true #这个暂时没做
-access_token: #钉钉机器人的token
-secret: #钉钉机器人的密钥
+  dingding:
+    enable: true #开启钉钉通知
+    msgtype: text #发送的消息格式，暂时我还没有做markdown
+    phone: #你的手机号
+    is-all: true #这个暂时没做
+    access_token: #钉钉机器人的token
+    secret: #钉钉机器人的密钥
 ```
 第二步，当然是写个restfulApi了，你还在期待什么
 ```

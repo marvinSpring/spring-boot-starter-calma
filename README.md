@@ -22,6 +22,10 @@ spring:
 application:
 name:
 piracy:
+  exceptionnotice:
+    enabled: true
+    listen-type: common
+    project-name: a example project
 #Sms配置
 #  sms:
 #    enable: true #开启短信通知
@@ -69,13 +73,62 @@ public class DemoApplicationTests {
 }
 ```
 到这里测试就完成了，可以快乐的当一个帅锅侠了
+我是分割线、、、、、、、、、、、、、、、从这开始讲解如何在web模式下使用本框架
+第一步还是需要继续先开始写配置文件
+```
+spring:
+application:
+name:
+piracy:
+  exceptionnotice:
+    enabled: true
+    listen-type: web #区别是这里是web，开启了web模式的征途了
+    project-name: a example project
+#Sms配置
+#  sms:
+#    enable: true #开启短信通知
+#    regionId: 阿里云短信的regionId
+#    accessKey: 阿里云短信的accessKey
+#    secret: 阿里云短信的密钥
+#    phoneNumbers: 你的手机号
+#    signName: 阿里云短信的签名
+#    templateCode: 阿里云短信的模板码
+#钉钉
+dingding:
+enable: true #开启钉钉通知
+msgtype: text #发送的消息格式，暂时我还没有做markdown
+phone: #你的手机号
+is-all: true #这个暂时没做
+access_token: #钉钉机器人的token
+secret: #钉钉机器人的密钥
+```
+第二步，当然是写个restfulApi了，你还在期待什么
+```
+@RestController
+@PiracyExceptionListener//写在这里可以让所有的方法都被监控
+public class ExampleController{
 
-未完待续.............
+  @GetMapping("/test")
+  //@PiracyExceptionListener当然标注在某个方法上面就只监控被标注的方法
+  public void foo(String param){
+    int i = 1/0;
+  }
+  
+  @PostMapping("/test")
+  public void foo(Integer param){
+    param = param/0;
+  }
+  
+}
+```
+到这里为止，web模式的这个测试也完了，还不快点去试试？
+
+未完待续.............(有问题请联系我的Email：1261626796@qq.com，最近有点忙)
 
 下个版本的期待：
 
-1.支持web-MVC模式的异常通知
+1.支持MarkDown模式的异常通知消息
 
-2.支持MarkDown模式的异常通知消息
+2.支持微服务的监控通知
 
-3.支持微服务的监控通知
+ps:好懒啊，markdown配置很麻烦啊，希望下个版本能先出这个，，and感谢大家（感谢大家没有因为这个readme这么拉跨还支持本star，我会抽时间把这个star给完善好的）

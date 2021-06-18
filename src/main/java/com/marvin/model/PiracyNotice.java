@@ -38,8 +38,8 @@ public class PiracyNotice extends Notice{//异常的结构体
 	List<String> exceptionMessage;//出现异常的异常原因信息
 	
 	List<String> traceInfos;//异常的追踪栈
-	
-	private String projectName;//工程名称
+
+	String projectName;//工程名称
 	
 	public PiracyNotice(Throwable e,Object [] args,String projectName) {
 		this.exceptionMessage = giveMeExceptionMessage(e);

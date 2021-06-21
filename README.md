@@ -27,11 +27,11 @@
 ```yaml
 spring:
   application:
-  name: #项目名称，这里和project-name都可以给项目配置名称
+    name: #项目名称，这里和project-name都可以给项目配置名称
 piracy:
   exceptionnotice:
     enabled: true #开启异常通知
-    listen-type: web #区别是这里是web，开启了web模式的征途了
+    listen-type: common #普通模式
     project-name: a example project #项目名称
 #Sms配置
 #  sms:
@@ -43,7 +43,7 @@ piracy:
 #    signName: 阿里云短信的签名
 #    templateCode: 阿里云短信的模板码
 #钉钉
-dingding:
+  dingding:
     enable: true #开启钉钉通知
     msgtype: text #发送的消息格式，暂时我还没有做markdown
     phone: #你的手机号
@@ -51,44 +51,7 @@ dingding:
     access_token: #钉钉机器人的token
     secret: #钉钉机器人的密钥
 ```
-
-tips：至于钉钉的配置请移步：钉钉机器人,注意订单机器人的钩子webhook 上面的步骤都完成之后，就可以测试这个starter有多好用了
-
-```java
-
-@Component
-@PiracyExceptionListener // 异常通知的监控来自这个注解
-public class ExceptionTest {
-
-    public void testException(String param) {
-        System.out.println("参数：" + param);
-        throw new IllegalArgumentException("异常");
-    }
-
-}
-```
-
-测试
-
-```java
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class DemoApplicationTests {
-
-    @Autowired
-    private ExceptionTest exceptionTest;
-
-    @Test
-    public void contextLoads() {
-        exceptionTest.testException("冲冲冲！");
-    }
-}
-```
-然后你的钉钉就会钉d=====(￣▽￣*)b的一声
-![img.png](src/main/resources/common.png)
-到这里测试就完成了，可以快乐的当一个帅锅侠了
-
+tips：至于钉钉的配置请移步：钉钉机器人,注意订单机器人的钩子webhook 上面的步骤都完成之后，就可以测试这个star有多好用了
 --------------------------------------------------------------------
 
 从这开始讲解如何在web模式下使用本框架

@@ -8,9 +8,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.marvin</groupId>
-	<artifactId>piracy-spring-boot-starter</artifactId>
+	<artifactId>spring-boot-starter-calma</artifactId>
 	<version>1.0.0</version>
-	<name>Piracy-Dong-ExceptionNotice-Framework</name>
+	<name>spring-boot-starter-calma</name>
 	<description>一个异常通知框架</description>
 
     <properties>

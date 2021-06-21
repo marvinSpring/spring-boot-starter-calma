@@ -54,6 +54,8 @@ dingding:
 
 tips：至于钉钉的配置请移步：钉钉机器人,注意订单机器人的钩子webhook 上面的步骤都完成之后，就可以测试这个starter有多好用了
 
+[钉钉机器人]:https://developers.dingtalk.com/document/app/custom-robot-access
+
 ```java
 
 @Component
@@ -66,6 +68,7 @@ public class ExceptionTest {
     }
 
 }
+
 ```
 
 测试
@@ -87,6 +90,7 @@ public class DemoApplicationTests {
 ```
 然后你的钉钉就会钉d=====(￣▽￣*)b的一声
 ![img.png](src/main/resources/common.png)
+
 到这里测试就完成了，可以快乐的当一个帅锅侠了
 
 --------------------------------------------------------------------

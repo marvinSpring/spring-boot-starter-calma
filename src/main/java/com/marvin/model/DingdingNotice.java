@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
-@ConfigurationProperties(prefix = "piracy.dingding")
+@ConfigurationProperties(prefix = "calma.dingding")
 @PropertySource(value = "classpath:application.yml",factory = SupportYamlPropertyFactory.class)
 @Data
 @Slf4j

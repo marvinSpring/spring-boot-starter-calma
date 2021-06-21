@@ -1,8 +1,8 @@
 package com.marvin.util;
 
+import com.marvin.model.CalmaNotice;
 import com.marvin.model.DingContent;
 import com.marvin.model.DingdingNotice;
-import com.marvin.model.PiracyNotice;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,25 +12,25 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Author: Marvin
  */
 @Slf4j
-public class DingNoticeSendComponent<T extends PiracyNotice> implements NoticeSendComponent<PiracyNotice> {
+public class DingNoticeSendComponent<T extends CalmaNotice> implements NoticeSendComponent<CalmaNotice> {
 
     @Autowired
     private DingDingProperty dingDingProperty;
 
     DingContent content;
 
-    private final PiracyNoticeTextResolver<PiracyNotice> resolver;
+    private final CalmaNoticeTextResolver<CalmaNotice> resolver;
 
     private final Client client;
 
-    public DingNoticeSendComponent(PiracyNoticeTextResolver<PiracyNotice> resolver, Client client) {
+    public DingNoticeSendComponent(CalmaNoticeTextResolver<CalmaNotice> resolver, Client client) {
         this.client = client;
         this.resolver = resolver;
     }
 
     //将异常结构体组装好
     @Override
-    public void send(PiracyNotice exceptionNotice) {
+    public void send(CalmaNotice exceptionNotice) {
         try {
             log.info("--------------->>>>>send<<<<<<<<-----------------------");
             String text = resolver.resolve(exceptionNotice);

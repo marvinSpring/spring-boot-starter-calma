@@ -1,6 +1,6 @@
 package com.marvin.web;
 
-import com.marvin.anno.PiracyExceptionListener;
+import com.marvin.anno.CalmaExceptionListener;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -26,8 +26,8 @@ public class DefaultRequestBodyResolver extends RequestBodyAdviceAdapter impleme
     @Override
     public boolean supports(MethodParameter methodParameter, Type tragetType,
                             Class<? extends HttpMessageConverter<?>> converterType) {
-        return methodParameter.hasMethodAnnotation(PiracyExceptionListener.class) ||
-                methodParameter.getContainingClass().isAnnotationPresent(PiracyExceptionListener.class);
+        return methodParameter.hasMethodAnnotation(CalmaExceptionListener.class) ||
+                methodParameter.getContainingClass().isAnnotationPresent(CalmaExceptionListener.class);
     }
 
     @Override

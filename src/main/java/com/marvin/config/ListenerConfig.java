@@ -1,15 +1,13 @@
 package com.marvin.config;
 
+import com.marvin.listener.AbstractCalmaNotifier;
+import com.marvin.listener.CalmaNotifier;
+import com.marvin.model.CalmaNotice;
+import com.marvin.util.NoticeSendComponent;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.marvin.listener.AbstractPiracyNotifier;
-import com.marvin.listener.PiracyNotifier;
-import com.marvin.model.PiracyNotice;
-import com.marvin.util.NoticeSendComponent;
 
 @Configuration
 @Slf4j
@@ -17,10 +15,10 @@ public class ListenerConfig {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public PiracyNotifier piracyNotifier( NoticeSendComponent<PiracyNotice> component) {
+	public CalmaNotifier piracyNotifier(NoticeSendComponent<CalmaNotice> component) {
 		log.info("-----------------》》》》》监听开启《《《《《《《-------------------------");
-		AbstractPiracyNotifier piracyNotifier = new PiracyNotifier(component);
-		return (PiracyNotifier) piracyNotifier;
+		AbstractCalmaNotifier piracyNotifier = new CalmaNotifier(component);
+		return (CalmaNotifier) piracyNotifier;
 	}
 	
 }

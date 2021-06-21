@@ -1,22 +1,20 @@
 package com.marvin.config;
 
+import com.marvin.anno.ConditionOnCalmaExceptionNotice;
+import com.marvin.model.CalmaNotice;
+import com.marvin.util.CalmaNoticeTextResolver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.marvin.anno.ConditionOnPiracyExceptionNotice;
-import com.marvin.model.PiracyNotice;
-import com.marvin.util.PiracyNoticeTextResolver;
-
 @Configuration
-@ConditionOnPiracyExceptionNotice
-//@EnableConfigurationProperties(PiracyExceptionProperties.class)
+@ConditionOnCalmaExceptionNotice
+//@EnableConfigurationProperties(CalmaExceptionProperties.class)
 public class DingdingExceptionNoticeSendConfig { 
 	
 	@Bean
 	@ConditionalOnMissingBean
-	public PiracyNoticeTextResolver<PiracyNotice> exceptionNotice() {
-		return PiracyNotice::createText;
+	public CalmaNoticeTextResolver<CalmaNotice> exceptionNotice() {
+		return CalmaNotice::createText;
 	}
 }

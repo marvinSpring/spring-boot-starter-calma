@@ -27,11 +27,11 @@
 ```yaml
 spring:
   application:
-  name: #项目名称，这里和project-name都可以给项目配置名称
+    name: #项目名称，这里和project-name都可以给项目配置名称
 piracy:
   exceptionnotice:
     enabled: true #开启异常通知
-    listen-type: web #区别是这里是web，开启了web模式的征途了
+    listen-type: common #普通模式
     project-name: a example project #项目名称
 #Sms配置
 #  sms:
@@ -43,7 +43,7 @@ piracy:
 #    signName: 阿里云短信的签名
 #    templateCode: 阿里云短信的模板码
 #钉钉
-dingding:
+  dingding:
     enable: true #开启钉钉通知
     msgtype: text #发送的消息格式，暂时我还没有做markdown
     phone: #你的手机号

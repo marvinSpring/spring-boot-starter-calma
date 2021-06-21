@@ -1,15 +1,14 @@
 package com.marvin.config.web;
 
-import com.marvin.anno.ConditionOnPiracyExceptionNotice;
-import com.marvin.handler.PiracyHandler;
-import com.marvin.model.PiracyExceptionNotice;
+import com.marvin.anno.ConditionOnCalmaExceptionNotice;
+import com.marvin.handler.CalmaHandler;
+import com.marvin.model.CalmaExceptionNotice;
 import com.marvin.web.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -22,24 +21,24 @@ import java.util.List;
 
 @Configuration
 @ConditionalOnWebApplication
-@ConditionOnPiracyExceptionNotice
-@ConditionalOnProperty(name = "piracy.exceptionnotice.listen-type", havingValue = "web")
+@ConditionOnCalmaExceptionNotice
+@ConditionalOnProperty(name = "calma.exceptionnotice.listen-type", havingValue = "web")
 public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistrations {
 
     @Autowired
-    private PiracyHandler piracyHandler;
+    private CalmaHandler calmaHandler;
 
     @Autowired
-    private PiracyExceptionNotice piracyExceptionNotice;
+    private CalmaExceptionNotice calmaExceptionNotice;
 
     //添加自定义异常处理解析器
     @Override
     public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
-        resolvers.add(0, piracyExceptionHandlerResolver());
+        resolvers.add(0, calmaExceptionHandlerResolver());
     }
 
-    private PiracyExceptionHandlerResolver piracyExceptionHandlerResolver() {
-        PiracyExceptionHandlerResolver exceptionHandlerResolver = new PiracyExceptionHandlerResolver(piracyHandler, piracyExceptionNotice, currentRequestHeaderResolver(), currentRequestBodyResolver());
+    private CalmaExceptionHandlerResolver calmaExceptionHandlerResolver() {
+        CalmaExceptionHandlerResolver exceptionHandlerResolver = new CalmaExceptionHandlerResolver(calmaHandler, calmaExceptionNotice, currentRequestHeaderResolver(), currentRequestBodyResolver());
         return exceptionHandlerResolver;
     }
 

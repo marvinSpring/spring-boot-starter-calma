@@ -10,7 +10,7 @@ import static java.util.stream.Collectors.toList;
 
 @Setter
 @Getter
-public class HttpExceptionNotice extends PiracyNotice {
+public class HttpExceptionNotice extends CalmaNotice {
     protected String url;
 
     protected Map<String, String> paramInfo;

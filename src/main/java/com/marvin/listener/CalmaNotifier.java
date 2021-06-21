@@ -1,6 +1,6 @@
 package com.marvin.listener;
 
-import com.marvin.model.PiracyNotice;
+import com.marvin.model.CalmaNotice;
 import com.marvin.util.NoticeSendComponent;
 
 /**
@@ -8,9 +8,9 @@ import com.marvin.util.NoticeSendComponent;
  * @Date: 2021/03/01
  * @Author: Marvin
  */
-public class PiracyNotifier extends AbstractPiracyNotifier{//异常监听器
+public class CalmaNotifier extends AbstractCalmaNotifier{//异常监听器
 
-	public PiracyNotifier(NoticeSendComponent<PiracyNotice> noticeSendComponent ) {
+	public CalmaNotifier(NoticeSendComponent<CalmaNotice> noticeSendComponent ) {
 		super(noticeSendComponent);
 	}
 

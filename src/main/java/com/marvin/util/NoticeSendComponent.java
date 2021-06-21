@@ -1,6 +1,6 @@
 package com.marvin.util;
 
-import com.marvin.model.PiracyNotice;
+import com.marvin.model.CalmaNotice;
 
 /**
  * @Describe: 异常通知的发送组件
@@ -8,7 +8,7 @@ import com.marvin.model.PiracyNotice;
  * @Author: Marvin
  */
 @FunctionalInterface
-public interface NoticeSendComponent<T extends PiracyNotice> {
+public interface NoticeSendComponent<T extends CalmaNotice> {
 
 	public void send(T entity);
 }

@@ -1,8 +1,8 @@
 package com.marvin.event;
 
+import com.marvin.model.CalmaNotice;
 import org.springframework.context.ApplicationEvent;
 
-import com.marvin.model.PiracyNotice;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,14 +14,14 @@ import lombok.Setter;
  * @Date: 2021/03/01
  * @Author: Marvin
  */
-public class PiracyListEvent extends ApplicationEvent{//异常事件驱动器
+public class CalmaEvent extends ApplicationEvent{//异常事件驱动器
 	
 	private static final long serialVersionUID = 1L;
 	
-	private PiracyNotice notice;
+	private CalmaNotice notice;
 	
-	public PiracyListEvent(Object source, PiracyNotice piracyNotice) {
+	public CalmaEvent(Object source, CalmaNotice calmaNotice) {
 		super(source);
-		this.notice = piracyNotice;
+		this.notice = calmaNotice;
 	}
 }

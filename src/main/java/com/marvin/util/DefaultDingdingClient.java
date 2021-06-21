@@ -1,24 +1,9 @@
 package com.marvin.util;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.binary.Base64;
-
 import com.google.gson.Gson;
 import com.marvin.feign.DingdingClientFeign;
 import com.marvin.model.DingdingNotice;
 import com.marvin.model.Notice;
-
 import feign.Feign;
 import feign.FeignException;
 import feign.RequestTemplate;
@@ -27,6 +12,17 @@ import feign.codec.DecodeException;
 import feign.codec.Decoder;
 import feign.codec.EncodeException;
 import feign.codec.Encoder;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.binary.Base64;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 
 @Slf4j
 public class DefaultDingdingClient implements Client {// 发送钉钉通知的客户端

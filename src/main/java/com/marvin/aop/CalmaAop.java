@@ -1,14 +1,13 @@
 package com.marvin.aop;
 
+import com.marvin.anno.CalmaExceptionListener;
+import com.marvin.handler.CalmaHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-import com.marvin.anno.PiracyExceptionListener;
-import com.marvin.handler.PiracyHandler;
 
 @Aspect
 @Slf4j
@@ -17,24 +16,24 @@ import com.marvin.handler.PiracyHandler;
  * @Date:2021/03/01
  * @Author:Marvin
  */
-public class PiracyAop {//在异常出现的时候收集异常创建通知
+public class CalmaAop {//在异常出现的时候收集异常创建通知
 
-	private final PiracyHandler handler;
+	private final CalmaHandler handler;
 	
 	@Value("${spring.application.name}")
 	private String projectName;
 	
-	public PiracyAop(PiracyHandler handler) {
+	public CalmaAop(CalmaHandler handler) {
 		this.handler = handler;
 	}
 
 	@AfterThrowing(value = "@within(listener)",throwing = "e",argNames = "listener,e")//创建通知
-	public void piracyExceptionNotifier(JoinPoint joinPoint,PiracyExceptionListener listener ,RuntimeException e) {
+	public void classExceptionNotifier(JoinPoint joinPoint, CalmaExceptionListener listener , RuntimeException e) {
 		handler.createNotice(joinPoint.getArgs(),e,projectName);
 	}
 
 	@AfterThrowing(value = "@annotation(listener)",throwing = "e",argNames = "listener,e")//创建通知
-	public void methodExceptionNotifier(JoinPoint joinPoint,PiracyExceptionListener listener ,RuntimeException e) {
+	public void methodExceptionNotifier(JoinPoint joinPoint, CalmaExceptionListener listener , RuntimeException e) {
 		handler.createNotice(joinPoint.getArgs(),e,projectName);
 	}
 	

@@ -2,16 +2,13 @@ package com.marvin.util;
 
 import com.marvin.model.DingContent;
 import com.marvin.model.DingdingNotice;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.stereotype.Component;
-
-import lombok.Data;
 
 //@Component
-@ConfigurationProperties(prefix = "piracy.dingding")
+@ConfigurationProperties(prefix = "calma.dingding")
 @PropertySource(value = "classpath:application.yml",factory = SupportYamlPropertyFactory.class)
 @Data
 @Slf4j

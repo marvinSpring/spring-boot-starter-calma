@@ -28,7 +28,7 @@
 spring:
   application:
     name: #项目名称，这里和project-name都可以给项目配置名称
-piracy:
+calma:
   exceptionnotice:
     enabled: true #开启异常通知
     listen-type: common #普通模式
@@ -59,7 +59,7 @@ tips：至于钉钉的配置请移步：钉钉机器人,注意订单机器人的
 ```java
 
 @Component
-@PiracyExceptionListener // 异常通知的监控来自这个注解
+@CalmaExceptionListener // 异常通知的监控来自这个注解
 public class ExceptionTest {
 
     public void testException(String param) {
@@ -115,7 +115,7 @@ public class DemoApplicationTests {
 spring:
   application:
     name: #这里和project-name都可以配置项目名称
-piracy:
+calma:
   exceptionnotice:
     enabled: true #开启异常通知
     listen-type: web #区别是这里是web，开启了web模式的征途了
@@ -141,11 +141,11 @@ piracy:
 第二步，当然是写个控制器了，你还在期待什么
 ```java
 @RestController
-@PiracyExceptionListener//写在这里可以让所有的方法都被监控
+@CalmaExceptionListener//写在这里可以让所有的方法都被监控
 public class ExampleController{
 
   @GetMapping("/testFoo")
-  //@PiracyExceptionListener当然标注在某个方法上面就只监控被标注的方法
+  //@CalmaExceptionListener当然标注在某个方法上面就只监控被标注的方法
   public void foo(String param){
     int i = 1/0;
   }

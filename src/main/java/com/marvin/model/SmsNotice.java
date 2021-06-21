@@ -1,18 +1,16 @@
 package com.marvin.model;
 
-import java.util.Map;
-
 import com.marvin.util.SupportYamlPropertyFactory;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+
+import java.util.Map;
 
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "piracy.sms")
+@ConfigurationProperties(prefix = "calma.sms")
 @PropertySource(value = "classpath:application.yml",factory = SupportYamlPropertyFactory.class)
 /**
  * @Describe: Sms异常结构体

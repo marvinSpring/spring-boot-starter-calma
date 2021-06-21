@@ -1,8 +1,8 @@
 package com.marvin.web;
 
-import com.marvin.anno.PiracyExceptionListener;
-import com.marvin.handler.PiracyHandler;
-import com.marvin.model.PiracyExceptionNotice;
+import com.marvin.anno.CalmaExceptionListener;
+import com.marvin.handler.CalmaHandler;
+import com.marvin.model.CalmaExceptionNotice;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,22 +13,22 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PiracyExceptionHandlerResolver implements HandlerExceptionResolver {
+public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
 
-    private PiracyHandler piracyHandler;
+    private CalmaHandler calmaHandler;
 
-    private PiracyExceptionNotice piracyExceptionNotice;
+    private CalmaExceptionNotice calmaExceptionNotice;
 
     private CurrentRequestHeaderResolver currentRequestHeaderResolver;
 
     private CurrentRequestBodyResolver currentRequestBodyResolver;
 
-    public PiracyExceptionHandlerResolver(PiracyHandler piracyHandler,
-                                          PiracyExceptionNotice piracyExceptionNotice,
+    public CalmaExceptionHandlerResolver(CalmaHandler calmaHandler,
+                                          CalmaExceptionNotice calmaExceptionNotice,
                                           CurrentRequestHeaderResolver currentRequestHeaderResolver,
                                           CurrentRequestBodyResolver currentRequestBodyResolver) {
-        this.piracyHandler = piracyHandler;
-        this.piracyExceptionNotice = piracyExceptionNotice;
+        this.calmaHandler = calmaHandler;
+        this.calmaExceptionNotice = calmaExceptionNotice;
         this.currentRequestHeaderResolver = currentRequestHeaderResolver;
         this.currentRequestBodyResolver = currentRequestBodyResolver;
     }
@@ -45,10 +45,10 @@ public class PiracyExceptionHandlerResolver implements HandlerExceptionResolver 
         if (handler instanceof HandlerMethod) {
             handlerMethod = (HandlerMethod) handler;
         }
-        PiracyExceptionListener listener = getListener(handlerMethod);
+        CalmaExceptionListener listener = getListener(handlerMethod);
         //创建通知
         if (listener != null && handlerMethod != null && e != null) {
-            piracyHandler.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request));
+            calmaHandler.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request));
         }
         return null;
     }
@@ -69,10 +69,10 @@ public class PiracyExceptionHandlerResolver implements HandlerExceptionResolver 
         return headers;
     }
 
-    private PiracyExceptionListener getListener(HandlerMethod handlerMethod) {
-        PiracyExceptionListener listener = handlerMethod.getMethodAnnotation(PiracyExceptionListener.class);
+    private CalmaExceptionListener getListener(HandlerMethod handlerMethod) {
+        CalmaExceptionListener listener = handlerMethod.getMethodAnnotation(CalmaExceptionListener.class);
         if (listener == null) {
-            listener = handlerMethod.getBeanType().getAnnotation(PiracyExceptionListener.class);
+            listener = handlerMethod.getBeanType().getAnnotation(CalmaExceptionListener.class);
         }
         return listener;
     }

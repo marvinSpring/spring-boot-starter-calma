@@ -13,11 +13,10 @@ import com.marvin.util.DefaultDingdingClient;
 import com.marvin.util.DingDingProperty;
 
 @Configuration
-@ConditionalOnProperty(prefix = "piracy.dingding",name = "enable",havingValue = "true")
+@ConditionalOnProperty(prefix = "calma.dingding",name = "enable",havingValue = "true")
 @EnableConfigurationProperties(DingDingProperty.class)
 @Slf4j
 public class DingDingClientConfig {//注入发送钉钉信息的客户端
-
 
 	@Bean
 	@ConditionalOnMissingBean

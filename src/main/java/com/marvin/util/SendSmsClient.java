@@ -1,21 +1,16 @@
 package com.marvin.util;
 
-import java.util.Map;
-
-import org.springframework.stereotype.Component;
-
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.marvin.model.Notice;
-import com.marvin.model.PiracyNotice;
 import com.marvin.model.SmsNotice;
-import com.marvin.util.Client;
+
+import java.util.Map;
 
 //阿里云sms短信发送组件
 public class SendSmsClient implements Client {

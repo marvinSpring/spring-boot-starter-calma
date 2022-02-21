@@ -17,12 +17,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
 @ConditionalOnWebApplication
 @ConditionOnCalmaExceptionNotice
-@ConditionalOnProperty(name = "calma.exceptionnotice.listen-type", havingValue = "web")
+@ConditionalOnProperty(name = "calma.exceptionnotice.listen-type", havingValue = "WEB")
 public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistrations {
 
     @Autowired
@@ -38,8 +39,7 @@ public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistr
     }
 
     private CalmaExceptionHandlerResolver calmaExceptionHandlerResolver() {
-        CalmaExceptionHandlerResolver exceptionHandlerResolver = new CalmaExceptionHandlerResolver(calmaHandler, calmaExceptionNotice, currentRequestHeaderResolver(), currentRequestBodyResolver());
-        return exceptionHandlerResolver;
+        return new CalmaExceptionHandlerResolver(calmaHandler, calmaExceptionNotice, currentRequestHeaderResolver(), currentRequestBodyResolver());
     }
 
     //------------
@@ -58,8 +58,7 @@ public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistr
 
     @Bean
     public ClearBodyInterceptor clearBodyInterceptor() {
-        ClearBodyInterceptor clearBodyInterceptor = new ClearBodyInterceptor(currentRequestBodyResolver());
-        return clearBodyInterceptor;
+        return new ClearBodyInterceptor(currentRequestBodyResolver());
     }
 
     //添加自定义拦截器
@@ -72,7 +71,7 @@ public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistr
     @Override
     public RequestMappingHandlerAdapter getRequestMappingHandlerAdapter() {
         RequestMappingHandlerAdapter requestMappingHandlerAdapter = new RequestMappingHandlerAdapter();
-        requestMappingHandlerAdapter.setRequestBodyAdvice(Arrays.asList(currentRequestBodyResolver()));
+        requestMappingHandlerAdapter.setRequestBodyAdvice(Collections.singletonList(currentRequestBodyResolver()));
         return requestMappingHandlerAdapter;
     }
 }

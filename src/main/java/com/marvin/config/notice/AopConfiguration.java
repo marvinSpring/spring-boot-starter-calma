@@ -15,8 +15,8 @@ public class AopConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public CalmaAop calmaAop(CalmaHandler CalmaHandler ){
-        return new CalmaAop(CalmaHandler);
+    public CalmaAop calmaAop(CalmaHandler calmaHandler ){
+        return new CalmaAop(calmaHandler);
     }
 
 }

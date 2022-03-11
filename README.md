@@ -52,7 +52,7 @@ calma:
     secret: #钉钉机器人的密钥
 ```
 
-tips：至于钉钉的配置请移步：钉钉机器人,注意订单机器人的钩子webhook 上面的步骤都完成之后，就可以测试这个starter有多好用了
+tips：至于钉钉的配置请移步：钉钉机器人,注意钉钉机器人的钩子webhook 上面的步骤都完成之后，就可以测试这个starter有多好用了
 
 [钉钉机器人]:https://developers.dingtalk.com/document/app/custom-robot-access
 
@@ -89,7 +89,7 @@ public class DemoApplicationTests {
 }
 ```
 然后你的钉钉就会钉d=====(￣▽￣*)b的一声
-![img.png](src/main/resources/common.png)
+![img.png](Image/common.png)
 
 到这里测试就完成了，可以快乐的当一个帅锅侠了
 
@@ -158,7 +158,7 @@ public class ExampleController{
 }
 ```
 然后你的钉钉再一次钉d=====(￣▽￣*)b
-![img_1.png](src/main/resources/web.png)
+![img_1.png](Image/web.png)
 到这里为止，web模式的这个测试也完了，还不快点去试试？
 
 未完待续.............(有问题请联系我的Email：1261626796@qq.com，最近有点忙)

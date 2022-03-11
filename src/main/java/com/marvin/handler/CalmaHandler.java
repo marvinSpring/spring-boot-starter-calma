@@ -33,9 +33,9 @@ public class CalmaHandler {//异常调度器
     }
 
     public HttpExceptionNotice createHttpNotice(RuntimeException ex, String url, Map<String, String> param,
-                                 String requestBody, Map<String, String> headers) {
+                                 String requestBody, Map<String, String> headers,String requestMethod) {
         HttpExceptionNotice httpExceptionNotice = new HttpExceptionNotice(ex, String.join(
-                calmaExceptionNotice.getProjectName(), "的异常通知"), url, param, requestBody, headers);
+                calmaExceptionNotice.getProjectName(), "的异常通知"), url, param, requestBody, headers,requestMethod);
         applicationEventPublisher.publishEvent(new CalmaEvent(this,httpExceptionNotice));
         return httpExceptionNotice;
     }

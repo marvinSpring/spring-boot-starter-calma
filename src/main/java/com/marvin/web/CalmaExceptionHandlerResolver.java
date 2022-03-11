@@ -1,6 +1,8 @@
 package com.marvin.web;
 
+import com.marvin.enumeration.ExceptionType;
 import com.marvin.anno.CalmaExceptionListener;
+import com.marvin.exception.NoSuchHttpRequestMethodException;
 import com.marvin.handler.CalmaHandler;
 import com.marvin.model.CalmaExceptionNotice;
 import org.springframework.web.method.HandlerMethod;
@@ -24,9 +26,9 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
     private CurrentRequestBodyResolver currentRequestBodyResolver;
 
     public CalmaExceptionHandlerResolver(CalmaHandler calmaHandler,
-                                          CalmaExceptionNotice calmaExceptionNotice,
-                                          CurrentRequestHeaderResolver currentRequestHeaderResolver,
-                                          CurrentRequestBodyResolver currentRequestBodyResolver) {
+                                         CalmaExceptionNotice calmaExceptionNotice,
+                                         CurrentRequestHeaderResolver currentRequestHeaderResolver,
+                                         CurrentRequestBodyResolver currentRequestBodyResolver) {
         this.calmaHandler = calmaHandler;
         this.calmaExceptionNotice = calmaExceptionNotice;
         this.currentRequestHeaderResolver = currentRequestHeaderResolver;
@@ -48,7 +50,7 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
         CalmaExceptionListener listener = getListener(handlerMethod);
         //创建通知
         if (listener != null && handlerMethod != null && e != null) {
-            calmaHandler.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request));
+            calmaHandler.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request), getMethod(request));
         }
         return null;
     }
@@ -67,6 +69,16 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
                 headers.put(x, String.join(" , ", Arrays.asList(y)))
         );
         return headers;
+    }
+
+    private String getMethod(HttpServletRequest request) {
+        String method = null;
+        try {
+            method = request.getMethod();
+        } catch (Exception e) {
+            throw new NoSuchHttpRequestMethodException(ExceptionType.ERROR_OBTAINING_METHOD, e);
+        }
+        return method;
     }
 
     private CalmaExceptionListener getListener(HandlerMethod handlerMethod) {

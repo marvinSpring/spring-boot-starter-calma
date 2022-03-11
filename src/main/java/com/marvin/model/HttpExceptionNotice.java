@@ -19,13 +19,16 @@ public class HttpExceptionNotice extends CalmaNotice {
 
     protected Map<String, String> headers;
 
+    protected String requestMethod;
+
     public HttpExceptionNotice(Throwable e, String projectName, String url,
-                               Map<String, String> paramInfo, String requestBody, Map<String, String> headers) {
+                               Map<String, String> paramInfo, String requestBody, Map<String, String> headers,String requestMethod) {
         super(e, null, projectName);
         this.url = url;
         this.paramInfo = paramInfo;
         this.requestBody = requestBody;
         this.headers = headers;
+        this.requestMethod = requestMethod;
     }
 
     @Override
@@ -48,6 +51,7 @@ public class HttpExceptionNotice extends CalmaNotice {
                     .map(x -> String.format("%s::%s", x.getKey(), x.getValue())).collect(toList())));
             stringBuilder.append("\r\n");
         }
+        stringBuilder.append("请求方法：").append(requestMethod).append("\r\n");
         stringBuilder.append("类路径：").append(classPath).append("\r\n");
         stringBuilder.append("方法名：").append(methodName).append("\r\n");
         if (params != null && params.size() > 0) {

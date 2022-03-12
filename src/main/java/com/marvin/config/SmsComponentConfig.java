@@ -21,7 +21,6 @@ public class SmsComponentConfig {
     public SmsNoticeSendComponent<CalmaNotice> smsNoticeComponent(CalmaNoticeTextResolver<CalmaNotice> resolver,
                                                                   Client client) {
         log.info("-----------------》》》》》短信通知开启《《《《《《《-------------------------");
-        NoticeSendComponent<CalmaNotice> component = new SmsNoticeSendComponent<CalmaNotice>(resolver, client);
-        return (SmsNoticeSendComponent<CalmaNotice>) component;
+        return new SmsNoticeSendComponent<>(resolver, client);
     }
 }

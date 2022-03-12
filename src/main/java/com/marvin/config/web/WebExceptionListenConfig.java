@@ -4,6 +4,7 @@ import com.marvin.anno.ConditionOnCalmaExceptionNotice;
 import com.marvin.handler.CalmaHandler;
 import com.marvin.model.CalmaExceptionNotice;
 import com.marvin.web.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -24,10 +25,13 @@ import java.util.List;
 @ConditionalOnWebApplication
 @ConditionOnCalmaExceptionNotice
 @ConditionalOnProperty(name = "calma.exceptionnotice.listen-type", havingValue = "WEB")
-public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistrations {
+//@ConditionalOnProperty(prefix = "Calma", value = "exceptionnotice.enbaled", matchIfMissing = true)
+@Slf4j
+public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistrations  {
 
     @Autowired
     private CalmaHandler calmaHandler;
+
 
     @Autowired
     private CalmaExceptionNotice calmaExceptionNotice;
@@ -35,11 +39,13 @@ public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistr
     //添加自定义异常处理解析器
     @Override
     public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
-        resolvers.add(0, calmaExceptionHandlerResolver());
+        resolvers.add(0,calmaExceptionHandlerResolver());
     }
 
     private CalmaExceptionHandlerResolver calmaExceptionHandlerResolver() {
-        return new CalmaExceptionHandlerResolver(calmaHandler, calmaExceptionNotice, currentRequestHeaderResolver(), currentRequestBodyResolver());
+        log.info("----------------------进入web模式----------------------");
+        CalmaExceptionHandlerResolver calmaExceptionHandlerResolver = new CalmaExceptionHandlerResolver(calmaHandler, calmaExceptionNotice, currentRequestHeaderResolver(), currentRequestBodyResolver());
+        return calmaExceptionHandlerResolver;
     }
 
     //------------

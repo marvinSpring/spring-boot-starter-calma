@@ -23,8 +23,7 @@ public class DingComponentConfig {
 	public NoticeSendComponent<CalmaNotice> registerSendComponent(CalmaNoticeTextResolver<CalmaNotice> resolver,
 																  Client client) {
 		log.info("-----------------》》》》》钉钉通知开启《《《《《《《-------------------------");
-		NoticeSendComponent<CalmaNotice> component = new DingNoticeSendComponent<CalmaNotice>(resolver, client);
-		return component;
+		return new DingNoticeSendComponent<>(resolver, client);
 	}
 
 }

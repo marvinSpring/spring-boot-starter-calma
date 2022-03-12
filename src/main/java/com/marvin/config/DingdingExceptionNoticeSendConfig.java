@@ -14,7 +14,7 @@ public class DingdingExceptionNoticeSendConfig {
 	
 	@Bean
 	@ConditionalOnMissingBean
-	public CalmaNoticeTextResolver<CalmaNotice> exceptionNotice() {
+	public CalmaNoticeTextResolver exceptionNotice() {
 		return CalmaNotice::createText;
 	}
 }

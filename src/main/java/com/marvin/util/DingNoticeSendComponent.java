@@ -12,25 +12,25 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Author: Marvin
  */
 @Slf4j
-public class DingNoticeSendComponent<T extends CalmaNotice> implements NoticeSendComponent<CalmaNotice> {
+public class DingNoticeSendComponent<T extends CalmaNotice> implements NoticeSendComponent<T> {
 
     @Autowired
     private DingDingProperty dingDingProperty;
 
     DingContent content;
 
-    private final CalmaNoticeTextResolver<CalmaNotice> resolver;
+    private final CalmaNoticeTextResolver<T> resolver;
 
     private final Client client;
 
-    public DingNoticeSendComponent(CalmaNoticeTextResolver<CalmaNotice> resolver, Client client) {
+    public DingNoticeSendComponent(CalmaNoticeTextResolver<T> resolver, Client client) {
         this.client = client;
         this.resolver = resolver;
     }
 
     //将异常结构体组装好
     @Override
-    public void send(CalmaNotice exceptionNotice) {
+    public void send(T exceptionNotice) {
         try {
             log.info("--------------->>>>>send<<<<<<<<-----------------------");
             String text = resolver.resolve(exceptionNotice);

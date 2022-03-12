@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.DigestUtils;
 
 import lombok.Getter;
@@ -92,7 +93,8 @@ public class CalmaNotice extends Notice{//异常的结构体
 		builder.append("工程名称：").append(projectName).append("\r\n");
 		builder.append("类路径：").append(classPath).append("\r\n");
 		builder.append("方法名称：").append(methodName).append("\r\n");
-		if(params!=null&&params.size()>0) {//如果有参数追加参数到内容中
+		if(params!=null&&!CollectionUtils.isEmpty(params)&&//如果有参数追加参数到内容中
+				params.stream().filter(x->x!=null).count()>0) {//这里是为了防止有参的参数为null
 			builder.append("参数信息：").append(String.join(",",params.stream().map(Object::toString).collect(Collectors.toList()))).append("\r\n");
 		}
 		builder.append("异常信息：").append(String.join("cause by : \r\n", exceptionMessage)).append("\r\n");

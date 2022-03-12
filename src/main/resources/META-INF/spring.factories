@@ -3,6 +3,7 @@ com.marvin.config.HandlerConfiguration,\
 com.marvin.config.notice.AopConfiguration,\
 com.marvin.config.notice.CalmaNoticeConfig,\
 com.marvin.config.ListenerConfig,\
+com.marvin.config.web.WebExceptionListenConfig,\
 com.marvin.config.SmsClientConfig,\
 com.marvin.config.SmsComponentConfig,\
 com.marvin.config.DingComponentConfig,\

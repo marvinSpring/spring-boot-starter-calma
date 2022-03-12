@@ -22,6 +22,7 @@ public class CalmaHandler {//异常调度器
     private final CalmaExceptionNotice calmaExceptionNotice;
 
     public CalmaHandler(ApplicationEventPublisher applicationEventPublisher, CalmaExceptionNotice calmaExceptionNotice) {
+        super();
         this.applicationEventPublisher = applicationEventPublisher;
         this.calmaExceptionNotice = calmaExceptionNotice;
     }

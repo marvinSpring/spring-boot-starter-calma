@@ -54,7 +54,8 @@ public class HttpExceptionNotice extends CalmaNotice {
         stringBuilder.append("请求方法：").append(requestMethod).append("\r\n");
         stringBuilder.append("类路径：").append(classPath).append("\r\n");
         stringBuilder.append("方法名：").append(methodName).append("\r\n");
-        if (params != null && params.size() > 0) {
+        if (params != null && params.size() > 0 &&
+                params.stream().filter(x->x!=null).count()>0) {//这里是为了防止有参请求的参数为null
             stringBuilder.append("参数信息：")
                     .append(String.join("\t,\t", params.stream().map(x -> x.toString()).collect(toList())))
                     .append("\r\n");

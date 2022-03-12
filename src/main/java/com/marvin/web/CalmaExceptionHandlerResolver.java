@@ -5,6 +5,7 @@ import com.marvin.anno.CalmaExceptionListener;
 import com.marvin.exception.NoSuchHttpRequestMethodException;
 import com.marvin.handler.CalmaHandler;
 import com.marvin.model.CalmaExceptionNotice;
+import com.marvin.model.HttpExceptionNotice;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,13 +18,13 @@ import java.util.Map;
 
 public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
 
-    private CalmaHandler calmaHandler;
+    private final CalmaHandler calmaHandler;
 
-    private CalmaExceptionNotice calmaExceptionNotice;
+    private final CalmaExceptionNotice calmaExceptionNotice;
 
-    private CurrentRequestHeaderResolver currentRequestHeaderResolver;
+    private final CurrentRequestHeaderResolver currentRequestHeaderResolver;
 
-    private CurrentRequestBodyResolver currentRequestBodyResolver;
+    private final CurrentRequestBodyResolver currentRequestBodyResolver;
 
     public CalmaExceptionHandlerResolver(CalmaHandler calmaHandler,
                                          CalmaExceptionNotice calmaExceptionNotice,

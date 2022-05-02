@@ -1,6 +1,7 @@
 package com.marvin.util;
 
 import com.marvin.model.CalmaNotice;
+import com.marvin.model.Notice;
 
 /**
  * @Describe: 异常通知的发送组件

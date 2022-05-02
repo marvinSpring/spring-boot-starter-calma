@@ -1,4 +1,4 @@
-package com.marvin.config;
+package com.marvin.config.sms;
 
 import com.marvin.model.CalmaNotice;
 import com.marvin.util.CalmaNoticeTextResolver;

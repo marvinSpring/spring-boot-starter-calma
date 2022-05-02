@@ -3,6 +3,7 @@ package com.marvin.util;
 import com.marvin.model.CalmaNotice;
 import com.marvin.model.DingContent;
 import com.marvin.model.DingdingNotice;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Author: Marvin
  */
 @Slf4j
+@Data
 public class DingNoticeSendComponent<T extends CalmaNotice> implements NoticeSendComponent<T> {
 
     @Autowired

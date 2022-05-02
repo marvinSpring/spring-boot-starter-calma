@@ -2,6 +2,7 @@ package com.marvin.event.listener;
 
 import com.marvin.event.CalmaEvent;
 import com.marvin.model.CalmaNotice;
+import com.marvin.model.Notice;
 import org.springframework.context.ApplicationListener;
 
 import com.marvin.util.NoticeSendComponent;

@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 
 public class DefaultRequestBodyResolver extends RequestBodyAdviceAdapter implements CurrentRequestBodyResolver {
 
-    private ThreadLocal<String> currentRequestBodyInfo = ThreadLocal.withInitial(() -> "");
+    private final ThreadLocal<String> currentRequestBodyInfo = ThreadLocal.withInitial(() -> "");
 
     @Override
     public void remove() {

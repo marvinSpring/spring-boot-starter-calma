@@ -1,4 +1,4 @@
-package com.marvin.config;
+package com.marvin.config.handler;
 
 import com.marvin.handler.CalmaHandler;
 import com.marvin.model.CalmaExceptionNotice;

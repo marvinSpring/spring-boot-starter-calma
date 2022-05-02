@@ -1,4 +1,4 @@
-package com.marvin.config;
+package com.marvin.config.ding;
 
 import com.marvin.anno.ConditionOnCalmaExceptionNotice;
 import com.marvin.model.CalmaNotice;

@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConditionOnCalmaExceptionNotice
-//@ConditionalOnProperty(prefix = "Calma", value = "exceptionnotice.enbaled", matchIfMissing = true)
 @ConditionalOnProperty(name = "calma.exceptionnotice.listen-type", havingValue = "COMMON", matchIfMissing = true)
 public class AopConfiguration {
 

@@ -1,6 +1,7 @@
 package com.marvin.event.listener;
 
 import com.marvin.model.CalmaNotice;
+import com.marvin.model.Notice;
 import com.marvin.util.NoticeSendComponent;
 
 /**

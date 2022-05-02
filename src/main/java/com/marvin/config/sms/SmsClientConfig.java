@@ -1,4 +1,4 @@
-package com.marvin.config;
+package com.marvin.config.sms;
 
 import com.marvin.model.SmsNotice;
 import com.marvin.util.Client;

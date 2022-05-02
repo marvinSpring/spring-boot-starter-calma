@@ -7,7 +7,7 @@
         <version>2.3.6.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
-    <groupId>io.github.marvinspring</groupId>
+    <groupId>io.github.marvinspring.test</groupId>
     <artifactId>spring-boot-starter-calma</artifactId>
     <version>1.0.1</version>
     <name>spring-boot-starter-calma</name>

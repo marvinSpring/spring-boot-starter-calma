@@ -1,4 +1,4 @@
-package com.marvin.config;
+package com.marvin.config.resolver;
 
 import com.marvin.anno.ConditionOnCalmaExceptionNotice;
 import com.marvin.model.CalmaNotice;
@@ -9,8 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConditionOnCalmaExceptionNotice
-//@EnableConfigurationProperties(CalmaExceptionProperties.class)
-public class DingdingExceptionNoticeSendConfig { 
+public class ExceptionNoticeSendConfig {
 	
 	@Bean
 	@ConditionalOnMissingBean

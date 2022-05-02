@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: example #项目名称，这里和project-name都可以给项目配置名称
+calma:
+  exceptionnotice:
+    enabled: true #开启异常通知
+    listen-type: COMMON #普通模式
+    project-name: a example project #项目名称
+  #Sms配置
+  #  sms:
+  #    enable: true #开启短信通知
+  #    regionId: 阿里云短信的regionId
+  #    accessKey: 阿里云短信的accessKey
+  #    secret: 阿里云短信的密钥
+  #    phoneNumbers: 你的手机号
+  #    signName: 阿里云短信的签名
+  #    templateCode: 阿里云短信的模板码
+  #钉钉
+  dingding:
+    enable: true #开启钉钉通知
+    msgtype: text #发送的消息格式，暂时我还没有做markdown
+    phone: 19991962259
+    is-all: true #这个暂时没做
+    access_token: 61f0e14efacaeca5f1a04bcc40661bb6abf82813c10529aa2950436404c70503
+    secret: SECf8d3754f8eaf969396f734bba96ef79fbba9947a1a5918cc6612690cf24562de

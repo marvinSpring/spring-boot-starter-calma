@@ -1,5 +1,6 @@
 package com.marvin.util;
 
+import com.marvin.factory.SupportYamlPropertyFactory;
 import com.marvin.model.DingContent;
 import com.marvin.model.DingdingNotice;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.marvin.model;
 
-import com.marvin.util.SupportYamlPropertyFactory;
+import com.marvin.factory.SupportYamlPropertyFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;

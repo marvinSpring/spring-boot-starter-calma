@@ -1,6 +1,6 @@
 package com.marvin.model;
 
-import com.marvin.util.SupportYamlPropertyFactory;
+import com.marvin.factory.SupportYamlPropertyFactory;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

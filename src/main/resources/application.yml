@@ -21,5 +21,5 @@ calma:
     msgtype: text #发送的消息格式，暂时我还没有做markdown
     phone: 19991962259
     is-all: true #这个暂时没做
-    access_token: 61f0e14efacaeca5f1a04bcc40661bb6abf82813c10529aa2950436404c70503
-    secret: SECf8d3754f8eaf969396f734bba96ef79fbba9947a1a5918cc6612690cf24562de
+    access_token: #钉钉机器人的token
+    secret: #钉钉机器人的密钥

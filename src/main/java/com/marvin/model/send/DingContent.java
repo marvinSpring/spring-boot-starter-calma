@@ -1,4 +1,4 @@
-package com.marvin.model;
+package com.marvin.model.send;
 
 import lombok.Getter;
 import lombok.Setter;

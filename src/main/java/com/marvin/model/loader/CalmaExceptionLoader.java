@@ -1,4 +1,4 @@
-package com.marvin.model;
+package com.marvin.model.loader;
 
 import com.marvin.enumeration.ListenType;
 import lombok.Data;
@@ -8,10 +8,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @ConfigurationProperties(prefix = "calma.exceptionnotice")
 @PropertySource(value = "classpath:application.yml")
-public class CalmaExceptionNotice extends Notice{
+public class CalmaExceptionLoader extends AbstractExceptionLoader{
 
     /**
      * 是否开启

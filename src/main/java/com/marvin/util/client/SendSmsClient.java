@@ -1,4 +1,4 @@
-package com.marvin.util;
+package com.marvin.util.client;
 
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
@@ -7,21 +7,21 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
-import com.marvin.model.Notice;
-import com.marvin.model.SmsNotice;
+import com.marvin.model.send.ExceptionSendContext;
+import com.marvin.model.send.SmsExceptionSendContext;
 
 import java.util.Map;
 
 //阿里云sms短信发送组件
 public class SendSmsClient implements Client {
 
-	private SmsNotice noticeStruct;
+	private SmsExceptionSendContext noticeStruct;
 
-	public SendSmsClient(SmsNotice noticeStruct) {
+	public SendSmsClient(SmsExceptionSendContext noticeStruct) {
 		this.setNoticeStruct(noticeStruct);
 	}
 
-	public String send(SmsNotice notice) {
+	public String send(SmsExceptionSendContext notice) {
 		DefaultProfile profile = DefaultProfile.getProfile(noticeStruct.getRegionId(), noticeStruct.getAccessKey(),
 				noticeStruct.getSecret());
 		IAcsClient client = new DefaultAcsClient(profile);
@@ -49,15 +49,15 @@ public class SendSmsClient implements Client {
 	}
 
 	@Override
-	public void doSend(Notice smsNotice) {
-		send((SmsNotice) smsNotice);
+	public void doSend(ExceptionSendContext smsNotice) {
+		send((SmsExceptionSendContext) smsNotice);
 	}
 
-	public SmsNotice getNoticeStruct() {
+	public SmsExceptionSendContext getNoticeStruct() {
 		return noticeStruct;
 	}
 
-	public void setNoticeStruct(SmsNotice noticeStruct) {
+	public void setNoticeStruct(SmsExceptionSendContext noticeStruct) {
 		this.noticeStruct = noticeStruct;
 	}
 }

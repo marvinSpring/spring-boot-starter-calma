@@ -1,17 +1,16 @@
 package com.marvin.event.listener;
 
 import com.marvin.event.CalmaEvent;
-import com.marvin.model.CalmaNotice;
-import com.marvin.model.Notice;
+import com.marvin.model.loader.SmartExceptionLoader;
 import org.springframework.context.ApplicationListener;
 
-import com.marvin.util.NoticeSendComponent;
+import com.marvin.util.component.NoticeSendComponent;
 
 public abstract class AbstractCalmaNotifier implements ApplicationListener<CalmaEvent>{
 
-	private final NoticeSendComponent<CalmaNotice> noticeSendComponent;//发送通知的组件
+	private final NoticeSendComponent<SmartExceptionLoader> noticeSendComponent;//发送通知的组件
 	
-	public AbstractCalmaNotifier(NoticeSendComponent<CalmaNotice> noticeSendComponent) {
+	public AbstractCalmaNotifier(NoticeSendComponent<SmartExceptionLoader> noticeSendComponent) {
 		this.noticeSendComponent = noticeSendComponent;//钉钉或者SMS
 	}
 
@@ -20,7 +19,7 @@ public abstract class AbstractCalmaNotifier implements ApplicationListener<Calma
 		send(event.getNotice());
 	}
 	
-	private void send(CalmaNotice notice) {
+	private void send(SmartExceptionLoader notice) {
 		noticeSendComponent.send(notice);
 	}
 }

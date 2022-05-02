@@ -1,9 +1,9 @@
 package com.marvin.handler;
 
 import com.marvin.event.CalmaEvent;
-import com.marvin.model.CalmaExceptionNotice;
-import com.marvin.model.CalmaNotice;
-import com.marvin.model.HttpExceptionNotice;
+import com.marvin.model.loader.CalmaExceptionLoader;
+import com.marvin.model.loader.SmartExceptionLoader;
+import com.marvin.model.loader.HttpExceptionLoader;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,14 +19,14 @@ public class CalmaHandler {//异常调度器
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    private final CalmaExceptionNotice calmaExceptionNotice;
+    private final CalmaExceptionLoader calmaExceptionNotice;
 
     /**
      *
      * @param applicationEventPublisher 事件发布器
      * @param calmaExceptionNotice 全局异常通知
      */
-    public CalmaHandler(ApplicationEventPublisher applicationEventPublisher, CalmaExceptionNotice calmaExceptionNotice) {
+    public CalmaHandler(ApplicationEventPublisher applicationEventPublisher, CalmaExceptionLoader calmaExceptionNotice) {
         super();
         this.applicationEventPublisher = applicationEventPublisher;
         this.calmaExceptionNotice = calmaExceptionNotice;
@@ -39,7 +39,7 @@ public class CalmaHandler {//异常调度器
      * @param projectName 项目名称
      */
     public void createNotice(Object[] objArgs, RuntimeException e, String projectName) {
-        CalmaNotice notice = new CalmaNotice(e, objArgs, projectName);
+        SmartExceptionLoader notice = new SmartExceptionLoader(e, objArgs, projectName);
         CalmaEvent event = new CalmaEvent(this, notice);
         applicationEventPublisher.publishEvent(event);//发布事件——这里将事件发布到applicationContext中
     }
@@ -55,7 +55,7 @@ public class CalmaHandler {//异常调度器
      */
     public void createHttpNotice(RuntimeException ex, String url, Map<String, String> param,
                                  String requestBody, Map<String, String> headers,String requestMethod) {
-        HttpExceptionNotice httpExceptionNotice = new HttpExceptionNotice(ex, String.join(
+        HttpExceptionLoader httpExceptionNotice = new HttpExceptionLoader(ex, String.join(
                 calmaExceptionNotice.getProjectName(), "的异常通知"), url, param, requestBody, headers,requestMethod);
         applicationEventPublisher.publishEvent(new CalmaEvent(this,httpExceptionNotice));
     }

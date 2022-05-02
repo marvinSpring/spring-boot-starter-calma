@@ -1,11 +1,11 @@
 package com.marvin.config.ding;
 
 import com.marvin.anno.ConditionOnCalmaExceptionNotice;
-import com.marvin.model.CalmaNotice;
+import com.marvin.model.loader.SmartExceptionLoader;
 import com.marvin.util.CalmaNoticeTextResolver;
-import com.marvin.util.Client;
-import com.marvin.util.DingNoticeSendComponent;
-import com.marvin.util.NoticeSendComponent;
+import com.marvin.util.client.Client;
+import com.marvin.util.component.DingNoticeSendComponent;
+import com.marvin.util.component.NoticeSendComponent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -20,8 +20,8 @@ public class DingComponentConfig {
 	@Bean// 注入通知的组件
 	@ConditionalOnMissingBean
 	@ConditionOnCalmaExceptionNotice
-	public NoticeSendComponent<CalmaNotice> registerSendComponent(CalmaNoticeTextResolver<CalmaNotice> resolver,
-																  Client client) {
+	public NoticeSendComponent<SmartExceptionLoader> registerSendComponent(CalmaNoticeTextResolver<SmartExceptionLoader> resolver,
+																		   Client client) {
 		log.info("-----------------》》》》》钉钉通知开启《《《《《《《-------------------------");
 		return new DingNoticeSendComponent<>(resolver, client);
 	}

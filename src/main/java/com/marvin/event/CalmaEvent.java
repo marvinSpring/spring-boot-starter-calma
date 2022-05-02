@@ -1,6 +1,6 @@
 package com.marvin.event;
 
-import com.marvin.model.CalmaNotice;
+import com.marvin.model.loader.SmartExceptionLoader;
 import org.springframework.context.ApplicationEvent;
 
 
@@ -18,9 +18,9 @@ public class CalmaEvent extends ApplicationEvent{//异常事件驱动器
 	
 	private static final long serialVersionUID = 1L;
 	
-	private CalmaNotice notice;
+	private SmartExceptionLoader notice;
 	
-	public CalmaEvent(Object source, CalmaNotice calmaNotice) {
+	public CalmaEvent(Object source, SmartExceptionLoader calmaNotice) {
 		super(source);
 		this.notice = calmaNotice;
 	}

@@ -2,7 +2,7 @@ package com.marvin.config.web;
 
 import com.marvin.anno.ConditionOnCalmaExceptionNotice;
 import com.marvin.handler.CalmaHandler;
-import com.marvin.model.CalmaExceptionNotice;
+import com.marvin.model.loader.CalmaExceptionLoader;
 import com.marvin.web.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistr
 
 
     @Autowired
-    private CalmaExceptionNotice calmaExceptionNotice;
+    private CalmaExceptionLoader calmaExceptionLoader;
 
     //添加自定义异常处理解析器
     @Override
@@ -43,7 +42,7 @@ public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistr
 
     private CalmaExceptionHandlerResolver calmaExceptionHandlerResolver() {
         log.info("----------------------进入web模式----------------------");
-        return new CalmaExceptionHandlerResolver(calmaHandler, calmaExceptionNotice, currentRequestHeaderResolver(), currentRequestBodyResolver());
+        return new CalmaExceptionHandlerResolver(calmaHandler, calmaExceptionLoader, currentRequestHeaderResolver(), currentRequestBodyResolver());
     }
 
     //------------

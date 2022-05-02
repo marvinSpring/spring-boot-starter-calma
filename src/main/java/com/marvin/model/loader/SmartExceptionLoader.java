@@ -1,4 +1,4 @@
-package com.marvin.model;
+package com.marvin.model.loader;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +22,7 @@ import lombok.Setter;
  * @Date: 2021/03/01
  * @Author: Marvin
  */
-public class CalmaNotice extends Notice{//异常的结构体
+public class SmartExceptionLoader extends CalmaExceptionLoader {//异常的结构体
 
 	String title;//异常类名称
 
@@ -43,7 +43,7 @@ public class CalmaNotice extends Notice{//异常的结构体
 
 	String projectName;//工程名称
 	
-	public CalmaNotice(Throwable e,Object [] args,String projectName) {
+	public SmartExceptionLoader(Throwable e, Object [] args, String projectName) {
 		this.exceptionMessage = giveMeExceptionMessage(e);
 		this.params = args==null?null:Arrays.stream(args).collect(Collectors.toList());
 		List<StackTraceElement> list = stackTrace(e);

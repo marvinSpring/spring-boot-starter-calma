@@ -1,4 +1,4 @@
-package com.marvin.model;
+package com.marvin.model.loader;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,11 +8,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-
 @Setter
 @Getter
-public class HttpExceptionNotice extends CalmaNotice {
+public class HttpExceptionLoader extends SmartExceptionLoader {
+
     protected String url;
 
     protected Map<String, String> paramInfo;
@@ -23,8 +22,8 @@ public class HttpExceptionNotice extends CalmaNotice {
 
     protected String requestMethod;
 
-    public HttpExceptionNotice(Throwable e, String projectName, String url,
-                               Map<String, String> paramInfo, String requestBody, Map<String, String> headers,String requestMethod) {
+    public HttpExceptionLoader(Throwable e, String projectName, String url,
+                               Map<String, String> paramInfo, String requestBody, Map<String, String> headers, String requestMethod) {
         super(e, null, projectName);
         this.url = url;
         this.paramInfo = paramInfo;

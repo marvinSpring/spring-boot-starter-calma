@@ -1,6 +1,6 @@
-package com.marvin.model;
+package com.marvin.model.send;
 
-import com.marvin.util.SupportYamlPropertyFactory;
+import com.marvin.factory.SupportYamlPropertyFactory;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -17,7 +17,7 @@ import java.util.Map;
  * @Date: 2021/03/01
  * @Author: Marvin
  */
-public class SmsNotice extends Notice{//最终发送短信的结构体
+public class SmsExceptionSendContext extends ExceptionSendContext {//最终发送短信的结构体
 
 	private boolean enable;
 	

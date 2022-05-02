@@ -1,6 +1,7 @@
-package com.marvin.util;
+package com.marvin.util.client;
 
-import com.marvin.model.Notice;
+
+import com.marvin.model.send.ExceptionSendContext;
 
 /**
  * @Describe: 真正的发送组件
@@ -10,5 +11,5 @@ import com.marvin.model.Notice;
 @FunctionalInterface
 public interface Client {
 
-	void doSend(Notice notice);
+	void doSend(ExceptionSendContext notice);
 }

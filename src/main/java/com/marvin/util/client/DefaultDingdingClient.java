@@ -1,9 +1,10 @@
-package com.marvin.util;
+package com.marvin.util.client;
 
 import com.google.gson.Gson;
 import com.marvin.feign.DingdingClientFeign;
-import com.marvin.model.DingdingNotice;
-import com.marvin.model.Notice;
+import com.marvin.model.send.DingdingExceptionSendContext;
+import com.marvin.model.send.ExceptionSendContext;
+import com.marvin.util.DingDingProperty;
 import feign.Feign;
 import feign.FeignException;
 import feign.RequestTemplate;
@@ -38,12 +39,12 @@ public class DefaultDingdingClient implements Client {// 发送钉钉通知的�
 	}
 
 	@Override // 预请求钉钉接口 
-	public void doSend(Notice body) {
+	public void doSend(ExceptionSendContext body) {
 		long timeStamp = System.currentTimeMillis();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("sign", generateSign(timeStamp, dingProperty.getSecret()));
 		map.put("timestamp", timeStamp);
-		client.post(dingProperty.getAccess_token(), (DingdingNotice) body, map);
+		client.post(dingProperty.getAccess_token(), (DingdingExceptionSendContext) body, map);
 	}
 
 	private String generateSign(long timeStamp, String signSecret) {// 生成sign码

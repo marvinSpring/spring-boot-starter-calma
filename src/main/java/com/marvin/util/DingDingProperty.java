@@ -1,13 +1,13 @@
 package com.marvin.util;
 
-import com.marvin.model.DingContent;
-import com.marvin.model.DingdingNotice;
+import com.marvin.factory.SupportYamlPropertyFactory;
+import com.marvin.model.send.DingContent;
+import com.marvin.model.send.DingdingExceptionSendContext;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 
-//@Component
 @ConfigurationProperties(prefix = "calma.dingding")
 @PropertySource(value = "classpath:application.yml",factory = SupportYamlPropertyFactory.class)
 @Data
@@ -48,8 +48,8 @@ public class DingDingProperty {
 
 	protected boolean enable;
 
-	public DingdingNotice createDingdingNotice(DingContent content) {
-		return new DingdingNotice(content);
+	public DingdingExceptionSendContext createDingdingNotice(DingContent content) {
+		return new DingdingExceptionSendContext(content);
 	}
 
 	//TODO:后期加入MarkDown

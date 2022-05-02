@@ -1,7 +1,10 @@
-package com.marvin.util;
+package com.marvin.util.component;
 
-import com.marvin.model.CalmaNotice;
-import com.marvin.model.SmsNotice;
+import com.marvin.model.loader.SmartExceptionLoader;
+import com.marvin.model.send.SmsExceptionSendContext;
+import com.marvin.util.CalmaNoticeTextResolver;
+import com.marvin.util.client.Client;
+import com.marvin.util.client.SendSmsClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -13,28 +16,28 @@ import java.util.Map;
  * @Date: 2021/03/01
  * @Author: Marvin
  */
-public class SmsNoticeSendComponent<T extends CalmaNotice> implements NoticeSendComponent<CalmaNotice> {// 短信发送的组件
+public class SmsNoticeSendComponent<T extends SmartExceptionLoader> implements NoticeSendComponent<SmartExceptionLoader> {// 短信发送的组件
 
-	private final CalmaNoticeTextResolver<CalmaNotice> resolver;
+	private final CalmaNoticeTextResolver<SmartExceptionLoader> resolver;
 
 	private final SendSmsClient client;
 
 	@Autowired
-	private SmsNotice smsNotice;
+	private SmsExceptionSendContext smsExceptionContext;
 
-	public SmsNoticeSendComponent(CalmaNoticeTextResolver<CalmaNotice> resolver, Client client) {
+	public SmsNoticeSendComponent(CalmaNoticeTextResolver<SmartExceptionLoader> resolver, Client client) {
 		this.client = (SendSmsClient) client;
 		this.resolver = resolver;
 	}
 
 	@Override
-	public void send(CalmaNotice calmaNotice) {
+	public void send(SmartExceptionLoader calmaNotice) {
 		Map<String, Object> map = this.smsResolve(calmaNotice);// 将异常解析成短信模板结构
-		smsNotice.setParam(map);
-		client.doSend(smsNotice);
+		smsExceptionContext.setParam(map);
+		client.doSend(smsExceptionContext);
 	}
 
-	private Map<String,Object> smsResolve(CalmaNotice calmaNotice) {
+	private Map<String,Object> smsResolve(SmartExceptionLoader calmaNotice) {
 		Map<String, Object> map = null;
 		try {
 			map = new HashMap<>();

@@ -1,4 +1,4 @@
-package com.marvin.util;
+package com.marvin.factory;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.env.PropertiesPropertySource;

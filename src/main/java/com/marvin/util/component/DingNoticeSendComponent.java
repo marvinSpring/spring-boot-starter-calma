@@ -1,8 +1,11 @@
-package com.marvin.util;
+package com.marvin.util.component;
 
-import com.marvin.model.CalmaNotice;
-import com.marvin.model.DingContent;
-import com.marvin.model.DingdingNotice;
+import com.marvin.model.loader.SmartExceptionLoader;
+import com.marvin.model.send.DingContent;
+import com.marvin.model.send.DingdingExceptionSendContext;
+import com.marvin.util.CalmaNoticeTextResolver;
+import com.marvin.util.DingDingProperty;
+import com.marvin.util.client.Client;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Slf4j
 @Data
-public class DingNoticeSendComponent<T extends CalmaNotice> implements NoticeSendComponent<T> {
+public class DingNoticeSendComponent<T extends SmartExceptionLoader> implements NoticeSendComponent<T> {
 
     @Autowired
     private DingDingProperty dingDingProperty;
@@ -38,9 +41,9 @@ public class DingNoticeSendComponent<T extends CalmaNotice> implements NoticeSen
             String text = resolver.resolve(exceptionNotice);
             content = new DingContent();
             content.setContent(text);
-            DingdingNotice dingdingNotice = dingDingProperty.createDingdingNotice(content);
-            ((DingdingNotice) dingdingNotice).setText(content);
-            client.doSend(dingdingNotice);
+            DingdingExceptionSendContext dingdingExceptionContext = dingDingProperty.createDingdingNotice(content);
+            ((DingdingExceptionSendContext) dingdingExceptionContext).setText(content);
+            client.doSend(dingdingExceptionContext);
         } catch (Exception e) {
             log.info(e.getCause().toString() + "\n \n");//TODO:加本项目特有的异常，然后用日志打印
             e.printStackTrace();

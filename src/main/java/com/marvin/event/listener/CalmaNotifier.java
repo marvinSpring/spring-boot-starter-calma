@@ -1,8 +1,7 @@
 package com.marvin.event.listener;
 
-import com.marvin.model.CalmaNotice;
-import com.marvin.model.Notice;
-import com.marvin.util.NoticeSendComponent;
+import com.marvin.model.loader.SmartExceptionLoader;
+import com.marvin.util.component.NoticeSendComponent;
 
 /**
  * @Describe: 将异常信息监听
@@ -11,7 +10,7 @@ import com.marvin.util.NoticeSendComponent;
  */
 public class CalmaNotifier extends AbstractCalmaNotifier{//异常监听器
 
-	public CalmaNotifier(NoticeSendComponent<CalmaNotice> noticeSendComponent ) {
+	public CalmaNotifier(NoticeSendComponent<SmartExceptionLoader> noticeSendComponent ) {
 		super(noticeSendComponent);
 	}
 

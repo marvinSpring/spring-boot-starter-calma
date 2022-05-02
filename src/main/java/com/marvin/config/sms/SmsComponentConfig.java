@@ -1,10 +1,9 @@
 package com.marvin.config.sms;
 
-import com.marvin.model.CalmaNotice;
+import com.marvin.model.loader.SmartExceptionLoader;
 import com.marvin.util.CalmaNoticeTextResolver;
-import com.marvin.util.Client;
-import com.marvin.util.NoticeSendComponent;
-import com.marvin.util.SmsNoticeSendComponent;
+import com.marvin.util.client.Client;
+import com.marvin.util.component.SmsNoticeSendComponent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -18,8 +17,8 @@ public class SmsComponentConfig {
 
     @Bean
     @ConditionalOnMissingBean
-    public SmsNoticeSendComponent<CalmaNotice> smsNoticeComponent(CalmaNoticeTextResolver<CalmaNotice> resolver,
-                                                                  Client client) {
+    public SmsNoticeSendComponent<SmartExceptionLoader> smsNoticeComponent(CalmaNoticeTextResolver<SmartExceptionLoader> resolver,
+                                                                           Client client) {
         log.info("-----------------》》》》》短信通知开启《《《《《《《-------------------------");
         return new SmsNoticeSendComponent<>(resolver, client);
     }

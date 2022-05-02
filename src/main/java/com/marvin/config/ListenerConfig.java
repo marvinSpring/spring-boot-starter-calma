@@ -1,7 +1,7 @@
 package com.marvin.config;
 
-import com.marvin.listener.AbstractCalmaNotifier;
-import com.marvin.listener.CalmaNotifier;
+import com.marvin.event.listener.AbstractCalmaNotifier;
+import com.marvin.event.listener.CalmaNotifier;
 import com.marvin.model.CalmaNotice;
 import com.marvin.util.NoticeSendComponent;
 import lombok.extern.slf4j.Slf4j;

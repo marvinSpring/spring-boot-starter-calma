@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -71,7 +72,10 @@ public class CalmaNotice extends Notice{//异常的结构体
 	}
 
 	private void addStackTrace(ArrayList<StackTraceElement> list, Throwable e) {//添加异常栈，过滤掉cglib动态生成的文件——<generated>
-		list.addAll(0,Arrays.stream(e.getStackTrace()).filter(x->!x.getFileName().equals("<generated>")).collect(Collectors.toList()));
+		list.addAll(0,Arrays.stream(e.getStackTrace()).filter(x-> {
+			assert x.getFileName() != null;
+			return !x.getFileName().equals("<generated>");
+		}).collect(Collectors.toList()));
 	}
 
 	private List<String> giveMeExceptionMessage(Throwable exception) {//获取异常原因信息
@@ -94,8 +98,8 @@ public class CalmaNotice extends Notice{//异常的结构体
 		builder.append("类路径：").append(classPath).append("\r\n");
 		builder.append("方法名称：").append(methodName).append("\r\n");
 		if(params!=null&&!CollectionUtils.isEmpty(params)&&//如果有参数追加参数到内容中
-				params.stream().filter(x->x!=null).count()>0) {//这里是为了防止有参的参数为null
-			builder.append("参数信息：").append(String.join(",",params.stream().map(Object::toString).collect(Collectors.toList()))).append("\r\n");
+				params.stream().anyMatch(Objects::nonNull)) {//这里是为了防止有参的参数为null
+			builder.append("参数信息：").append(params.stream().map(Object::toString).collect(Collectors.joining(","))).append("\r\n");
 		}
 		builder.append("异常信息：").append(String.join("cause by : \r\n", exceptionMessage)).append("\r\n");
 		builder.append("异常追踪：").append(String.join("\r\n",traceInfos)).append("\r\n");

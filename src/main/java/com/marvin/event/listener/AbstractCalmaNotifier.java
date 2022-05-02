@@ -1,4 +1,4 @@
-package com.marvin.listener;
+package com.marvin.event.listener;
 
 import com.marvin.event.CalmaEvent;
 import com.marvin.model.CalmaNotice;

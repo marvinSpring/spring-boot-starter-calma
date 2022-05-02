@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -38,8 +40,8 @@ public class HttpExceptionNotice extends CalmaNotice {
         stringBuilder.append("接口地址：").append(url).append("\r\n");
         if (paramInfo != null && paramInfo.size() > 0) {
             stringBuilder.append("接口参数：").append("\r\n")
-                    .append(String.join("\r\r", paramInfo.entrySet().stream()
-                            .map(x -> String.format("%s::%s", x.getKey(), x.getValue())).collect(toList())))
+                    .append(paramInfo.entrySet().stream()
+                            .map(x -> String.format("%s::%s", x.getKey(), x.getValue())).collect(Collectors.joining("\r\r")))
                     .append("\r\n");
         }
         if (requestBody != null) {
@@ -47,17 +49,17 @@ public class HttpExceptionNotice extends CalmaNotice {
         }
         if (headers != null && headers.size() > 0) {
             stringBuilder.append("请求头：").append("\r\n");
-            stringBuilder.append(String.join(",\t", headers.entrySet().stream()
-                    .map(x -> String.format("%s::%s", x.getKey(), x.getValue())).collect(toList())));
+            stringBuilder.append(headers.entrySet().stream()
+                    .map(x -> String.format("%s::%s", x.getKey(), x.getValue())).collect(Collectors.joining(",\t")));
             stringBuilder.append("\r\n");
         }
         stringBuilder.append("请求方法：").append(requestMethod).append("\r\n");
         stringBuilder.append("类路径：").append(classPath).append("\r\n");
         stringBuilder.append("方法名：").append(methodName).append("\r\n");
         if (params != null && params.size() > 0 &&
-                params.stream().filter(x->x!=null).count()>0) {//这里是为了防止有参请求的参数为null
+                params.stream().anyMatch(Objects::nonNull)) {//这里是为了防止有参请求的参数为null
             stringBuilder.append("参数信息：")
-                    .append(String.join("\t,\t", params.stream().map(x -> x.toString()).collect(toList())))
+                    .append(params.stream().map(Object::toString).collect(Collectors.joining("\t,\t")))
                     .append("\r\n");
         }
         stringBuilder.append("异常信息：").append(String.join("\r\n caused by: ", exceptionMessage)).append("\r\n");

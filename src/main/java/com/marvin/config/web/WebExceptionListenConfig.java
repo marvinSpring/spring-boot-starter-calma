@@ -44,8 +44,7 @@ public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistr
 
     private CalmaExceptionHandlerResolver calmaExceptionHandlerResolver() {
         log.info("----------------------进入web模式----------------------");
-        CalmaExceptionHandlerResolver calmaExceptionHandlerResolver = new CalmaExceptionHandlerResolver(calmaHandler, calmaExceptionNotice, currentRequestHeaderResolver(), currentRequestBodyResolver());
-        return calmaExceptionHandlerResolver;
+        return new CalmaExceptionHandlerResolver(calmaHandler, calmaExceptionNotice, currentRequestHeaderResolver(), currentRequestBodyResolver());
     }
 
     //------------

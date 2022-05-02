@@ -48,10 +48,16 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
         if (handler instanceof HandlerMethod) {
             handlerMethod = (HandlerMethod) handler;
         }
+        assert handlerMethod != null;
         CalmaExceptionListener listener = getListener(handlerMethod);
         //创建通知
-        if (listener != null && handlerMethod != null && e != null) {
-            calmaHandler.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request), getMethod(request));
+        if (listener != null && e != null) {
+            calmaHandler.createHttpNotice(
+                    e,
+                    request.getRequestURI(),
+                    getParams(request), getRequestBody(),
+                    getHeader(request), getMethod(request)
+            );
         }
         return null;
     }

@@ -4,7 +4,7 @@ import com.marvin.anno.ConditionOnCalmaExceptionNotice;
 import com.marvin.handler.CalmaHandler;
 import com.marvin.model.loader.CalmaExceptionLoader;
 import com.marvin.web.*;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -24,12 +24,12 @@ import java.util.List;
 @ConditionalOnWebApplication
 @ConditionOnCalmaExceptionNotice
 @ConditionalOnProperty(name = "calma.exceptionnotice.listen-type", havingValue = "WEB")
-@Slf4j
 public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistrations  {
+
+    protected final org.apache.commons.logging.Log log = LogFactory.getLog(this.getClass());
 
     @Autowired
     private CalmaHandler calmaHandler;
-
 
     @Autowired
     private CalmaExceptionLoader calmaExceptionLoader;

@@ -13,7 +13,6 @@ import feign.codec.DecodeException;
 import feign.codec.Decoder;
 import feign.codec.EncodeException;
 import feign.codec.Encoder;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Mac;
@@ -25,7 +24,6 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
-@Slf4j
 public class DefaultDingdingClient implements Client {// 发送钉钉通知的客户端
 
 	private final DingdingClientFeign client = Feign.builder().encoder(new GsonEncoder()).decoder(new GsonDecoder()).target(DingdingClientFeign.class, "https://oapi.dingtalk.com/robot");

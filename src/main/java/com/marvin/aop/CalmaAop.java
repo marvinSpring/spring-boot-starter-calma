@@ -2,7 +2,6 @@ package com.marvin.aop;
 
 import com.marvin.anno.CalmaExceptionListener;
 import com.marvin.handler.CalmaHandler;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 
 
 @Aspect
-@Slf4j
 /**
  * @Describe:核心，通过Aop中的在方法执行抛异常后切入的这个方式来将异常进行捕获，然后对捕获到的异常进行处理
  * @Date:2021/03/01

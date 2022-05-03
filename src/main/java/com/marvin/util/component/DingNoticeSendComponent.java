@@ -7,7 +7,7 @@ import com.marvin.util.CalmaNoticeTextResolver;
 import com.marvin.util.DingDingProperty;
 import com.marvin.util.client.Client;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -15,9 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Date: 2021/03/01
  * @Author: Marvin
  */
-@Slf4j
 @Data
 public class DingNoticeSendComponent<T extends SmartExceptionLoader> implements NoticeSendComponent<T> {
+
+    protected final org.apache.commons.logging.Log log = LogFactory.getLog(this.getClass());
 
     @Autowired
     private DingDingProperty dingDingProperty;

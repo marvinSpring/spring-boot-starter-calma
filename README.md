@@ -170,3 +170,4 @@ public class ExampleController{
 2.支持微服务的监控通知
 
 _ps:下个版本将会先出markdown配置的功能，（感谢大家没有因为这个readme这么拉跨还支持本框架，我会抽时间把它给完善好的）_
+![](https://raw.githubusercontent.com/marvinSpring/marvinSpring/main/assets/github-contribution-grid-snake.svg)

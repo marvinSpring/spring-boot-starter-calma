@@ -19,7 +19,9 @@ public class SmsClientConfig {
 	@Bean
 	@ConditionalOnMissingBean
 	public SendSmsClient clientForSms(SmsNotice noticeStruct) {
-		Client client = new SendSmsClient(noticeStruct);
-		return (SendSmsClient) client;
+		if (log.isDebugEnabled()) {
+			log.info("-----------------》》》》》短信组件客户端注入《《《《《《《-------------------------");
+		}
+		return new SendSmsClient(noticeStruct);
 	}
 }

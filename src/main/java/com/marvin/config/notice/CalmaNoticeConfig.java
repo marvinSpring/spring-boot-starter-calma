@@ -15,7 +15,6 @@ public class CalmaNoticeConfig {
     @Bean
     @ConditionalOnMissingBean
     public AbstractCalmaNotifier abstractCalmaNotifier(NoticeSendComponent noticeSendComponent){
-        AbstractCalmaNotifier abstractCalmaNotifier = new CalmaNotifier(noticeSendComponent);
-        return abstractCalmaNotifier;
+        return new CalmaNotifier(noticeSendComponent);
     }
 }

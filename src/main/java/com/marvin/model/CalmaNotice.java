@@ -1,26 +1,26 @@
 package com.marvin.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.DigestUtils;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.DigestUtils;
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 /**
  * @Describe: 异常信息
  * @Date: 2021/03/01
  * @Author: Marvin
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class CalmaNotice extends Notice{//异常的结构体
 
 	String title;//异常类名称
@@ -94,12 +94,27 @@ public class CalmaNotice extends Notice{//异常的结构体
 		builder.append("类路径：").append(classPath).append("\r\n");
 		builder.append("方法名称：").append(methodName).append("\r\n");
 		if(params!=null&&!CollectionUtils.isEmpty(params)&&//如果有参数追加参数到内容中
-				params.stream().filter(x->x!=null).count()>0) {//这里是为了防止有参的参数为null
+				params.stream().anyMatch(Objects::nonNull)) {//这里是为了防止有参的参数为null
 			builder.append("参数信息：").append(String.join(",",params.stream().map(Object::toString).collect(Collectors.toList()))).append("\r\n");
 		}
 		builder.append("异常信息：").append(String.join("cause by : \r\n", exceptionMessage)).append("\r\n");
 		builder.append("异常追踪：").append(String.join("\r\n",traceInfos)).append("\r\n");
 		builder.append("出现时间：").append(createTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\r\n");
+		return builder.toString();
+	}
+
+	public String createMarkdown(){
+		StringBuilder builder = new StringBuilder();
+		builder.append("#### 工程名称：").append(projectName).append("\r\n");
+		builder.append("##### 类路径：`").append(classPath).append("`\r\n");
+		builder.append("##### 方法名称：").append(methodName).append("\r\n");
+		if(params!=null&&!CollectionUtils.isEmpty(params)&&//如果有参数追加参数到内容中
+				params.stream().anyMatch(Objects::nonNull)) {//这里是为了防止有参的参数为null
+			builder.append("##### 参数信息：").append(params.stream().map(Object::toString).collect(Collectors.joining(","))).append("\r\n");
+		}
+		builder.append("##### 异常信息：\r\n`").append(String.join("cause by : \r\n", exceptionMessage)).append("`\r\n");
+		builder.append("##### 异常追踪：\r\n`").append(String.join("`\r\n`",traceInfos)).append("`\r\n");
+		builder.append("###### 出现时间：").append(createTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\r\n");
 		return builder.toString();
 	}
 

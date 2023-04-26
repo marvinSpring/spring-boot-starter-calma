@@ -1,4 +1,4 @@
-package com.marvin.web;
+package com.marvin.web.resolver;
 
 public class DefaultRequestHeaderResolver implements CurrentRequestHeaderResolver{
 }

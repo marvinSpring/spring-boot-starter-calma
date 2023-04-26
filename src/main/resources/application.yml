@@ -18,7 +18,7 @@ calma:
   #钉钉
   dingding:
     enable: true #开启钉钉通知
-    msgtype: text #发送的消息格式，暂时我还没有做markdown
+    msgtype: markdown #发送的消息格式，暂时我还没有做markdown
     phone: 19991962259
     is-all: true #这个暂时没做
     access_token: #钉钉机器人的token

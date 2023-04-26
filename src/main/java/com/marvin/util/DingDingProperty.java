@@ -2,10 +2,14 @@ package com.marvin.util;
 
 import com.marvin.factory.SupportYamlPropertyFactory;
 import com.marvin.model.DingContent;
+import com.marvin.model.DingMarkdown;
 import com.marvin.model.DingdingNotice;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.PropertySource;
 
 //@Component
@@ -49,11 +53,15 @@ public class DingDingProperty {
 
 	protected boolean enable;
 
-	public DingdingNotice createDingdingNotice(DingContent content) {
-		return new DingdingNotice(content);
+	protected String msgtype;
+
+	public DingdingNotice createDingdingTextNotice(DingContent content) {
+		return new DingdingNotice(content,msgtype);
 	}
 
-	//TODO:后期加入MarkDown
-
+	//加入MarkDown
+	public DingdingNotice createDingdingMarkdownNotice(DingMarkdown markdown) {
+		return new DingdingNotice(markdown,msgtype);
+	}
 
 }

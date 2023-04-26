@@ -132,9 +132,9 @@ calma:
   #钉钉
   dingding:
     enable: true #开启钉钉通知
-    msgtype: text #发送的消息格式，暂时我还没有做markdown
-    phone: #你的手机号
-    is-all: true #这个暂时没做
+    msgtype: text #发送的消息格式,text将通过普通文本方式发送，markdown将会将异常信息用markdown语法转化后发送
+    phone: #你的手机号，暂时不支持@通知到人
+    is-all: true #这个暂时没做，额，这个@全体成员也还没做，这几天抽空就做了
     access_token: #钉钉机器人的token
     secret: #钉钉机器人的密钥
 ```
@@ -165,8 +165,6 @@ public class ExampleController{
 
 下个版本的期待：
 
-1.支持MarkDown模式的异常通知消息
+1.支持微服务的监控通知
 
-2.支持微服务的监控通知
-
-_ps:下个版本将会先出markdown配置的功能，（感谢大家没有因为这个readme这么拉跨还支持本框架，我会抽时间把它给完善好的）_
+_ps:终于吧markdown补充好了，之前一直有其他事情没空搞，（感谢大家没有因为这个readme这么拉跨还支持本框架，我会抽时间把它给完善好的）_

@@ -1,4 +1,4 @@
-package com.marvin.web;
+package com.marvin.web.resolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;

@@ -1,4 +1,4 @@
-package com.marvin.web;
+package com.marvin.web.resolver;
 
 import com.marvin.anno.CalmaExceptionListener;
 import org.springframework.core.MethodParameter;
@@ -6,7 +6,6 @@ import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdviceAdapter;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 
 public class DefaultRequestBodyResolver extends RequestBodyAdviceAdapter implements CurrentRequestBodyResolver {

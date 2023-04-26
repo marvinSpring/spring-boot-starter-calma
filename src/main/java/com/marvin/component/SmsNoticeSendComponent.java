@@ -4,7 +4,7 @@ import com.marvin.client.Client;
 import com.marvin.client.SendSmsClient;
 import com.marvin.model.CalmaNotice;
 import com.marvin.model.SmsNotice;
-import com.marvin.util.CalmaNoticeTextResolver;
+import com.marvin.util.CalmaValueResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -18,14 +18,14 @@ import java.util.Map;
  */
 public class SmsNoticeSendComponent<T extends CalmaNotice> implements NoticeSendComponent<CalmaNotice> {// 短信发送的组件
 
-	private final CalmaNoticeTextResolver<CalmaNotice> resolver;
+	private final CalmaValueResolver<CalmaNotice> resolver;
 
 	private final SendSmsClient client;
 
 	@Autowired
 	private SmsNotice smsNotice;
 
-	public SmsNoticeSendComponent(CalmaNoticeTextResolver<CalmaNotice> resolver, Client client) {
+	public SmsNoticeSendComponent(CalmaValueResolver<CalmaNotice> resolver, Client client) {
 		this.client = (SendSmsClient) client;
 		this.resolver = resolver;
 	}

@@ -1,9 +1,8 @@
-package com.marvin.util;
-
-import com.marvin.model.CalmaNotice;
-
-@FunctionalInterface
-public interface CalmaNoticeTextResolver<T extends CalmaNotice> {
-
-	public String resolve(T exceptionNotice);
-}
+//package com.marvin.util;
+//
+//import com.marvin.model.CalmaNotice;
+//
+//public interface CalmaNoticeTextResolver<T extends CalmaNotice> extends CalmaValueResolver{
+//
+//	public String resolve(T exceptionNotice);
+//}

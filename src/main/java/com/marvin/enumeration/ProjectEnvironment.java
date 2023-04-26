@@ -1,13 +1,13 @@
 package com.marvin.enumeration;
 
 //项目环境
-public enum ProjectEnvirment {
+public enum ProjectEnvironment {
 
 	DEVELOP("develop"),PREVIEW("preview"),ROLLBACK("rollback"),RELEASE("release"),TEST("test");
 	
 	private String name;
 	
-	ProjectEnvirment(String name) {
+	ProjectEnvironment(String name) {
 		this.name = name;
 	}
 

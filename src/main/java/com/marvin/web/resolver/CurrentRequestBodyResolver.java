@@ -1,4 +1,4 @@
-package com.marvin.web;
+package com.marvin.web.resolver;
 
 import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
 

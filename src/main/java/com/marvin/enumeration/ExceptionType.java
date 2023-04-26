@@ -2,7 +2,8 @@ package com.marvin.enumeration;
 
 public enum ExceptionType {
 
-    ERROR_OBTAINING_METHOD(9521,"Request method not found or empty."),;
+    ERROR_OBTAINING_METHOD(9521,"Request method not found or empty."),
+    UNABLE_FIND_CONTROLLER(9522,"Controller not found."),;
 
     private final Integer value;
     private final String message;

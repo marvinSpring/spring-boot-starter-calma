@@ -18,7 +18,7 @@ public class HandlerConfiguration {
     @ConditionalOnMissingBean
     public CalmaHandler calmaHandler(ApplicationEventPublisher publisher,
                                       CalmaExceptionNotice calmaExceptionNotice) {
-        CalmaHandler calmaHandler = new CalmaHandler(publisher, calmaExceptionNotice);
-        return calmaHandler;
+
+        return new CalmaHandler(publisher, calmaExceptionNotice);
     }
 }

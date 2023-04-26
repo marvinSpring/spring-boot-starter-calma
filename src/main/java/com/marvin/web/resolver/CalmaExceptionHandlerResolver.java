@@ -1,11 +1,10 @@
-package com.marvin.web;
+package com.marvin.web.resolver;
 
 import com.marvin.enumeration.ExceptionType;
 import com.marvin.anno.CalmaExceptionListener;
 import com.marvin.exception.NoSuchHttpRequestMethodException;
 import com.marvin.handler.CalmaHandler;
 import com.marvin.model.CalmaExceptionNotice;
-import com.marvin.model.HttpExceptionNotice;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import static com.marvin.enumeration.ExceptionType.UNABLE_FIND_CONTROLLER;
 
 public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
 
@@ -50,7 +52,7 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
         }
         CalmaExceptionListener listener = getListener(handlerMethod);
         //创建通知
-        if (listener != null && handlerMethod != null && e != null) {
+        if (listener != null && e != null) {
             calmaHandler.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request), getMethod(request));
         }
         return null;
@@ -83,8 +85,13 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
     }
 
     private CalmaExceptionListener getListener(HandlerMethod handlerMethod) {
+        if (Objects.isNull(handlerMethod)){
+            throw new NoSuchHttpRequestMethodException(UNABLE_FIND_CONTROLLER);
+        }
+        //获取请求方法上的注解
         CalmaExceptionListener listener = handlerMethod.getMethodAnnotation(CalmaExceptionListener.class);
-        if (listener == null) {
+        //如果请求方法上获取不到，那么去看看是不是在类级别
+        if (Objects.isNull(listener)) {
             listener = handlerMethod.getBeanType().getAnnotation(CalmaExceptionListener.class);
         }
         return listener;

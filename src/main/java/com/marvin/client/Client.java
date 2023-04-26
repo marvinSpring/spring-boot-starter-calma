@@ -1,5 +1,7 @@
 package com.marvin.client;
 
+//import com.marvin.model.Notice;
+
 import com.marvin.model.Notice;
 
 /**

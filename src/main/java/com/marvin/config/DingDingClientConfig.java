@@ -20,7 +20,9 @@ public class DingDingClientConfig {//注入发送钉钉信息的客户端
 	@Bean
 	@ConditionalOnMissingBean
 	public Client dingDingClient(DingDingProperty dingProperty) {
-		Client client = new DefaultDingdingClient(dingProperty);
-		return client;
+		if (log.isDebugEnabled()){
+			log.info("-----------------》》》》》钉钉组件客户端注入《《《《《《《-------------------------");
+		}
+		return new DefaultDingdingClient(dingProperty);
 	}
 }

@@ -1,6 +1,7 @@
 package com.marvin.model;
 
 import com.marvin.factory.SupportYamlPropertyFactory;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
+@EqualsAndHashCode(callSuper = true)
 @Component
 @ConfigurationProperties(prefix = "calma.dingding")
 @PropertySource(value = "classpath:application.yml",factory = SupportYamlPropertyFactory.class)
@@ -20,12 +22,24 @@ import lombok.Data;
  */
 public class DingdingNotice extends Notice{//最终给钉钉发送的结构体
 
-	protected String msgtype = "text";//发送的文本类型
+	protected String msgtype;//发送的文本类型
 
-	public DingdingNotice(DingContent text) {
-		this.text = text;
+	public DingdingNotice() {
 	}
 
-	private DingContent text;//发送的消息内容
+	public DingdingNotice(DingContent text, String msgtype) {
+		this.text = text;
+		this.msgtype = msgtype;
+	}
+
+	public DingdingNotice(DingMarkdown markdown,String msgtype) {
+		this.markdown = markdown;
+		this.msgtype = msgtype;
+	}
+
+
+	private DingContent text;
+
+	private DingMarkdown markdown;
 
 }

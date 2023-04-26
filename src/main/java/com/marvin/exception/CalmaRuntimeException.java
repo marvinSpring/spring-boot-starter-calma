@@ -13,4 +13,7 @@ public class CalmaRuntimeException extends RuntimeException implements Serializa
         super(type.getMessage(),throwable);
     }
 
+    public CalmaRuntimeException(ExceptionType type) {
+        super(type.getMessage());
+    }
 }

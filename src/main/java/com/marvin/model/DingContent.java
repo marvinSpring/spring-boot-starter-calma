@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
-@Component
+//@Component
 public class DingContent {//给钉钉发送的内容消息
 
 	public DingContent() {

@@ -3,7 +3,8 @@ package com.marvin.config.web;
 import com.marvin.anno.ConditionOnCalmaExceptionNotice;
 import com.marvin.handler.CalmaHandler;
 import com.marvin.model.CalmaExceptionNotice;
-import com.marvin.web.*;
+import com.marvin.web.interceptor.ClearBodyInterceptor;
+import com.marvin.web.resolver.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -17,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,11 +39,13 @@ public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistr
     //添加自定义异常处理解析器
     @Override
     public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
+        if (log.isDebugEnabled()) {
+            log.info("----------------------进入web模式----------------------");
+        }
         resolvers.add(0,calmaExceptionHandlerResolver());
     }
 
     private CalmaExceptionHandlerResolver calmaExceptionHandlerResolver() {
-        log.info("----------------------进入web模式----------------------");
         CalmaExceptionHandlerResolver calmaExceptionHandlerResolver = new CalmaExceptionHandlerResolver(calmaHandler, calmaExceptionNotice, currentRequestHeaderResolver(), currentRequestBodyResolver());
         return calmaExceptionHandlerResolver;
     }

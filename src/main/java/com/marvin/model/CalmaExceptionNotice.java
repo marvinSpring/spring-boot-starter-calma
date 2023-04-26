@@ -2,14 +2,16 @@ package com.marvin.model;
 
 import com.marvin.enumeration.ListenType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 
+//@EqualsAndHashCode(callSuper = true)
 @Data
 @ConfigurationProperties(prefix = "calma.exceptionnotice")
 @PropertySource(value = "classpath:application.yml")
-public class CalmaExceptionNotice extends Notice{
+public class CalmaExceptionNotice /*extends Notice*/{
 
     private boolean enabled = false;
 

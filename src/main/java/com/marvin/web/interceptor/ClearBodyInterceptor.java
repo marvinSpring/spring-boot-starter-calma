@@ -1,5 +1,6 @@
-package com.marvin.web;
+package com.marvin.web.interceptor;
 
+import com.marvin.web.resolver.CurrentRequestBodyResolver;
 import lombok.Data;
 import org.springframework.web.servlet.HandlerInterceptor;
 

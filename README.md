@@ -18,7 +18,7 @@
 <dependency>
     <groupId>com.marvin</groupId>
     <artifactId>spring-boot-starter-calma</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.3.RELEASE</version>
 </dependency>
 ```
 

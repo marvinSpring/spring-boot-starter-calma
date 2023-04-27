@@ -46,8 +46,9 @@ calma:
   dingding:
     enable: true #开启钉钉通知
     msgtype: text #发送的消息格式，暂时我还没有做markdown
-    phone: #你的手机号
-    is-all: true #这个暂时没做
+    phoneNumbers: #要@的人的手机号
+    userIds: #要@的人的钉钉id
+    isAtAll: true #true 通知全体成员，false则不
     access_token: #钉钉机器人的token
     secret: #钉钉机器人的密钥
 ```
@@ -133,8 +134,9 @@ calma:
   dingding:
     enable: true #开启钉钉通知
     msgtype: text #发送的消息格式,text将通过普通文本方式发送，markdown将会将异常信息用markdown语法转化后发送
-    phone: #你的手机号，暂时不支持@通知到人
-    is-all: true #这个暂时没做，额，这个@全体成员也还没做，这几天抽空就做了
+    phoneNumbers: #要@的人的手机号
+    userIds: #要@的人的钉钉id
+    isAtAll: true #true 通知全体成员，false则不
     access_token: #钉钉机器人的token
     secret: #钉钉机器人的密钥
 ```

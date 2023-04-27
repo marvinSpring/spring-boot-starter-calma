@@ -1,10 +1,9 @@
 package com.marvin.web.resolver;
 
-import com.marvin.enumeration.ExceptionType;
-import com.marvin.anno.CalmaExceptionListener;
-import com.marvin.exception.NoSuchHttpRequestMethodException;
-import com.marvin.handler.CalmaHandler;
-import com.marvin.model.CalmaExceptionNotice;
+import com.marvin.common.enumeration.ExceptionType;
+import com.marvin.common.exception.NoSuchHttpRequestMethodException;
+import com.marvin.config.anno.CalmaExceptionListener;
+import com.marvin.handler.DispatcherHandler;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,24 +15,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.marvin.enumeration.ExceptionType.UNABLE_FIND_CONTROLLER;
+import static com.marvin.common.enumeration.ExceptionType.UNABLE_FIND_CONTROLLER;
+
 
 public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
 
-    private final CalmaHandler calmaHandler;
-
-    private final CalmaExceptionNotice calmaExceptionNotice;
+    private final DispatcherHandler dispatcherHandler;
 
     private final CurrentRequestHeaderResolver currentRequestHeaderResolver;
 
     private final CurrentRequestBodyResolver currentRequestBodyResolver;
 
-    public CalmaExceptionHandlerResolver(CalmaHandler calmaHandler,
-                                         CalmaExceptionNotice calmaExceptionNotice,
+    public CalmaExceptionHandlerResolver(DispatcherHandler dispatcherHandler,
                                          CurrentRequestHeaderResolver currentRequestHeaderResolver,
                                          CurrentRequestBodyResolver currentRequestBodyResolver) {
-        this.calmaHandler = calmaHandler;
-        this.calmaExceptionNotice = calmaExceptionNotice;
+        this.dispatcherHandler = dispatcherHandler;
         this.currentRequestHeaderResolver = currentRequestHeaderResolver;
         this.currentRequestBodyResolver = currentRequestBodyResolver;
     }
@@ -53,7 +49,7 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
         CalmaExceptionListener listener = getListener(handlerMethod);
         //创建通知
         if (listener != null && e != null) {
-            calmaHandler.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request), getMethod(request));
+            dispatcherHandler.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request), getMethod(request));
         }
         return null;
     }
@@ -75,7 +71,7 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
     }
 
     private String getMethod(HttpServletRequest request) {
-        String method = null;
+        String method;
         try {
             method = request.getMethod();
         } catch (Exception e) {
@@ -85,7 +81,7 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
     }
 
     private CalmaExceptionListener getListener(HandlerMethod handlerMethod) {
-        if (Objects.isNull(handlerMethod)){
+        if (Objects.isNull(handlerMethod)) {
             throw new NoSuchHttpRequestMethodException(UNABLE_FIND_CONTROLLER);
         }
         //获取请求方法上的注解

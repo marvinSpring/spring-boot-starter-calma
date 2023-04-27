@@ -1,6 +1,5 @@
 package com.marvin.testModel;
 
-import com.marvin.anno.CalmaExceptionListener;
 import org.springframework.stereotype.Component;
 
 

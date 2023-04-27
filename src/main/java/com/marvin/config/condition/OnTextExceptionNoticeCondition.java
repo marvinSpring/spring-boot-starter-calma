@@ -1,6 +1,5 @@
 package com.marvin.config.condition;
 
-import com.marvin.anno.ConditionOnTextExceptionNotice;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.SpringBootCondition;

@@ -1,8 +1,8 @@
 package com.marvin.config;
 
-import com.marvin.component.NoticeSendComponent;
-import com.marvin.listener.CalmaNotifier;
-import com.marvin.model.CalmaNotice;
+import com.marvin.context.component.NoticeSendComponent;
+import com.marvin.event.listener.CalmaNotifier;
+import com.marvin.model.notice.CommonNotice;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -16,7 +16,7 @@ public class ListenerConfig {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public CalmaNotifier calmaNotifier(NoticeSendComponent<CalmaNotice> component) {
+	public CalmaNotifier calmaNotifier(NoticeSendComponent<CommonNotice> component) {
 		if (log.isDebugEnabled()) {
 			log.info("-----------------》》》》》监听开启《《《《《《《-------------------------");
 		}

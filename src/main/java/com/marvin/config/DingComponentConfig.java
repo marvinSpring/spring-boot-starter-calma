@@ -1,10 +1,10 @@
 package com.marvin.config;
 
-import com.marvin.client.Client;
-import com.marvin.component.DingNoticeSendComponent;
-import com.marvin.component.NoticeSendComponent;
-import com.marvin.model.CalmaNotice;
-import com.marvin.util.CalmaValueResolver;
+import com.marvin.context.client.Client;
+import com.marvin.context.component.DingNoticeSendComponent;
+import com.marvin.context.component.NoticeSendComponent;
+import com.marvin.model.notice.CommonNotice;
+import com.marvin.resolver.CalmaValueResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -18,10 +18,9 @@ public class DingComponentConfig {
 
 	@Bean// 注入通知的组件
 	@ConditionalOnMissingBean
-//	@ConditionOnCalmaExceptionNotice
 	@ConditionalOnProperty(prefix = "calma.dingding",name = "enable",havingValue = "true")
-	public NoticeSendComponent<CalmaNotice> registerSendComponent(CalmaValueResolver<CalmaNotice> resolver,
-																  Client client) {
+	public NoticeSendComponent<CommonNotice> registerSendComponent(CalmaValueResolver<CommonNotice> resolver,
+                                                                   Client client) {
 		if (log.isDebugEnabled()){
 			log.info("-----------------》》》》》钉钉通知开启《《《《《《《-------------------------");
 		}

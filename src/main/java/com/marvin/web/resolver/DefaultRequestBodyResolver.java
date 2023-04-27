@@ -1,6 +1,6 @@
 package com.marvin.web.resolver;
 
-import com.marvin.anno.CalmaExceptionListener;
+import com.marvin.config.anno.CalmaExceptionListener;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;

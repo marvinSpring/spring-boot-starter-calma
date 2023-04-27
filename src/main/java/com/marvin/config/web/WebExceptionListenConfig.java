@@ -1,8 +1,7 @@
 package com.marvin.config.web;
 
-import com.marvin.anno.ConditionOnCalmaExceptionNotice;
-import com.marvin.handler.CalmaHandler;
-import com.marvin.model.CalmaExceptionNotice;
+import com.marvin.config.anno.ConditionOnCalmaExceptionNotice;
+import com.marvin.handler.DispatcherHandler;
 import com.marvin.web.interceptor.ClearBodyInterceptor;
 import com.marvin.web.resolver.*;
 import lombok.extern.slf4j.Slf4j;
@@ -25,16 +24,11 @@ import java.util.List;
 @ConditionalOnWebApplication
 @ConditionOnCalmaExceptionNotice
 @ConditionalOnProperty(name = "calma.exceptionnotice.listen-type", havingValue = "WEB")
-//@ConditionalOnProperty(prefix = "Calma", value = "exceptionnotice.enbaled", matchIfMissing = true)
 @Slf4j
 public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistrations  {
 
     @Autowired
-    private CalmaHandler calmaHandler;
-
-
-    @Autowired
-    private CalmaExceptionNotice calmaExceptionNotice;
+    private DispatcherHandler calmaHandler;
 
     //添加自定义异常处理解析器
     @Override
@@ -46,8 +40,7 @@ public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistr
     }
 
     private CalmaExceptionHandlerResolver calmaExceptionHandlerResolver() {
-        CalmaExceptionHandlerResolver calmaExceptionHandlerResolver = new CalmaExceptionHandlerResolver(calmaHandler, calmaExceptionNotice, currentRequestHeaderResolver(), currentRequestBodyResolver());
-        return calmaExceptionHandlerResolver;
+        return new CalmaExceptionHandlerResolver(calmaHandler, currentRequestHeaderResolver(), currentRequestBodyResolver());
     }
 
     //------------

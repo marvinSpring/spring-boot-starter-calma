@@ -9,7 +9,7 @@ public class CalmaUnCatchException extends RuntimeException implements Serializa
 
     private static final Long serializableId = 0L;
 
-    public CalmaRuntimeException(ExceptionType type,Throwable throwable) {
+    public CalmaUnCatchException(ExceptionType type,Throwable throwable) {
         super(type.getMessage(),throwable);
     }
   

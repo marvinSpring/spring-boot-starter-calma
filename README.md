@@ -10,9 +10,7 @@
 
 **快速入门**
 
-1.将本工程从git上拉下来
-
-2.在你的工程的pom文件中将以下依赖加入
+1.在你的工程的pom文件中将以下依赖加入
 
 ```xml
 <dependency>
@@ -22,7 +20,7 @@
 </dependency>
 ```
 
-3.在SpringBoot的配置文件：application.yml中做如下的配置：
+2.在SpringBoot的配置文件：application.yml中做如下的配置：
 
 ```yaml
 spring:
@@ -46,23 +44,22 @@ calma:
   dingding:
     enable: true #开启钉钉通知
     msgtype: text #发送的消息格式，暂时我还没有做markdown
-    phoneNumbers: #要@的人的手机号
-    userIds: #要@的人的钉钉id
+    phoneNumbers: #要@的人的手机号,格式为：136xxxxxxxx,159xxxxxxxx
+    userIds: #要@的人的钉钉id，格式为：xxx,xxxx
     isAtAll: true #true 通知全体成员，false则不
     access_token: #钉钉机器人的token
     secret: #钉钉机器人的密钥
 ```
 
-tips：至于钉钉的配置请移步：钉钉机器人,注意钉钉机器人的钩子webhook 上面的步骤都完成之后，就可以测试这个starter有多好用了
-
-[钉钉机器人]:https://developers.dingtalk.com/document/app/custom-robot-access
+3.首先在你的项目中写如下案例
 
 ```java
 
-@Component
+@Component//由于common方式通知实现是由spring aop方式实现，这里它必须被装载到spring中
 @CalmaExceptionListener // 异常通知的监控来自这个注解
 public class ExceptionTest {
 
+    //@CalmaExceptionListener当然标注在某个方法上面就只监控被标注的方法
     public void testException(String param) {
         System.out.println("参数：" + param);
         throw new IllegalArgumentException("异常");
@@ -72,7 +69,7 @@ public class ExceptionTest {
 
 ```
 
-测试
+4.测试
 
 ```java
 
@@ -98,9 +95,7 @@ public class DemoApplicationTests {
 
 从这开始讲解如何在web模式下使用本框架
 
-1.将本工程从git上拉下来
-
-2.在你的工程的pom文件中将以下依赖加入
+1.在你的工程的pom文件中将以下依赖加入
 
 ```xml
 <dependency>
@@ -110,7 +105,7 @@ public class DemoApplicationTests {
 </dependency>
 ```
 
-3.在SpringBoot的配置文件：application.yml中做如下的配置：
+2.在SpringBoot的配置文件：application.yml中做如下的配置：
 
 ```yaml
 spring:
@@ -134,15 +129,15 @@ calma:
   dingding:
     enable: true #开启钉钉通知
     msgtype: text #发送的消息格式,text将通过普通文本方式发送，markdown将会将异常信息用markdown语法转化后发送
-    phoneNumbers: #要@的人的手机号
-    userIds: #要@的人的钉钉id
+    phoneNumbers: #要@的人的手机号,格式为：136xxxxxxxx,159xxxxxxxx
+    userIds: #要@的人的钉钉id，格式为：xxx,xxxx
     isAtAll: true #true 通知全体成员，false则不
     access_token: #钉钉机器人的token
     secret: #钉钉机器人的密钥
 ```
-第二步，当然是写个控制器了，你还在期待什么
+3.当然是像上面一样写个模拟的控制器了，你还在期待什么
 ```java
-@RestController
+@RestController//web方式只需要将其声明为控制器就可以例如：@Controller
 @CalmaExceptionListener//写在这里可以让所有的方法都被监控
 public class ExampleController{
 
@@ -159,14 +154,62 @@ public class ExampleController{
   
 }
 ```
+
+4.请求它，无所谓用httpclient或者postman或者其他方式，这里由于我懒得截图，，就没图了
+
 然后你的钉钉再一次钉d=====(￣▽￣*)b
 ![img_1.png](Image/web.png)
 到这里为止，web模式的这个测试也完了，还不快点去试试？
 
-未完待续.............(有问题请联系我的Email：1261626796@qq.com，最近有点忙)
+
+------------
+###### 关于钉钉机器人的配置：
+
+###### 1.找到你所需要通知的群
+
+![ding0.png](Image/ding0.png)
+
+###### 2.点击群设置，在pc端，它通常在右上角的位置
+
+![ding1.png](Image/ding1.png)
+
+###### 3.在群设置中找到机器人选项，进入
+
+![ding2.png](Image/ding2.png)
+
+###### 4.点击添加机器人
+
+![ding3.png](Image/ding3.png)
+
+###### 5.继续点击机器人
+
+![ding4.png](Image/ding4.png)
+
+###### 6.选中自定义机器人
+
+![ding5.png](Image/ding5.png)
+
+###### 7.给你的机器人取个名字并找到安全设置，勾选加签作为认证方式，点击复制，将签名复制到你的项目中的ding.secret的值的位置
+
+![ding6.png](Image/ding6.png)
+
+###### 8.在上一步中，点击完成后，你需要将钉钉的access token同样复制到你的配置文件中的ding.access_token的值的位置中
+
+![ding7.png](Image/ding7.png)
+
+###### 9.到这一步钉钉机器人的配置就完成了
+
+![ding8.png](Image/ding8.png)
+
+------------
+
+
+未完待续.............
+
+(有问题请联系我的Email：1261626796@qq.com，我会很快回复的)
 
 下个版本的期待：
 
 1.支持微服务的监控通知
 
-_ps:终于吧markdown补充好了，之前一直有其他事情没空搞，（感谢大家没有因为这个readme这么拉跨还支持本框架，我会抽时间把它给完善好的）_
+_ps:终于吧markdown补充好了，之前一直有其他事情没空搞

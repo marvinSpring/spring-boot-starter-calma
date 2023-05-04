@@ -1,4 +1,4 @@
-#### 异常监控spring-boot-starter
+#### 基于SpringAOP的异常通知spring-boot-starter
 
 **介绍**
 
@@ -18,7 +18,7 @@
 <dependency>
     <groupId>com.marvin</groupId>
     <artifactId>spring-boot-starter-calma</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.4.RELEASE</version>
 </dependency>
 ```
 
@@ -46,8 +46,9 @@ calma:
   dingding:
     enable: true #开启钉钉通知
     msgtype: text #发送的消息格式，暂时我还没有做markdown
-    phone: #你的手机号
-    is-all: true #这个暂时没做
+    phoneNumbers: #要@的人的手机号
+    userIds: #要@的人的钉钉id
+    isAtAll: true #true 通知全体成员，false则不
     access_token: #钉钉机器人的token
     secret: #钉钉机器人的密钥
 ```
@@ -132,9 +133,10 @@ calma:
   #钉钉
   dingding:
     enable: true #开启钉钉通知
-    msgtype: text #发送的消息格式，暂时我还没有做markdown
-    phone: #你的手机号
-    is-all: true #这个暂时没做
+    msgtype: text #发送的消息格式,text将通过普通文本方式发送，markdown将会将异常信息用markdown语法转化后发送
+    phoneNumbers: #要@的人的手机号
+    userIds: #要@的人的钉钉id
+    isAtAll: true #true 通知全体成员，false则不
     access_token: #钉钉机器人的token
     secret: #钉钉机器人的密钥
 ```
@@ -165,9 +167,6 @@ public class ExampleController{
 
 下个版本的期待：
 
-1.支持MarkDown模式的异常通知消息
+1.支持微服务的监控通知
 
-2.支持微服务的监控通知
-
-_ps:下个版本将会先出markdown配置的功能，（感谢大家没有因为这个readme这么拉跨还支持本框架，我会抽时间把它给完善好的）_
-![](https://raw.githubusercontent.com/marvinSpring/spring-boot-starter-calma/main/assets/github-contribution-grid-snake.svg)
+_ps:终于吧markdown补充好了，之前一直有其他事情没空搞，（感谢大家没有因为这个readme这么拉跨还支持本框架，我会抽时间把它给完善好的）_

@@ -43,7 +43,7 @@ calma:
 #钉钉
   dingding:
     enable: true #开启钉钉通知
-    msgtype: text #发送的消息格式，暂时我还没有做markdown
+    msgtype: text #发送的消息格式,text将通过普通文本方式发送，markdown将会将异常信息用markdown语法转化后发送
     phoneNumbers: #要@的人的手机号,格式为：136xxxxxxxx,159xxxxxxxx
     userIds: #要@的人的钉钉id，格式为：xxx,xxxx
     isAtAll: true #true 通知全体成员，false则不

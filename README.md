@@ -14,7 +14,7 @@
 
 ```xml
 <dependency>
-    <groupId>com.marvin</groupId>
+    <groupId>io.github.marvinspring</groupId>
     <artifactId>spring-boot-starter-calma</artifactId>
     <version>1.0.5</version>
 </dependency>

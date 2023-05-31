@@ -1,7 +1,7 @@
 package com.marvin.config;
 
-import com.marvin.context.client.Client;
-import com.marvin.context.client.DingClient;
+import com.marvin.context.support.client.Client;
+import com.marvin.context.support.client.DingClient;
 import com.marvin.model.message.ding.DingDingProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

@@ -1,7 +1,7 @@
-package com.marvin.context.component;
+package com.marvin.context.support.component;
 
-import com.marvin.context.client.Client;
-import com.marvin.context.client.SmsClient;
+import com.marvin.context.support.client.Client;
+import com.marvin.context.support.client.SmsClient;
 import com.marvin.model.notice.CommonNotice;
 import com.marvin.model.message.SmsMessage;
 import com.marvin.resolver.CalmaValueResolver;

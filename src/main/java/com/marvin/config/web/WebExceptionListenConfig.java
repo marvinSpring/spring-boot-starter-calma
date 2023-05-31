@@ -1,7 +1,7 @@
 package com.marvin.config.web;
 
 import com.marvin.config.anno.ConditionOnCalmaExceptionNotice;
-import com.marvin.handler.DispatcherHandler;
+import com.marvin.context.DefaultNoticeContext;
 import com.marvin.web.interceptor.ClearBodyInterceptor;
 import com.marvin.web.resolver.*;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
+import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +29,8 @@ import java.util.List;
 public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistrations  {
 
     @Autowired
-    private DispatcherHandler calmaHandler;
+    @Resource
+    private DefaultNoticeContext noticeContext;
 
     //添加自定义异常处理解析器
     @Override
@@ -40,7 +42,7 @@ public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistr
     }
 
     private CalmaExceptionHandlerResolver calmaExceptionHandlerResolver() {
-        return new CalmaExceptionHandlerResolver(calmaHandler, currentRequestHeaderResolver(), currentRequestBodyResolver());
+        return new CalmaExceptionHandlerResolver(noticeContext, currentRequestHeaderResolver(), currentRequestBodyResolver());
     }
 
     //------------

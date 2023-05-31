@@ -4,7 +4,7 @@ import com.marvin.event.ExceptionEvent;
 import com.marvin.model.notice.CommonNotice;
 import org.springframework.context.ApplicationListener;
 
-import com.marvin.context.component.NoticeSendComponent;
+import com.marvin.context.support.component.NoticeSendComponent;
 
 public abstract class AbstractCalmaNotifier implements ApplicationListener<ExceptionEvent>{
 

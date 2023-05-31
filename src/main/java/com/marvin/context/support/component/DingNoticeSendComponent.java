@@ -1,19 +1,13 @@
-package com.marvin.context.component;
+package com.marvin.context.support.component;
 
-import com.marvin.context.client.Client;
+import com.marvin.context.support.client.Client;
 import com.marvin.factory.DingMessageFactory;
 import com.marvin.model.notice.CommonNotice;
-import com.marvin.model.message.ding.DingText;
-import com.marvin.model.message.ding.DingMarkdown;
-import com.marvin.model.message.DingMessage;
 import com.marvin.resolver.CalmaValueResolver;
 import com.marvin.model.message.ding.DingDingProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-
-import java.util.Objects;
 
 /**
  * @Describe: 发送钉钉通知的组件

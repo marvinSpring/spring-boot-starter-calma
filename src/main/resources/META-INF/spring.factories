@@ -9,4 +9,5 @@ com.marvin.config.SmsComponentConfig,\
 com.marvin.config.DingComponentConfig,\
 com.marvin.config.TextExceptionNoticeSendConfig,\
 com.marvin.config.DingDingClientConfig,\
-com.marvin.config.MarkdownExceptionNoticeSendConfig
+com.marvin.config.MarkdownExceptionNoticeSendConfig,\
+com.marvin.config.web.load.WebAutoLoadConfig

@@ -41,8 +41,11 @@ public class CommonNotice extends Notice{//异常的结构体
 	List<String> traceInfos;//异常的追踪栈
 
 	String projectName;//工程名称
+
+	Throwable e;
 	
 	public CommonNotice(Throwable e, Object [] args, String projectName) {
+		this.e = e;
 		this.exceptionMessage = giveMeExceptionMessage(e);
 		this.params = args==null?null:Arrays.stream(args).collect(Collectors.toList());
 		List<StackTraceElement> list = stackTrace(e);

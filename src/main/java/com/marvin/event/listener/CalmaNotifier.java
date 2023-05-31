@@ -1,7 +1,7 @@
 package com.marvin.event.listener;
 
 import com.marvin.model.notice.CommonNotice;
-import com.marvin.context.component.NoticeSendComponent;
+import com.marvin.context.support.component.NoticeSendComponent;
 
 /**
  * @Describe: 将异常信息监听

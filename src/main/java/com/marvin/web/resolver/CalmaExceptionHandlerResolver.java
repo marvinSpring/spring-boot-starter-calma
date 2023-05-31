@@ -3,7 +3,8 @@ package com.marvin.web.resolver;
 import com.marvin.common.enumeration.ExceptionType;
 import com.marvin.common.exception.NoSuchHttpRequestMethodException;
 import com.marvin.config.anno.CalmaExceptionListener;
-import com.marvin.handler.DispatcherHandler;
+import com.marvin.context.DefaultNoticeContext;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,18 +19,19 @@ import java.util.Objects;
 import static com.marvin.common.enumeration.ExceptionType.UNABLE_FIND_CONTROLLER;
 
 
+@Component
 public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
 
-    private final DispatcherHandler dispatcherHandler;
+    private final DefaultNoticeContext defaultNoticeContext;
 
     private final CurrentRequestHeaderResolver currentRequestHeaderResolver;
 
     private final CurrentRequestBodyResolver currentRequestBodyResolver;
 
-    public CalmaExceptionHandlerResolver(DispatcherHandler dispatcherHandler,
+    public CalmaExceptionHandlerResolver(DefaultNoticeContext defaultNoticeContext,
                                          CurrentRequestHeaderResolver currentRequestHeaderResolver,
                                          CurrentRequestBodyResolver currentRequestBodyResolver) {
-        this.dispatcherHandler = dispatcherHandler;
+        this.defaultNoticeContext = defaultNoticeContext;
         this.currentRequestHeaderResolver = currentRequestHeaderResolver;
         this.currentRequestBodyResolver = currentRequestBodyResolver;
     }
@@ -48,8 +50,10 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
         }
         CalmaExceptionListener listener = getListener(handlerMethod);
         //创建通知
-        if (listener != null && e != null) {
-            dispatcherHandler.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request), getMethod(request));
+        if (e != null ) {
+            if (listener != null || defaultNoticeContext.isAuto()) {
+                defaultNoticeContext.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request), getMethod(request));
+            }
         }
         return null;
     }

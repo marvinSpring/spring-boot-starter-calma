@@ -1,7 +1,7 @@
 package com.marvin.config.aop;
 
 import com.marvin.config.anno.CalmaExceptionListener;
-import com.marvin.handler.DispatcherHandler;
+import com.marvin.context.AbstractNoticeContext;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -18,13 +18,13 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class CalmaAop {//在异常出现的时候收集异常创建通知
 
-	private final DispatcherHandler dispatcherHandler;
+	private final AbstractNoticeContext noticeContext;
 	
 	@Value("${spring.application.name}")
 	private String projectName;
 	
-	public CalmaAop(DispatcherHandler dispatcherHandler) {
-		this.dispatcherHandler = dispatcherHandler;
+	public CalmaAop(AbstractNoticeContext noticeContext) {
+		this.noticeContext = noticeContext;
 	}
 
 	@AfterThrowing(value = "@within(listener)",throwing = "e",argNames = "joinPoint,listener,e")//创建通知
@@ -38,7 +38,7 @@ public class CalmaAop {//在异常出现的时候收集异常创建通知
 	}
 
 	public void createNotice(Object[] objArgs, RuntimeException e, String projectName) {
-		dispatcherHandler.createNotice(objArgs,e,projectName);
+		noticeContext.createNotice(objArgs,e,projectName);
 	}
 
 

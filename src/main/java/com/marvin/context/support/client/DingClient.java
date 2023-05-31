@@ -1,4 +1,4 @@
-package com.marvin.context.client;
+package com.marvin.context.support.client;
 
 import com.google.gson.Gson;
 import com.marvin.util.DingClientFeign;

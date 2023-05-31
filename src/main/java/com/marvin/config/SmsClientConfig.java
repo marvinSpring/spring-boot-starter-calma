@@ -1,7 +1,7 @@
 package com.marvin.config;
 
 import com.marvin.model.message.SmsMessage;
-import com.marvin.context.client.SmsClient;
+import com.marvin.context.support.client.SmsClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

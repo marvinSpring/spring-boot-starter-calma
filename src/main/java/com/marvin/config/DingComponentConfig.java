@@ -1,8 +1,8 @@
 package com.marvin.config;
 
-import com.marvin.context.client.Client;
-import com.marvin.context.component.DingNoticeSendComponent;
-import com.marvin.context.component.NoticeSendComponent;
+import com.marvin.context.support.client.Client;
+import com.marvin.context.support.component.DingNoticeSendComponent;
+import com.marvin.context.support.component.NoticeSendComponent;
 import com.marvin.model.notice.CommonNotice;
 import com.marvin.resolver.CalmaValueResolver;
 import lombok.extern.slf4j.Slf4j;

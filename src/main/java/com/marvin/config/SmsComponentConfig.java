@@ -1,7 +1,7 @@
 package com.marvin.config;
 
-import com.marvin.context.client.Client;
-import com.marvin.context.component.SmsNoticeSendComponent;
+import com.marvin.context.support.client.Client;
+import com.marvin.context.support.component.SmsNoticeSendComponent;
 import com.marvin.model.notice.CommonNotice;
 import com.marvin.resolver.CalmaValueResolver;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package com.marvin.config.notice;
 
 import com.marvin.config.aop.CalmaAop;
-import com.marvin.handler.DispatcherHandler;
+import com.marvin.context.AbstractNoticeContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -16,7 +16,7 @@ public class AopConfiguration {
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = "calma.exceptionnotice",name = "enabled",havingValue = "true")
-    public CalmaAop calmaAop(DispatcherHandler dispatcherHandler ){
+    public CalmaAop calmaAop(AbstractNoticeContext dispatcherHandler ){
         if (log.isDebugEnabled()){
             log.info("-----------------》》》》》普通通知模式开启《《《《《《《-------------------------");
         }

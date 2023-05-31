@@ -16,7 +16,7 @@
 <dependency>
     <groupId>io.github.marvinspring</groupId>
     <artifactId>spring-boot-starter-calma</artifactId>
-    <version>1.0.5-RELEASE</version>
+    <version>1.0.6</version>
 </dependency>
 ```
 
@@ -101,7 +101,7 @@ public class DemoApplicationTests {
 <dependency>
     <groupId>io.github.marvinspring</groupId>
     <artifactId>spring-boot-starter-calma</artifactId>
-    <version>1.0.5-RELEASE</version>
+    <version>1.0.6</version>
 </dependency>
 ```
 

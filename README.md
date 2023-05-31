@@ -31,16 +31,16 @@ calma:
     enabled: true #开启异常通知
     listen-type: common #普通模式
     project-name: a example project #项目名称
-#Sms配置
-#  sms:
-#    enable: true #开启短信通知
-#    regionId: 阿里云短信的regionId
-#    accessKey: 阿里云短信的accessKey
-#    secret: 阿里云短信的密钥
-#    phoneNumbers: 你的手机号
-#    signName: 阿里云短信的签名
-#    templateCode: 阿里云短信的模板码
-#钉钉
+  #Sms配置
+  #  sms:
+  #    enable: true #开启短信通知
+  #    regionId: 阿里云短信的regionId
+  #    accessKey: 阿里云短信的accessKey
+  #    secret: 阿里云短信的密钥
+  #    phoneNumbers: 你的手机号
+  #    signName: 阿里云短信的签名
+  #    templateCode: 阿里云短信的模板码
+  #钉钉
   dingding:
     enable: true #开启钉钉通知
     msgtype: text #发送的消息格式,text将通过普通文本方式发送，markdown将会将异常信息用markdown语法转化后发送
@@ -141,17 +141,17 @@ calma:
 @CalmaExceptionListener//写在这里可以让所有的方法都被监控
 public class ExampleController{
 
-  @GetMapping("/testFoo")
-  //@CalmaExceptionListener当然标注在某个方法上面就只监控被标注的方法
-  public void foo(String param){
-    int i = 1/0;
-  }
-  
-  @PostMapping("/testFoo")
-  public void foo(Integer param){
-    param = param/0;
-  }
-  
+    @GetMapping("/testFoo")
+    //@CalmaExceptionListener当然标注在某个方法上面就只监控被标注的方法
+    public void foo(String param){
+        int i = 1/0;
+    }
+
+    @PostMapping("/testFoo")
+    public void foo(Integer param){
+        param = param/0;
+    }
+
 }
 ```
 
@@ -161,6 +161,116 @@ public class ExampleController{
 ![img_1.png](Image/web.png)
 到这里为止，web模式的这个测试也完了，还不快点去试试？
 
+--------------------------------------------------------------------
+#### web模式下开启自动加载controller
+
+该功能背景是由于某些项目需要监听的接口太多，一个一个标注@CalmaExceptionListener太过于繁琐，不利于开发者，本着约定大于配置的约束，有了本功能以及以下介绍：
+
+1.首先，看完上面你应该已经知道如何配置web模式并成功通知了，所以假定你已经可以正常的发通知了
+
+2.只需要在此基础上将配置文件（application.yml也可能在你的项目是其他指定名称）中添加
+
+```yaml
+calma:
+  exceptionnotice:
+    listen-type: web #区别是这里是web，开启了web模式的征途了
+    auto: true #注意该值不为true或者缺省都不会进行自动通知，尤其是listen-type不为web时，该配置无意义，只有在web模式下才会自动扫描控制器并将自动通知
+```
+
+3.写一个控制器类似于
+
+```java
+@RestController//web方式只需要将其声明为控制器就可以例如：@Controller
+//@CalmaExceptionListener//这时候该注解就可有可无了
+public class ExampleController{
+
+  @GetMapping("/testFoo")
+  //@CalmaExceptionListener这时候该注解就可有可无了
+  public void foo(String param){
+    int i = 1/0;
+  }
+
+  @PostMapping("/testFoo")
+  public void foo(Integer param){
+    param = param/0;
+  }
+
+}
+```
+在此类中一共有俩个接口被扫描到，分别是GET /testFoo以及POST /testFoo，这俩接口都将被calma扫描并当异常发生时通知到你
+
+4.这里由于考虑到某些特定的接口不需要被通知，你还可以使用@WebIGExceptionListener注解对不需要通知的接口标注，也可以标注在对应的类身上，例如
+
+
+```java
+@RestController//web方式只需要将其声明为控制器就可以例如：@Controller
+public class ExampleController{
+
+  @GetMapping("/testFoo")
+  @WebIGExceptionListener
+  public void foo(String param){
+    int i = 1/0;
+  }
+
+  @PostMapping("/testFoo")
+  public void foo(Integer param){
+    param = param/0;
+  }
+
+}
+```
+
+这里GET /testFoo接口中发生的任何异常calma不会将其纳入通知范围
+
+------------
+#### 全模式支持IGException异常。
+该异常为忽略异常，如果被监听的方法/接口抛出了该异常将不会发起通知。
+
+该功能背景是作用于某些特定的逻辑下，异常是必须抛出的，而又不需要去监听，因为开发者不关心他，那么你可以抛出IGException or extends它，它设定为RuntimeException并且是非final异常，你的所有业务异常可以继承它，当然这样就有一定侵入性（当我后期对这个异常进行更改名称/异常层次等，当然不会将其变更为final异常）这样你的项目会有麻烦。
+
+在web模式下：
+
+```java
+@RestController//web方式只需要将其声明为控制器就可以例如：@Controller
+public class ExampleController{
+
+  @GetMapping("/testFoo")
+  public void foo(String param){
+    int i = 1/0;
+  }
+
+  @PostMapping("/testFoo")
+  public void foo(Integer param){
+      if(xxxCondition){
+        throw new IGException("我不想被通知");
+      }
+    param = param/0;
+  }
+
+}
+```
+如上述代码中POST /testFoo接口如果走到了xxxCondition逻辑内并成功抛出IGException异常，那么此次请求将不会发起通知流程
+
+同样的，在普通模式下：
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class DemoApplicationTests {
+
+    @Autowired
+    private ExceptionTest exceptionTest;
+
+    @Test
+    public void contextLoads() {
+        if(xxxCondition){
+           throw new IGException("我不想被通知");
+       }
+        exceptionTest.testException("冲冲冲！");
+    }
+}
+```
+contextLoads方法如果走到了xxxCondition逻辑内并成功抛出IGException异常，那么此次请求将不会发起通知流程。
 
 ------------
 ###### 关于钉钉机器人的配置：

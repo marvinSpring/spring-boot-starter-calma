@@ -26,7 +26,7 @@ import java.util.List;
 @ConditionOnCalmaExceptionNotice
 @ConditionalOnProperty(name = "calma.exceptionnotice.listen-type", havingValue = "WEB")
 @Slf4j
-public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistrations  {
+public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistrations {
 
     @Autowired
     @Resource

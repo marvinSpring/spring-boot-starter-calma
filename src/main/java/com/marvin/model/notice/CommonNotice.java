@@ -1,5 +1,6 @@
 package com.marvin.model.notice;
 
+import com.marvin.statistic.dto.ExceptionStatisticDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,6 +44,8 @@ public class CommonNotice extends Notice{//异常的结构体
 	String projectName;//工程名称
 
 	Throwable e;
+
+	ExceptionStatisticDto exceptionStatisticDto;
 	
 	public CommonNotice(Throwable e, Object [] args, String projectName) {
 		this.e = e;
@@ -102,6 +105,9 @@ public class CommonNotice extends Notice{//异常的结构体
 		}
 		builder.append("异常信息：").append(String.join("cause by : \r\n", exceptionMessage)).append("\r\n");
 		builder.append("异常追踪：").append(String.join("\r\n",traceInfos)).append("\r\n");
+		builder.append("首次出现时间：").append(exceptionStatisticDto.getFirstAppearTime()).append("\r\n");
+		builder.append("出现次数：").append(exceptionStatisticDto.getCount()).append("\r\n");
+		builder.append("出现频率：").append(exceptionStatisticDto.getFrequency()).append("%").append("\r\n");
 		builder.append("出现时间：").append(createTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\r\n");
 		return builder.toString();
 	}
@@ -117,6 +123,9 @@ public class CommonNotice extends Notice{//异常的结构体
 		}
 		builder.append("##### 异常信息：\r\n`").append(String.join("cause by : \r\n", exceptionMessage)).append("`\r\n");
 		builder.append("##### 异常追踪：\r\n`").append(String.join("`\r\n`",traceInfos)).append("`\r\n");
+		builder.append("###### 首次出现时间：").append(exceptionStatisticDto.getFirstAppearTime()).append("\r\n");
+		builder.append("###### 出现次数：").append(exceptionStatisticDto.getCount()).append("\r\n");
+		builder.append("###### 出现频率：").append(exceptionStatisticDto.getFrequency()).append("%").append("\r\n");
 		builder.append("###### 出现时间：").append(createTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\r\n");
 		return builder.toString();
 	}

@@ -16,7 +16,7 @@
 <dependency>
     <groupId>io.github.marvinspring</groupId>
     <artifactId>spring-boot-starter-calma</artifactId>
-    <version>1.0.5-RELEASE</version>
+    <version>1.0.6</version>
 </dependency>
 ```
 
@@ -101,7 +101,7 @@ public class DemoApplicationTests {
 <dependency>
     <groupId>io.github.marvinspring</groupId>
     <artifactId>spring-boot-starter-calma</artifactId>
-    <version>1.0.5-RELEASE</version>
+    <version>1.0.6</version>
 </dependency>
 ```
 
@@ -184,16 +184,16 @@ calma:
 //@CalmaExceptionListener//这时候该注解就可有可无了
 public class ExampleController{
 
-  @GetMapping("/testFoo")
-  //@CalmaExceptionListener这时候该注解就可有可无了
-  public void foo(String param){
-    int i = 1/0;
-  }
+    @GetMapping("/testFoo")
+    //@CalmaExceptionListener这时候该注解就可有可无了
+    public void foo(String param){
+        int i = 1/0;
+    }
 
-  @PostMapping("/testFoo")
-  public void foo(Integer param){
-    param = param/0;
-  }
+    @PostMapping("/testFoo")
+    public void foo(Integer param){
+        param = param/0;
+    }
 
 }
 ```
@@ -206,16 +206,16 @@ public class ExampleController{
 @RestController//web方式只需要将其声明为控制器就可以例如：@Controller
 public class ExampleController{
 
-  @GetMapping("/testFoo")
-  @WebIGExceptionListener
-  public void foo(String param){
-    int i = 1/0;
-  }
+    @GetMapping("/testFoo")
+    @WebIGExceptionListener
+    public void foo(String param){
+        int i = 1/0;
+    }
 
-  @PostMapping("/testFoo")
-  public void foo(Integer param){
-    param = param/0;
-  }
+    @PostMapping("/testFoo")
+    public void foo(Integer param){
+        param = param/0;
+    }
 
 }
 ```
@@ -234,18 +234,18 @@ public class ExampleController{
 @RestController//web方式只需要将其声明为控制器就可以例如：@Controller
 public class ExampleController{
 
-  @GetMapping("/testFoo")
-  public void foo(String param){
-    int i = 1/0;
-  }
+    @GetMapping("/testFoo")
+    public void foo(String param){
+        int i = 1/0;
+    }
 
-  @PostMapping("/testFoo")
-  public void foo(Integer param){
-      if(xxxCondition){
-        throw new IGException("我不想被通知");
-      }
-    param = param/0;
-  }
+    @PostMapping("/testFoo")
+    public void foo(Integer param){
+        if(xxxCondition){
+            throw new IGException("我不想被通知");
+        }
+        param = param/0;
+    }
 
 }
 ```
@@ -264,8 +264,8 @@ public class DemoApplicationTests {
     @Test
     public void contextLoads() {
         if(xxxCondition){
-           throw new IGException("我不想被通知");
-       }
+            throw new IGException("我不想被通知");
+        }
         exceptionTest.testException("冲冲冲！");
     }
 }

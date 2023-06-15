@@ -4,6 +4,7 @@ import com.marvin.common.enumeration.ExceptionType;
 import com.marvin.common.exception.NoSuchHttpRequestMethodException;
 import com.marvin.config.anno.CalmaExceptionListener;
 import com.marvin.context.DefaultNoticeContext;
+import com.marvin.model.notice.HttpNotice;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -52,7 +53,9 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
         //创建通知
         if (e != null ) {
             if (listener != null || defaultNoticeContext.isAuto()) {
-                defaultNoticeContext.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request), getMethod(request));
+                HttpNotice httpNotice = defaultNoticeContext.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request), getMethod(request));
+
+
             }
         }
         return null;

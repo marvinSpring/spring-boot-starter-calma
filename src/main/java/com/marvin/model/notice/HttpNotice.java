@@ -2,6 +2,7 @@ package com.marvin.model.notice;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.StringUtils;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class HttpNotice extends CommonNotice {
                             .map(x -> String.format("%s::%s", x.getKey(), x.getValue())).collect(toList())))
                     .append("\r\n");
         }
-        if (requestBody != null) {
+        if (!StringUtils.isEmpty(requestBody)) {
             stringBuilder.append("请求体数据：").append(requestBody).append("\r\n");
         }
         if (headers != null && headers.size() > 0) {
@@ -64,6 +65,9 @@ public class HttpNotice extends CommonNotice {
         }
         stringBuilder.append("异常信息：").append(String.join("\r\n caused by: ", exceptionMessage)).append("\r\n");
         stringBuilder.append("异常追踪：").append("\r\n").append(String.join("\r\n", traceInfos)).append("\r\n");
+        stringBuilder.append("首次出现时间：").append(exceptionStatisticDto.getFirstAppearTime()).append("\r\n");
+        stringBuilder.append("出现次数：").append(exceptionStatisticDto.getCount()).append("\r\n");
+        stringBuilder.append("出现频率：").append(exceptionStatisticDto.getFrequency()).append("%").append("\r\n");
         stringBuilder.append("最后一次出现时间：").append(createTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .append("\r\n");
         return stringBuilder.toString();
@@ -79,7 +83,7 @@ public class HttpNotice extends CommonNotice {
                             .map(x -> String.format("` %s : %s `", x.getKey(), x.getValue())).collect(Collectors.joining("\r\r")))
                     .append("\r\n");
         }
-        if (requestBody != null) {
+        if (!StringUtils.isEmpty(requestBody)) {
             stringBuilder.append("##### 请求体数据：").append("\r\n`").append(requestBody).append("`\r\n");
         }
         if (headers != null && headers.size() > 0) {
@@ -99,6 +103,9 @@ public class HttpNotice extends CommonNotice {
         }
         stringBuilder.append("##### 异常信息：`").append(String.join("\r\n caused by: ", exceptionMessage)).append("`\r\n");
         stringBuilder.append("##### 异常追踪：").append("\r\n`").append(String.join("`\r\n`", traceInfos)).append("`\r\n");
+        stringBuilder.append("###### 首次出现时间：").append(exceptionStatisticDto.getFirstAppearTime()).append("\r\n");
+        stringBuilder.append("###### 出现次数：").append(exceptionStatisticDto.getCount()).append("\r\n");
+        stringBuilder.append("###### 出现频率：").append(exceptionStatisticDto.getFrequency()).append("%").append("\r\n");
         stringBuilder.append("###### 最后一次出现时间：").append(createTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .append("\r\n");
         return stringBuilder.toString();

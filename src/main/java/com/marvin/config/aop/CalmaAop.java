@@ -3,7 +3,7 @@ package com.marvin.config.aop;
 import com.marvin.config.anno.CalmaExceptionListener;
 import com.marvin.context.DefaultNoticeContext;
 import com.marvin.model.notice.CommonNotice;
-import com.marvin.statistic.cache.StatisticCache;
+import com.marvin.statistic.cache.StatisticHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -42,7 +42,7 @@ public class CalmaAop {//在异常出现的时候收集异常创建通知
     public void createNotice(Object[] objArgs, RuntimeException e, String projectName) {
         CommonNotice commonNotice = noticeContext.createNotice(objArgs, e, projectName);
 
-        StatisticCache.common(commonNotice);
+        StatisticHelper.common(commonNotice);
     }
 
 

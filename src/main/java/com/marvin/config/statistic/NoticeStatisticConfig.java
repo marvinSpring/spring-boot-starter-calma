@@ -1,6 +1,6 @@
 //package com.marvin.config.statistic;
 //
-//import com.marvin.statistic.cache.StatisticCache;
+//import com.marvin.statistic.cache.StatisticHelper;
 //import com.marvin.util.NumberUtils;
 //import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -15,7 +15,7 @@
 //    private String statisticalDays;
 //
 //    @Bean
-//    public StatisticCache statisticCache() {
-//        return new StatisticCache(NumberUtils.strToLong(statisticalDays, "calma.exceptionnotice.statisticalDays"));
+//    public StatisticHelper statisticCache() {
+//        return new StatisticHelper(NumberUtils.strToLong(statisticalDays, "calma.exceptionnotice.statisticalDays"));
 //    }
 //}

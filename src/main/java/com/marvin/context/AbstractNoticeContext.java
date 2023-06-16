@@ -7,16 +7,13 @@ import com.marvin.context.support.IGExceptionPostProcessor;
 import com.marvin.event.ExceptionEvent;
 import com.marvin.model.notice.CommonNotice;
 import com.marvin.model.notice.HttpNotice;
-import com.marvin.model.web.NoticeInfo;
-import com.marvin.statistic.cache.StatisticCache;
+import com.marvin.statistic.cache.StatisticHelper;
 import com.marvin.util.web.bridge.CacheBridge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Lazy;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -38,13 +35,13 @@ public abstract class AbstractNoticeContext {//异常调度器
     public CommonNotice createNotice(Object[] objArgs, RuntimeException e, String projectName) {
         CommonNotice notice = new CommonNotice(e, objArgs, projectName);
         statistic(notice);
-        notice.setExceptionStatisticDto(StatisticCache.get(notice.getE().getClass().getName()));
         publishEvent(new ExceptionEvent(this, notice));//发布事件——这里将事件发布到applicationContext中
         return notice;
     }
 
     private void statistic(CommonNotice notice) {
-        StatisticCache.common(notice);
+        StatisticHelper.common(notice);
+        notice.setExceptionStatisticDto(StatisticHelper.get(notice.getE().getClass().getName()));
     }
 
     public HttpNotice createHttpNotice(RuntimeException ex, String url, Map<String, String> param,
@@ -52,7 +49,6 @@ public abstract class AbstractNoticeContext {//异常调度器
         HttpNotice httpExceptionNotice = new HttpNotice(ex, String.join(
                 projectName, "的异常通知"), url, param, requestBody, headers, requestMethod);
         statistic(httpExceptionNotice);
-        httpExceptionNotice.setExceptionStatisticDto(StatisticCache.get(httpExceptionNotice.getE().getClass().getName()));
         publishEvent(new ExceptionEvent(this, httpExceptionNotice));
         //不通知，只统计
         return httpExceptionNotice;

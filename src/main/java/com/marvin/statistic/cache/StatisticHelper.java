@@ -12,12 +12,12 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Data
-public class StatisticCache {
+public class StatisticHelper {
 
     //异常持续时长
     private final long keepDuration;
 
-    public StatisticCache(long keepDuration) {
+    public StatisticHelper(long keepDuration) {
         this.keepDuration = keepDuration;
     }
 

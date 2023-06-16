@@ -1,4 +1,4 @@
-#### 基于SpringAOP的异常通知spring-boot-starter
+#### 异常通知spring-boot-starter
 
 **介绍**
 

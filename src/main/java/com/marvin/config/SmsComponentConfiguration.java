@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnProperty(prefix = "calma.sms", name = "enable", havingValue = "true")
 @Slf4j
-public class SmsComponentConfig {
+public class SmsComponentConfiguration {
 
     @Bean
     @ConditionalOnMissingBean

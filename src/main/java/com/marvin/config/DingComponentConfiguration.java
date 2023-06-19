@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Slf4j
 @ConditionalOnProperty(prefix = "calma.exceptionnotice",name = "enabled",havingValue = "true")
-public class DingComponentConfig {
+public class DingComponentConfiguration {
 
 	@Bean// 注入通知的组件
 	@ConditionalOnMissingBean

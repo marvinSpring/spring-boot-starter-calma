@@ -1,48 +1,43 @@
 package com.marvin.context;
 
 import com.marvin.config.anno.ConditionOnCalmaExceptionNotice;
-import com.marvin.context.support.AbstractPostProcessor;
+import com.marvin.context.support.AbstractConditionPostProcessor;
 import com.marvin.event.ExceptionEvent;
-import com.marvin.model.web.NoticeInfo;
-import org.springframework.beans.factory.InitializingBean;
+import com.marvin.model.notice.CommonNotice;
+import com.marvin.statistic.cache.StatisticHelper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Objects;
-
 @Configuration
 @ConditionOnCalmaExceptionNotice
-public class DefaultNoticeContext extends AbstractNoticeContext implements InitializingBean {
+public class DefaultNoticeContext extends AbstractNoticeContext {
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    private final NoticeInfo noticeInfo;
-
-    private boolean auto;
-
-    public DefaultNoticeContext(ApplicationEventPublisher applicationEventPublisher, NoticeInfo noticeInfo) {
+    public DefaultNoticeContext(ApplicationEventPublisher applicationEventPublisher) {
         this.applicationEventPublisher = applicationEventPublisher;
-        this.noticeInfo = noticeInfo;
+    }
+
+    public CommonNotice createNotice(Object[] objArgs, RuntimeException e, String projectName) {
+        CommonNotice notice = new CommonNotice(e, objArgs, projectName);
+        statistic(notice);
+        publishEventNotice(new ExceptionEvent(this, notice));
+        return notice;
     }
 
     @Override
-    public void setNextPostProcessor(AbstractPostProcessor abstractPostProcessor) {
+    public void statistic(CommonNotice notice) {
+        StatisticHelper.common(notice);
+    }
+
+    @Override
+    public void setNextPostProcessor(AbstractConditionPostProcessor abstractPostProcessor, ExceptionEvent event) {
         //something to do,but at there just ok
     }
 
     @Override
-    public void doPublishEvent(ExceptionEvent event) {
+    public void doPublishEventNotice(ExceptionEvent event) {
         applicationEventPublisher.publishEvent(event);
     }
 
-    public boolean isAuto() {
-        return auto;
-    }
-
-
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        this.auto = Objects.nonNull(this.noticeInfo) && this.noticeInfo.isAuto();
-    }
 }

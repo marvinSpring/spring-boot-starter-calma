@@ -18,14 +18,14 @@ import org.springframework.beans.factory.annotation.Value;
  * @Date:2021/03/01
  * @Author:Marvin
  */
-public class CalmaAop {//在异常出现的时候收集异常创建通知
+public class CommonAop {
 
     private final DefaultNoticeContext noticeContext;
 
     @Value("${spring.application.name}")
     private String projectName;
 
-    public CalmaAop(DefaultNoticeContext noticeContext) {
+    public CommonAop(DefaultNoticeContext noticeContext) {
         this.noticeContext = noticeContext;
     }
 
@@ -41,8 +41,6 @@ public class CalmaAop {//在异常出现的时候收集异常创建通知
 
     public void createNotice(Object[] objArgs, RuntimeException e, String projectName) {
         CommonNotice commonNotice = noticeContext.createNotice(objArgs, e, projectName);
-
-        StatisticHelper.common(commonNotice);
     }
 
 

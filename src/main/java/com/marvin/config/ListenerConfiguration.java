@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Slf4j
 @ConditionalOnProperty(prefix = "calma.exceptionnotice",name = "enabled",havingValue = "true")
-public class ListenerConfig {
+public class ListenerConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean

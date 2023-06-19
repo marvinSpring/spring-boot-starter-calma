@@ -1,11 +1,9 @@
 package com.marvin.config.web.load;
 
-import com.marvin.config.anno.ConditionOnWebAutoConfigure;
 import com.marvin.config.anno.WebIGExceptionListener;
-import com.marvin.model.web.NoticeInfo;
+import com.marvin.model.web.WebNoticeInfo;
 import com.marvin.util.web.bridge.CacheBridge;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.WebApplicationContext;
@@ -13,16 +11,13 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 @Configuration
-@EnableConfigurationProperties(NoticeInfo.class)
+@EnableConfigurationProperties(WebNoticeInfo.class)
 //@ConditionOnWebAutoConfigure
-public class WebAutoLoadConfig {
+public class WebAutoLoadConfiguration {
 
     @Autowired
     private WebApplicationContext webApplicationContext;

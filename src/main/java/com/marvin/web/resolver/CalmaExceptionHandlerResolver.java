@@ -4,6 +4,7 @@ import com.marvin.common.enumeration.ExceptionType;
 import com.marvin.common.exception.NoSuchHttpRequestMethodException;
 import com.marvin.config.anno.CalmaExceptionListener;
 import com.marvin.context.DefaultNoticeContext;
+import com.marvin.context.HttpNoticeContext;
 import com.marvin.model.notice.HttpNotice;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -23,16 +24,16 @@ import static com.marvin.common.enumeration.ExceptionType.UNABLE_FIND_CONTROLLER
 @Component
 public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
 
-    private final DefaultNoticeContext defaultNoticeContext;
+    private final HttpNoticeContext httpNoticeContext;
 
     private final CurrentRequestHeaderResolver currentRequestHeaderResolver;
 
     private final CurrentRequestBodyResolver currentRequestBodyResolver;
 
-    public CalmaExceptionHandlerResolver(DefaultNoticeContext defaultNoticeContext,
+    public CalmaExceptionHandlerResolver(HttpNoticeContext httpNoticeContext,
                                          CurrentRequestHeaderResolver currentRequestHeaderResolver,
                                          CurrentRequestBodyResolver currentRequestBodyResolver) {
-        this.defaultNoticeContext = defaultNoticeContext;
+        this.httpNoticeContext = httpNoticeContext;
         this.currentRequestHeaderResolver = currentRequestHeaderResolver;
         this.currentRequestBodyResolver = currentRequestBodyResolver;
     }
@@ -52,9 +53,8 @@ public class CalmaExceptionHandlerResolver implements HandlerExceptionResolver {
         CalmaExceptionListener listener = getListener(handlerMethod);
         //创建通知
         if (e != null ) {
-            if (listener != null || defaultNoticeContext.isAuto()) {
-                HttpNotice httpNotice = defaultNoticeContext.createHttpNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request), getMethod(request));
-
+            if (listener != null || httpNoticeContext.isAuto()) {
+                HttpNotice httpNotice = httpNoticeContext.createNotice(e, request.getRequestURI(), getParams(request), getRequestBody(), getHeader(request), getMethod(request));
 
             }
         }

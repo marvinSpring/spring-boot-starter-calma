@@ -1,7 +1,6 @@
 package com.marvin.config.web;
 
 import com.marvin.config.anno.ConditionOnCalmaExceptionNotice;
-import com.marvin.context.DefaultNoticeContext;
 import com.marvin.web.interceptor.ClearBodyInterceptor;
 import com.marvin.web.resolver.*;
 import lombok.extern.slf4j.Slf4j;
@@ -26,11 +25,11 @@ import java.util.List;
 @ConditionOnCalmaExceptionNotice
 @ConditionalOnProperty(name = "calma.exceptionnotice.listen-type", havingValue = "WEB")
 @Slf4j
-public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistrations {
+public class WebExceptionListenConfiguration implements WebMvcConfigurer, WebMvcRegistrations {
 
     @Autowired
     @Resource
-    private DefaultNoticeContext noticeContext;
+    private com.marvin.context.HttpNoticeContext HttpNoticeContext;
 
     //添加自定义异常处理解析器
     @Override
@@ -42,7 +41,7 @@ public class WebExceptionListenConfig implements WebMvcConfigurer, WebMvcRegistr
     }
 
     private CalmaExceptionHandlerResolver calmaExceptionHandlerResolver() {
-        return new CalmaExceptionHandlerResolver(noticeContext, currentRequestHeaderResolver(), currentRequestBodyResolver());
+        return new CalmaExceptionHandlerResolver(HttpNoticeContext, currentRequestHeaderResolver(), currentRequestBodyResolver());
     }
 
     //------------

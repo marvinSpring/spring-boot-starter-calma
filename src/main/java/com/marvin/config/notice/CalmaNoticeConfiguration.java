@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConditionOnCalmaExceptionNotice
-public class CalmaNoticeConfig {
+public class CalmaNoticeConfiguration {
 
     @Bean
     @ConditionalOnMissingBean

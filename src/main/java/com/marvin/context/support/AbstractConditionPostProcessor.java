@@ -3,20 +3,20 @@ package com.marvin.context.support;
 import java.util.Objects;
 
 /**
- * 后置增强处理器，决定是否具体发通知
+ * 后置条件增强处理器，决定是否具体发通知
  *
  * @author marvin
  */
-public abstract class AbstractPostProcessor {
+public abstract class AbstractConditionPostProcessor {
 
 
-    protected AbstractPostProcessor nextPostProcessor;
+    protected AbstractConditionPostProcessor nextPostProcessor;
 
     public boolean haveNextPostProcessor() {
         return nextPostProcessor != null;
     }
 
-    public void setNextPostProcessor(AbstractPostProcessor nextPostProcessor) {
+    public void setNextPostProcessor(AbstractConditionPostProcessor nextPostProcessor) {
         this.nextPostProcessor = nextPostProcessor;
     }
 

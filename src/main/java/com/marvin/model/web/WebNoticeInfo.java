@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @ConfigurationProperties(prefix = "calma.exceptionnotice")
 @PropertySource(value = "classpath:application.yml",factory = SupportYamlPropertyFactory.class)
-public class NoticeInfo {
+public class WebNoticeInfo {
 
     public boolean isEnabled() {
         return enabled;

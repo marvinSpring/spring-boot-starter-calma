@@ -39,6 +39,7 @@ public class StatisticHelper {
     public static void common(CommonNotice commonNotice) {
         String className = commonNotice.getE().getClass().getName();
         CACHE.put(className, statisticCommon(className, commonNotice));
+        commonNotice.setExceptionStatisticDto(StatisticHelper.get(commonNotice.getE().getClass().getName()));
     }
 
     private static ExceptionStatisticDto statisticCommon(String className, CommonNotice commonNotice) {

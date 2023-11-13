@@ -8,6 +8,10 @@ import com.marvin.statistic.cache.StatisticHelper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 默认通知上下午
+ * @author marvin
+ */
 @Configuration
 @ConditionOnCalmaExceptionNotice
 public class DefaultNoticeContext extends AbstractNoticeContext {

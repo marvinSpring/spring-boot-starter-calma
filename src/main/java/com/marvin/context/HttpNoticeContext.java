@@ -51,7 +51,8 @@ public class HttpNoticeContext extends AbstractNoticeContext implements Initiali
 
     @Override
     public void statistic(CommonNotice notice) {
-        StatisticHelper.common(notice);//http统计
+        //http通知方式统计
+        StatisticHelper.common(notice);
     }
 
     public HttpNotice createNotice(RuntimeException ex, String url, Map<String, String> param,
@@ -86,8 +87,9 @@ public class HttpNoticeContext extends AbstractNoticeContext implements Initiali
     }
 
     private Set<String> getNotifiedMethods() {
-        if (!CacheBridge.init())
+        if (!CacheBridge.init()) {
             webAutoLoadConfiguration.init();
+        }
         return CacheBridge.getNotifiedMethods();
     }
 }

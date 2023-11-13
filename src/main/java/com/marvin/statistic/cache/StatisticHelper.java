@@ -14,24 +14,29 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 public class StatisticHelper {
 
-    //异常持续时长
+    /**
+     * 异常持续时长
+     */
     private final long keepDuration;
 
     public StatisticHelper(long keepDuration) {
         this.keepDuration = keepDuration;
     }
 
-    private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-    //key:Exception all place name，val：dto
+    /**
+     * Exception all place name，val：dto
+     */
     private static final Map<String, ExceptionStatisticDto> CACHE = new ConcurrentHashMap<>();
 
 //    private static final Map<String, ExceptionStatisticDto> HTTP = new ConcurrentHashMap<>();
 
 //    private static final ThreadLocal<Map<String, CommonNotice>> MICRO_SERVICE = new ThreadLocal<>();
 
-    //按指定天 统计异常
-
+    /**
+     * 按指定天 统计异常
+     * @param key 异常名称
+     * @return 异常dto
+     */
     public static ExceptionStatisticDto get(String key){
         return CACHE.get(key);
     }
@@ -42,6 +47,12 @@ public class StatisticHelper {
         commonNotice.setExceptionStatisticDto(StatisticHelper.get(commonNotice.getE().getClass().getName()));
     }
 
+    /**
+     * 统计通用通知信息
+     * @param className 类名称
+     * @param commonNotice 通用通知
+     * @return 统计dto
+     */
     private static ExceptionStatisticDto statisticCommon(String className, CommonNotice commonNotice) {
         ExceptionStatisticDto.ExceptionStatisticDtoBuilder builder = ExceptionStatisticDto.builder();
         ExceptionStatisticDto exceptionStatisticDto = CACHE.get(className);
